@@ -8,6 +8,23 @@ var bodyParser = require('body-parser');
 var appRoutes = require('./routes/app');
 
 var app = express();
+var mysql = require('mysql');
+
+const User = require('./models').User;
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'better_invoice02',
+    debug: true
+});
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+  console.log('connected as id ' + connection.threadId);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
