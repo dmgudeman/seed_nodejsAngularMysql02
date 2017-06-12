@@ -36,9 +36,12 @@ module.exports = function (sequelize, DataTypes) {
       hooks: {
         beforeCreate: function(user, options, next) {
           bcrypt.genSalt(saltRounds, function(err, salt) {
+            if (err) return console.log('error in creating password hash');
             bcrypt.hash(user.password, salt, function(err, hash) {
-              user.password = hash;
-              next(null, user);
+               if (err) return console.log('error in creating password hash');
+              
+              return user.password = hash;
+              // next(null, user);
             });
           });
         },
