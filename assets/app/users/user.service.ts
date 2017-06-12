@@ -6,6 +6,7 @@ import { Http,
 import { Router }             from '@angular/router';
 import { Observable }         from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 import { User }               from './user';
 import { MyGlobals }          from '../shared/myglobals';
@@ -39,7 +40,7 @@ export class UserService implements OnInit{
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this._http
-		           .post(this._url + '/register', payload, options)
+		           .post(this._url + '/user', payload, options)
 				   .map(res => res.json())
                    .catch(this.shared.handleError);
     }
