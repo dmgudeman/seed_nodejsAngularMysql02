@@ -11,7 +11,16 @@ import { RouterModule, Routes }   from '@angular/router';
 // import { UserComponent }          from './users/user/user.component';
 
 export const routes: Routes = [
-  { path: '',                     redirectTo: 'login', pathMatch: 'full'},
+  // PERMANENT
+  // { path: '',                     redirectTo: 'login', pathMatch: 'full'},
+  
+  
+  // TEMPORARY
+  { path: '',                     redirectTo: 'register', pathMatch: 'full'},
+  
+
+
+
   // { path: 'address',              component: AddressEditComponent },
   // { path: 'item-edit/:id',        component: ItemEditComponent },
   // { path: 'item-edit',            component: ItemEditComponent },
