@@ -51,7 +51,9 @@ export class LoginComponent implements OnInit {
         });
     }
     onSubmit() {
-        let result;
+
+        // PERMANENT CODE
+    /*    let result;
         let username = this.fcUsername.value;
         let password = this.fcPassword.value;
         let payload = { username, password };
@@ -64,6 +66,11 @@ export class LoginComponent implements OnInit {
             // this.form.markAsPristine();
             this._router.navigate([`companies` ]);
         });
+        */
+
+        // TEMPORARY COD
+        this._router.navigate([`register`]);
     }
+    
 
 }
