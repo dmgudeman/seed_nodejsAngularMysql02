@@ -33,19 +33,19 @@ module.exports = function (sequelize, DataTypes) {
       freezeTableName: true,
       tableName: 'user',
       dialect: 'mysql',
-      hooks: {
-        beforeCreate: function(user, options, next) {
-          bcrypt.genSalt(saltRounds, function(err, salt) {
-            if (err) return console.log('error in creating password hash');
-            bcrypt.hash(user.password, salt, function(err, hash) {
-               if (err) return console.log('error in creating password hash');
+      // hooks: {
+      //   beforeCreate: function(user, options, next) {
+      //     bcrypt.genSalt(saltRounds, function(err, salt) {
+      //       if (err) return console.log('error in creating password hash');
+      //       bcrypt.hash(user.password, salt, function(err, hash) {
+      //          if (err) return console.log('error in creating password hash');
               
-              return user.password = hash;
-              // next(null, user);
-            });
-          });
-        },
-      },
+      //         user.password = hash;
+      //         next(null, user);
+      //       });
+      //     });
+      //   },
+      // },
       // classMethods: {
       //   associate: (models) => {
       //     User.hasMany(models.Company, {
