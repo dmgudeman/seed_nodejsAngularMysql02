@@ -10,7 +10,7 @@ import { RouterModule, Routes }   from '@angular/router';
 // import { LoginComponent }         from './users/login/login.component';
 // import { UserComponent }          from './users/user/user.component';
 
-export const routes: Routes = [
+export const APP_ROUTES: Routes = [
   // PERMANENT
   // { path: '',                     redirectTo: 'login', pathMatch: 'full'},
   
@@ -32,12 +32,12 @@ export const routes: Routes = [
   // { path: '403', component: LoginComponent },
     
   // { path: 'not-found',            component: NotFoundComponent },
-  { path: '**',                   redirectTo: 'not-found' }
+  // { path: '**',                   redirectTo: 'not-found' }
 ];
 
 @NgModule({
    imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(APP_ROUTES),
    ],
    exports: [
     RouterModule

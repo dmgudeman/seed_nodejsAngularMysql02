@@ -8,7 +8,8 @@ import { HttpModule }              from '@angular/http';
 // import { AlertService }            from './services/alert.service';
 // import { AlwaysAuthGuard }         from './services/guards/always-auth-guard';
 // import { AuthenticationService }   from './services/authentication.service';
-// import { LoginComponent }          from './login/login.component';
+import { LoginComponent }          from './login/login.component';
+import { LogoutComponent }          from './logout/logout.component';
 // import { OnlyLoggedInUsersGuard }   from '../users/services/guards/only-loggedin-users-guard';
 // import { UserComponent }           from './user/user.component';
 import { UserService }             from './user.service';
@@ -18,7 +19,8 @@ import { RegisterComponent }       from './register/register.component';
 
 @NgModule({
   declarations: [
-    // LoginComponent,
+    LoginComponent,
+    LogoutComponent,
     // UserComponent,
     RegisterComponent
   ],

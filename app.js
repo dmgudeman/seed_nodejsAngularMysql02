@@ -47,7 +47,7 @@ app.use(function(req, res, next) {
 
 app.use('/', appRoutes);
 
-// catch 404 and forward to error handler
+// catch 404 and route back to the front end to be handled 
 app.use(function(req, res, next) {
   res.render('index');
 });
