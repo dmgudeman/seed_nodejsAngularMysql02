@@ -6,7 +6,9 @@ const User = require('../models/').User;
 router.post('/', function(req, res, next) {
     let user = req.body;
     console.log(`user route BE req.body= ${JSON.stringify(req.body)}`);
-    User.create(user)
+    User
+
+    .create(user)
     .then((user) => {
     console.log(`register ${JSON.stringify(user)}`);
 

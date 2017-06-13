@@ -38,39 +38,14 @@ module.exports = function (sequelize, DataTypes) {
       hooks: {
          beforeCreate: function (user, options) {
              const myPlaintextPassword = 'user.password';
-             console.log(`beforeCreate user.password ${user.password}`);
              var hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
-             console.log(`beforeCreate hash ${hash}`);
-
              return    user.password = hash;
-                 
          },
       } // end hooks
     }  // end options
   );
   return User;
 };
-      //-----------------------------------------------------------
-      // classMethods: {
-      //   associate: (models) => {
-      //     User.hasMany(models.Company, {
-      //       foreignKey: 'userId',
-      //     });
-      //   },
-      // },
-  //   });
-      //-----------------------------------------------------------
-  //  User.hook('beforeCreate', ((user, options, cb) => {
-  //    var salt =  bcrypt.genSalt(saltRounds, function(err, salt) {
-  //         return salt});
-  //   bcrypt.hash(user.password, salt, null, function(err, hash) {
-  //       if(err) return cb(err);
-  //       // Store hash in your password DB. 
-  //       console.log(`HASH= ${hash}`)
-  //       user.password = hash;
-  //       if (cb){
-  //       return cb(null, options);
-  //       }
-    // },
+      
       
      
