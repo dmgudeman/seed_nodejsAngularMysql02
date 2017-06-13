@@ -7,9 +7,11 @@ router.post('/', function(req, res, next) {
     let user = req.body;
     console.log(`user route BE req.body= ${JSON.stringify(req.body)}`);
     User.create(user)
-    .then((register) => {
+    .then((user) => {
+    console.log(`register ${JSON.stringify(user)}`);
+
        return res.status(201).json({
-            register,
+            user,
         });
     }).catch((error) => {
         console.log(error.stack);

@@ -1,6 +1,6 @@
 'use strict';
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 
 const saltRounds = 10;
 
@@ -29,23 +29,33 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
     },
   },
+    // start options ---------------------------------------
     {
       freezeTableName: true,
       tableName: 'user',
       dialect: 'mysql',
-      // hooks: {
-      //   beforeCreate: function(user, options, next) {
-      //     bcrypt.genSalt(saltRounds, function(err, salt) {
-      //       if (err) return console.log('error in creating password hash');
-      //       bcrypt.hash(user.password, salt, function(err, hash) {
-      //          if (err) return console.log('error in creating password hash');
-              
-      //         user.password = hash;
-      //         next(null, user);
-      //       });
-      //     });
-      //   },
-      // },
+  
+      hooks: {
+         beforeCreate: function (user, options, cb) {
+             var salt =  bcrypt.genSalt(saltRounds, function(err, salt) {
+             return salt});
+        
+             bcrypt.hash(user.password, salt, null, function(err, hash) {
+                 if(err) return cb(err);
+                     // Store hash in your password DB. 
+                      console.log(`HASH= ${hash}`)
+                      user.password = hash
+                 if (cb){
+                      return cb(null, user.password);
+                 }
+              })
+         }  
+      } // end hooks
+    }  // end options
+  );
+  return User;
+};
+      //-----------------------------------------------------------
       // classMethods: {
       //   associate: (models) => {
       //     User.hasMany(models.Company, {
@@ -53,6 +63,19 @@ module.exports = function (sequelize, DataTypes) {
       //     });
       //   },
       // },
-    });
-  return User;
-};
+  //   });
+      //-----------------------------------------------------------
+  //  User.hook('beforeCreate', ((user, options, cb) => {
+  //    var salt =  bcrypt.genSalt(saltRounds, function(err, salt) {
+  //         return salt});
+  //   bcrypt.hash(user.password, salt, null, function(err, hash) {
+  //       if(err) return cb(err);
+  //       // Store hash in your password DB. 
+  //       console.log(`HASH= ${hash}`)
+  //       user.password = hash;
+  //       if (cb){
+  //       return cb(null, options);
+  //       }
+    // },
+      
+     
