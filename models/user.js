@@ -43,8 +43,22 @@ module.exports = function(sequelize, DataTypes) {
                               reject(console.log('Error is hashing password'));
                         })
                     });
-                } // end beforeCreate
-            } // end hooks
+                }, // end beforeCreate
+           
+            
+                validate: function(password, otherPassword) {
+                    console.log(`PASSWORD ${password}`);
+                    console.log(`OTHERPASSWORD ${otherPassword}`);
+                }
+                    // return new Promise((resolve, reject) => {
+                    // bcrypt.compare(someOtherPlaintextPassword, hash).then(function(res) {
+                    //   console.log(`res in instanceMethods of User model ${res}`);
+
+            //             })
+            //    });
+            }, // end hooks
+                
+            
         } // end options
     );
     return User;

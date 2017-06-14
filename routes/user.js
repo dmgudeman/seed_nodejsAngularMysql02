@@ -5,7 +5,6 @@ const User = require('../models/').User;
 
 router.post('/', function(req, res, next) {
     let user = req.body;
-
     
     User.create(user)
         .then((user) => {
@@ -14,7 +13,8 @@ router.post('/', function(req, res, next) {
         return res.status(201).json({
                 user,
             });
-        }).catch((error) => {
+        })
+        .catch((error) => {
             console.log(error.stack);
             return res.status(400).json({
                 error: error.stack,
@@ -22,6 +22,28 @@ router.post('/', function(req, res, next) {
     });
 });
 
+router.post('/login', function(req, res, next){
+    let liUser = req.body;
+   
+    User.findOne({where: {username: liUser.username}})
+        .then((user) => {
+            console.log(`IN BE ROUTER POST LOGIN user.password= ${user.password}`)
+            console.log(`IN BE ROUTER POST LOGIN liUser.username=${liUser.username}`);
+            console.log(`IN BE ROUTER POST LOGIN liUser.password=${liUser.password}`);
+        // validatePassword(user.password, liUser.password)
+
+        return res.status(201).json({
+                user,
+            });
+        })
+        .catch((error) => {
+            console.log(error.stack);
+            return res.status(400).json({
+                error: error.stack,
+            });
+
+        });
+});
 module.exports = router;
 
 

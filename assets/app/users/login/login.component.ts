@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 // import { AlertService }           from '../alert.service';
-// import { AuthenticationService }  from '../authentication.service';
+import { AuthenticationService }  from '../authentication.service';
 import { UserService }            from '../user.service';
 
 @Component({
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
-        // private _authenticationService: AuthenticationService,
+        private _authenticationService: AuthenticationService,
         // private _alertService: AlertService,
         private _fb: FormBuilder,
         private _userService: UserService
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         // reset login status
         // this._authenticationService.logout();
        
-
+        console.log(`Hi THERE in ngInit login`);
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
@@ -51,25 +51,29 @@ export class LoginComponent implements OnInit {
         });
     }
     onSubmit() {
-
         // PERMANENT CODE
-    /*    let result;
+        let result;
         let username = this.fcUsername.value;
         let password = this.fcPassword.value;
         let payload = { username, password };
-        // console.log(`login.component onSubmit payload ${JSON.stringify(payload)}`);
+        console.log(`${username}`);
+        console.log(`${password}`);
+        console.log(`login.component onSubmit payload ${JSON.stringify(payload)}`);
         result = this._authenticationService.login(username, password);
 
         result.subscribe(x => {
             console.log(`login.component onSubmit result ${JSON.stringify(x)}`);
             // Ideally, here we'd want:
             // this.form.markAsPristine();
-            this._router.navigate([`companies` ]);
-        });
-        */
 
-        // TEMPORARY COD
-        this._router.navigate([`register`]);
+            // TEMPORARY CODE
+            this._router.navigate([`register`]);
+            // PERMANENT CODE
+            // this._router.navigate([`companies` ]);
+        });
+        
+
+        
     }
     
 

@@ -30,21 +30,18 @@ export class RegisterComponent implements OnInit {
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
-        // private _authenticationService: AuthenticationService,
-        // private _alertService: AlertService,
         private _fb:FormBuilder,
         private _userService:UserService
         ) { }
 
     ngOnInit() {
-        // reset login status
-        // this._authenticationService.logout();
         this.firstname= new FormControl('', Validators.required);
         this.lastname = new FormControl('', Validators.required);
         this.username = new FormControl('', Validators.required),
         this.password= new FormControl('', [Validators.required,
                                               Validators.minLength(1)]);
         this.password_confirm = new FormControl('', Validators.required);  
+        
         // get return url from route parameters or default to '/'
         this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
 
@@ -56,16 +53,7 @@ export class RegisterComponent implements OnInit {
             "password_confirm": this.password_confirm,
         });
     }
-
-    signup() {
-        // var results = authService.login(this.form.value)
-
-        this.myform.controls['username'].setErrors({
-            invalidLogin: false
-        });
-
-        console.log(`in signup register.component ${this.myform.value}`);
-    }
+    
     onSubmit() {
       
         let result;
@@ -76,8 +64,6 @@ export class RegisterComponent implements OnInit {
         let password_confirmation = this.password_confirm.value;
         let payload = { firstname, lastname, username, password };
 
-        console.log (`R payload ${JSON.stringify(payload)}`);
-        
         result = this._userService.addUser(payload);
     
         result.subscribe(x => {
