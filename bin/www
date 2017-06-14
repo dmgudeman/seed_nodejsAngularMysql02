@@ -26,7 +26,7 @@ var server = http.createServer(app);
 
 models.sequelize.sync({ 
                  force: false,
-                 logging: true }).then( () => {
+                 logging: false }).then( () => {
   /**
    * Listen on provided port, on all network interfaces.
    */
