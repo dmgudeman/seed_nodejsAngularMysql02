@@ -26,38 +26,40 @@ router.post('/', function(req, res, next) {
 router.post('/login', function(req, res, next){
     let liUser = req.body;
     let userr ;
-    let firstMethod = function() {
+    let findUser = function() {
         let promise = new Promise(function(resolve, reject) {
             resolve(  User.findOne({where: {username: liUser.username}}));
+            reject( console.log('bad username'))
         });
         return promise;
     };
 
-    let secondMethod = function(user) {
+    let comparePasswords = function(user) {
         // console.log(`PPPPPPPPPPPPPPPp ${user}`);
         this.userr = user;
         let promise = new Promise((resolve, reject) => {
             //  console.log(` user.password ${user.password}`);
             //  console.log(` lllllliUser.password ${liUser.password}`);
              resolve(bcrypt.compare(liUser.password, user.password));
-             reject("sign in failed")
+             reject(console.log("sign in failed"))
         });
         return promise;
     };
 
-    let thirdMethod = function(bool) {
+    let sendResponse = function(bool) {
         let promise = new Promise((resolve, reject) => {
             if (bool){
             resolve(res.status(201).json(this.userr))
             } else {
-            reject(res.status(401).json({error: error}))
+            // reject(res.status(401).json({error: error}))
+            reject(console.log('third method failed'))
             }
        } );
     };
 
-   firstMethod()
-       .then(secondMethod)
-       .then(thirdMethod)
+   findUser()
+       .then(comparePasswords)
+       .then(sendResponse)
        .catch((error) => {
             console.log(error.stack);
             return res.status(400).json({
