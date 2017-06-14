@@ -34,11 +34,11 @@ router.post('/login', function(req, res, next){
     };
 
     let secondMethod = function(user) {
-        console.log(`PPPPPPPPPPPPPPPp ${user}`);
+        // console.log(`PPPPPPPPPPPPPPPp ${user}`);
         this.userr = user;
         let promise = new Promise((resolve, reject) => {
-             console.log(` user.password ${user.password}`);
-             console.log(` lllllliUser.password ${liUser.password}`);
+            //  console.log(` user.password ${user.password}`);
+            //  console.log(` lllllliUser.password ${liUser.password}`);
              resolve(bcrypt.compare(liUser.password, user.password));
              reject("sign in failed")
         });
@@ -53,15 +53,12 @@ router.post('/login', function(req, res, next){
             reject(res.status(401).json({error: error}))
             }
        } );
-    //    return promise;
     };
 
-//    firstMethod().then(secondMethod).then(function(user) { console.log(`liUser.password= ${liUser.password} USER = ${JSON.stringify(user)}`)})
-   firstMethod().then(secondMethod).then(thirdMethod)
-                 //      
-    //    .then(function(p){return secondMethod})
-    //    .then(thirdMethod)
-        .catch((error) => {
+   firstMethod()
+       .then(secondMethod)
+       .then(thirdMethod)
+       .catch((error) => {
             console.log(error.stack);
             return res.status(400).json({
                 error: error.stack,
