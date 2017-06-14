@@ -3,6 +3,7 @@ var router = express.Router();
 
 const User = require('../models/').User;
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 router.post('/', function(req, res, next) {
     let user = req.body;
@@ -46,20 +47,40 @@ router.post('/login', function(req, res, next){
         return promise;
     };
 
+    // let makeToken = function() {
+
+    //     const token = jwt.sign({user: this.userr}, 'secret', {expiresIn: 7200});
+    //     let promise = new Promise((resolve, reject) => {
+    //         this.response = {message: 'Successfully logged in',
+    //                         token: token,
+    //                          userId: this.userr.id}
+    //         resolve(response);
+    //     })
+    //     return promise; 
+
+    // }
     let sendResponse = function(bool) {
+        console.log(`BOOOOOOOL ${bool}`);
+      
+        const token = jwt.sign({user: this.userr}, 'secret', {expiresIn: 7200});
+        const response = { message: 'Successfully logged in',
+                           token: token,
+                           userId: this.userr.id}
         let promise = new Promise((resolve, reject) => {
-            if (bool){
-            resolve(res.status(201).json(this.userr))
-            } else {
-            // reject(res.status(401).json({error: error}))
-            reject(console.log('third method failed'))
-            }
-       } );
+              if(bool){
+                   console.log(`response ${JSON.stringify(response)}`);
+                   resolve(res.status(201).json(response))
+                   // reject(res.status(401).json({error: error}))
+              } else {
+                   reject(console.log('third method failed'))
+              }
+        });
     };
 
    findUser()
        .then(comparePasswords)
        .then(sendResponse)
+    //    .then(makeToken)
        .catch((error) => {
             console.log(error.stack);
             return res.status(400).json({
