@@ -44,22 +44,28 @@ module.exports = function(sequelize, DataTypes) {
                         })
                     });
                 }, // end beforeCreate
-           
-            
-                validate: function(password, otherPassword) {
-                    console.log(`PASSWORD ${password}`);
-                    console.log(`OTHERPASSWORD ${otherPassword}`);
-                }
-                    // return new Promise((resolve, reject) => {
-                    // bcrypt.compare(someOtherPlaintextPassword, hash).then(function(res) {
-                    //   console.log(`res in instanceMethods of User model ${res}`);
-
-            //             })
-            //    });
             }, // end hooks
-                
-            
+            classMethods: {
+                validatePassword: function(password, otherPassword) {
+                    return new Promise((resolve, reject) => {
+                        
+                              resolve(console.log(`PASSWORD ${password} OTHERPASSWORD ${otherPassword}`));
+                              reject(console.log('Error is hashing password'));
+                    });
+                } // end validatPassword
+            } // end instance Methods
         } // end options
+
     );
+    var hasSecurePassword = function(user, options, callback) {
+        // if (user.password != user.password_confirmation) {
+        //     throw new Error("Password confirmation doesn't match Password");
+        // }
+        bcrypt.hash(user.get('password'), 10, function(err, hash) {
+            if (err) return callback(err);
+            user.set('password_digest', hash);
+            return callback(null, options);
+        });
+    };
     return User;
 };
