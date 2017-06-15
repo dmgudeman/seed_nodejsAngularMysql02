@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
 
         result.subscribe(x => {
             console.log(`login.component onSubmit result ${JSON.stringify(x)}`);
+            
             // Ideally, here we'd want:
             // this.form.markAsPristine();
 

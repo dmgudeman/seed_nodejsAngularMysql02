@@ -51,13 +51,14 @@ export class UserService implements OnInit{
             let headers = new Headers({ 'Content-Type': 'application/json' });
             let options = new RequestOptions({ headers: headers });
             let payload = { username, password };
-            // console.log(`${this._url}/user/login  payload=${JSON.stringify(payload)}`);
+            console.log(`${this._url}/user/login  payload=${JSON.stringify(payload)}`);
             
             return this._http
                     .post(this._url + '/user/login', payload, options)
                     .map(res => {
-                        console.log(`in authentication.service login res ${JSON.stringify(res)}`);
-                        res.json()})
+                        console.log(`in user.service login res ${JSON.stringify(res)}`);
+                        return res;})
+                        // res.json()})
                     .catch(this.shared.handleError);
     }
 
