@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 // import { AlertService }           from '../alert.service';
-import { AuthenticationService }  from '../authentication.service';
+// import { AuthenticationService }  from '../authentication.service';
 import { UserService }            from '../user.service';
 
 @Component({
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
-        private _authenticationService: AuthenticationService,
+        // private _authenticationService: AuthenticationService,
         // private _alertService: AlertService,
         private _fb: FormBuilder,
         private _userService: UserService
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         console.log(`${username}`);
         console.log(`${password}`);
         console.log(`login.component onSubmit payload ${JSON.stringify(payload)}`);
-        result = this._authenticationService.login(username, password);
+        result = this._userService.login(username, password);
 
         result.subscribe(x => {
             console.log(`login.component onSubmit result ${JSON.stringify(x)}`);

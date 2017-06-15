@@ -45,25 +45,21 @@ export class UserService implements OnInit{
 				   .map(res => res.json())
                    .catch(this.shared.handleError);
     }
-// https://medium.com/@blacksonic86/authentication-in-angular-2-958052c64492
-    login(payload) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this._http
-		           .post(this._url + '/login', payload, options)
-				   .map(res => {
-                       console.log(`in login in user.service res= ${JSON.stringify(res)}`);
-                       
-                       res.json()}
-                       )
-                //    .map((res) => {
-                //        db.setItem('auth_token', res.auth_token);
-                //        this.loggedIn = true;
-                //    })
-                   .do(data => console.log(`login in user.service ${data}`))
-                   .catch(this.shared.handleError);
-    }
     
+    login(username, password) {
+        // console.log(`Im here in Authentication service ${username} ${password}`);
+            let headers = new Headers({ 'Content-Type': 'application/json' });
+            let options = new RequestOptions({ headers: headers });
+            let payload = { username, password };
+            // console.log(`${this._url}/user/login  payload=${JSON.stringify(payload)}`);
+            
+            return this._http
+                    .post(this._url + '/user/login', payload, options)
+                    .map(res => {
+                        console.log(`in authentication.service login res ${JSON.stringify(res)}`);
+                        res.json()})
+                    .catch(this.shared.handleError);
+    }
 
     // update(user: User) {
     //     return this._http.put('/api/users/' + user.id, user, this.jwt()).map((response: Response) => response.json());

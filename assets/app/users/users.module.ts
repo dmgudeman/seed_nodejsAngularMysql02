@@ -7,7 +7,7 @@ import { HttpModule }              from '@angular/http';
 // my modules
 // import { AlertService }            from './services/alert.service';
 // import { AlwaysAuthGuard }         from './services/guards/always-auth-guard';
-import { AuthenticationService }   from './authentication.service';
+// import { AuthenticationService }   from './authentication.service';
 import { LoginComponent }          from './login/login.component';
 import { LogoutComponent }          from './logout/logout.component';
 // import { OnlyLoggedInUsersGuard }   from '../users/services/guards/only-loggedin-users-guard';
@@ -35,7 +35,7 @@ import { RegisterComponent }       from './register/register.component';
   providers: [
     // AlertService,
     // AlwaysAuthGuard,
-    AuthenticationService,
+    // AuthenticationService,
     // OnlyLoggedInUsersGuard,
     UserService
   ]

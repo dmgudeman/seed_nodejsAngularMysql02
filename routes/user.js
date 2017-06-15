@@ -36,12 +36,7 @@ router.post('/login', function(req, res, next){
             }
         })
         .then((user) => {
-            let flag =bcrypt.compare(liUser.password, user.password)
-            if (flag) {
-                 return flag;
-            } else {
-                return console.log( 'passwords did not match');
-            }
+            return bcrypt.compare(liUser.password, user.password)
         })
         .then((flag) => {
             if (flag) {

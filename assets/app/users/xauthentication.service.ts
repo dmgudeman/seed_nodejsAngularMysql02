@@ -32,7 +32,7 @@ login(username, password) {
         return this._http
 		           .post(this._url + '/user/login', payload, options)
 				   .map(res => {
-                    //    console.log(`in authentication.service login res ${JSON.stringify(res)}`);
+                       console.log(`in authentication.service login res ${JSON.stringify(res)}`);
                        res.json()})
                    .catch(this.shared.handleError);
 }
