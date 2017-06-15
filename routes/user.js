@@ -63,16 +63,15 @@ router.post('/login', function(req, res, next){
         });
     };
 
+    // chain the promises
    findUser()
        .then(comparePasswords)
        .then(sendResponse)
-    //    .then(makeToken)
        .catch((error) => {
             console.log(error.stack);
             return res.status(400).json({
                 error: error.stack,
             });
-
         });
 });
 module.exports = router;
