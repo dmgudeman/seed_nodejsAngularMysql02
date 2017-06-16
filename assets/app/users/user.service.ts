@@ -55,10 +55,7 @@ export class UserService implements OnInit{
             
             return this._http
                     .post(this._url + '/user/login', payload, options)
-                    .map(res => {
-                        console.log(`in user.service login res ${JSON.stringify(res)}`);
-                        return res;})
-                        // res.json()})
+                    .map((response: Response) => response.json())
                     .catch(this.shared.handleError);
     }
 
