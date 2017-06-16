@@ -58,23 +58,10 @@ export class UserService implements OnInit{
                     .map((response: Response) => response.json())
                     .catch(this.shared.handleError);
     }
-
-    // update(user: User) {
-    //     return this._http.put('/api/users/' + user.id, user, this.jwt()).map((response: Response) => response.json());
-    // }
-
-    // delete(id: number) {
-    //     return this._http.delete('/api/users/' + id, this.jwt()).map((response: Response) => response.json());
-    // }
-
-    // // private helper methods
-
-    // private jwt() {
-    //     // create authorization header with jwt token
-    //     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    //     if (currentUser && currentUser.token) {
-    //         let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-    //         return new RequestOptions({ headers: headers });
-    //     }
-    // }
 }
+
+// RESOURCES FOR FACEBOOK AUTHENTICATION ----------------------------------------------
+// https://developers.facebook.com/docs/apps/register
+// https://developers.facebook.com/docs/facebook-login/overview
+// https://stackoverflow.com/questions/37770471/angular-2-facebook-login
+// http://blog.selfbits.io/blog/tutorial/angular2/2016/11/24/dashboard-tutorial-part3-social-auth.html
