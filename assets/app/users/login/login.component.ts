@@ -55,8 +55,7 @@ export class LoginComponent implements OnInit {
         // https://stackoverflow.com/questions/34245593/html5-localstorage-usefull-functions-javascript-typescript
         // There are a lot of good methods about the localStorage here. 
         // This because the items were being stored to localStorage but did not show up on the developer tools area. 
-        function localStorage_consoleInfo(fShowMaximumSize?) {
-            if (fShowMaximumSize === void 0) { fShowMaximumSize = false; }
+        function localStorage_consoleInfo() {
             var amount = 0;
             var size = 0;
             for (var i = 0; i < localStorage.length; ++i) {
@@ -68,10 +67,6 @@ export class LoginComponent implements OnInit {
             }
             console.log("Total entries:", amount);
             console.log("Total size:", size);
-            // if (fShowMaximumSize === true) {
-            //     var maxSize = localStorage_getMaximumSize();
-            //     console.log("Total size:", maxSize);
-            // }
         }
         localStorage_consoleInfo();
         // END OF: HEALTH OF LOCALSTORAGE----------------------------------------
