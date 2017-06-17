@@ -1,18 +1,36 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-var appRoutes = require('./routes/app');
-var userRoutes = require('./routes/user'); 
+const routes = require('./routes/');
+const appRoutes = require('./routes/app');
+const userRoutes = require('./routes/user'); 
 
-var app = express();
-var mysql = require('mysql');
+// const createAddress = require('./routes/address/createAddress');
+// const getAddressByCoId = require('./routes/address/:addressId');
+// const updateAddress = require('./routes/address/:addressId');
+// const getCompanyById = require('./routes/companies/:companyId');
+// const getCompaniesByUserId = require('./routes/companies');
+// const createCompany = require('./routes/company/createCompany');
+// const updateCompany = require('./routes/companies/:companyId');
+// const getItemById = require('./routes/items/:itemId');
+// const createItem = require('./routes/items');
+// const updateItem = require('./routes/items/:itemId');
+// const createInvoice = require('./routes/invoices');
+// const getAllInvoices = require('./routes/invoices');
+// const getInvoiceById = require('./routes/invoices/:invoiceId');
+// const getAllUsers = require('./routes/users');
+// const register = require('./routes/register');
+
+
+const app = express();
+const mysql = require('mysql');
 
 const User = require('./models').User;
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
@@ -45,6 +63,25 @@ app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
   next();
 });
+
+app.use('/user_invoices', express.static(path.join(__dirname, 'user_invoices')));
+
+app.post('/address', routes.createAddress);
+app.get('/address/:addressId', routes.getAddressByCoId);
+app.put('/address/:addressId', routes.updateAddress);
+// app.get('/companies', routes.getAllCompanies);
+app.get('/companies/:companyId', routes.getCompanyById);
+app.get('/companies', routes.getCompaniesByUserId);
+app.post('/companies', routes.createCompany);
+app.put('/companies/:companyId', routes.updateCompany);
+app.get('/items/:itemId', routes.getItemById);
+app.post('/items', routes.createItem);
+app.put('/items/:itemId', routes.updateItem);
+app.post('/invoices', routes.createInvoice);
+app.get('/invoices', routes.getAllInvoices);
+app.get('/invoices/:invoiceId', routes.getInvoiceById);
+
+
 
 app.use('/user', userRoutes);
 app.use('/', appRoutes);

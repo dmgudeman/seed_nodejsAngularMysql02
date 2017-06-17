@@ -5,7 +5,9 @@ import {
   }                          from '@angular/core';
 import { Address }           from '../address';
 import { Company }           from '../../company/company';
+import { CompanyDetailsComponent }    from '../../company/company-details/company-details.component';
 import { CompanyService }    from '../../company/company.service';
+import { EditCompanyComponent } from '../../company/edit-company/edit-company.component'
 
 @Component({
   selector: 'app-address',

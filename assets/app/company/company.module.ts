@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule }              from '@angular/http';
 import { RouterModule, Routes }    from '@angular/router';
 import { MaterialModule }          from '@angular/material';
-import { SharedModule }            from '../shared/shared.module';
+
 import { AddressComponent }        from '../address/address/address.component';
 import { AddressEditComponent }    from '../address/address-edit/address-edit.component';
 import { AddressService }          from '../address/address.service';
@@ -16,6 +16,7 @@ import { CompanyService }          from './company.service';
 import { CompanyRoutingModule }    from './company-routing.module';
 import { EditCompanyComponent }    from './edit-company/edit-company.component';
 import { ItemDetailComponent }     from '../item/item-detail/item-detail.component';
+import { SharedModule }            from '../shared/shared.module';
 
 @NgModule({
   declarations: [

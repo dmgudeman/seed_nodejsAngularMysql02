@@ -23,6 +23,8 @@ import { MyDatePickerModule }       from 'mydatepicker';
 // import { MyDateRangePickerModule }  from 'mydaterangepicker';
 
 // components
+// import { AddressComponent }        from './address/address/address.component';
+// import { AddressEditComponent }    from './address/address-edit/address-edit.component';
 import { AppComponent }             from './app.component';
 import { InvoiceEditComponent }     from './invoice/invoice-edit/invoice-edit.component';
 import { ItemEditComponent }        from './item/item-edit/item-edit.component';
@@ -33,6 +35,7 @@ import { Tab }                      from './shared/tab';
 import { Tabs }                     from './shared/tabs';
 
 // services and providers
+// import { AddressService }          from './address/address.service';
 import { ItemService }              from './item/item.service';
 import { HttpClientService }        from './shared/http-client.service';
 import { InvoicePrePdfComponent }   from './invoice/invoice-pre-pdf/invoice-pre-pdf.component';
@@ -42,6 +45,8 @@ import { ItemListComponent }        from './item/item-list/item-list.component';
 
 @NgModule({
   declarations: [
+    // AddressComponent,
+    // AddressEditComponent,
     AppComponent,
     InvoicePrePdfComponent,
     InvoiceEditComponent,
@@ -73,6 +78,7 @@ import { ItemListComponent }        from './item/item-list/item-list.component';
     UsersRoutingModule,
   ],
   providers: [
+    // AddressService,
     InvoiceService,
     ItemService,
     MyGlobals,

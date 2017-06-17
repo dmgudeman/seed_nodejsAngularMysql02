@@ -89,16 +89,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('userId', x.userId);
             // Ideally, here we'd want:
             // this.form.markAsPristine();
-
-            // TEMPORARY CODE
-            this._router.navigate([`register`]);
-            // PERMANENT CODE
-            // this._router.navigate([`companies` ]);
+            this._router.navigate([`companies` ]);
         });
-        
-
-        
     }
-    
-
 }
