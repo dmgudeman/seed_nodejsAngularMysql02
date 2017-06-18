@@ -23,24 +23,22 @@ const Item = require('../../models/').Item;
 const Address = require('../../models/').Address;
 
 module.exports = (req, res) => {
-  console.log(`req.sessionID ${JSON.stringify(req.sessionID)}`);
-   const loggedIn = req.app.locals.loggedIn;
-   const userId = req.app.locals.userId;
-  if (!loggedIn) {
-    res.redirect('/login');
-  }
+  console.log(`In getAllCompanies endpoint req=`);
   Company.findAll({
-    where: {
-      userId: userId,
-      active: true,
-    },
-    include: [
-      Item,
-      Address,
-    ],
+    // where: {
+    //   userId: userId,
+    //   active: true,
+    // },
+    // include: [
+    //   Item,
+    //   Address,
+    // ],
   }).then((companies) => {
+    let x = companies ? companies :  null;
+    console.log(`In getAllcompanies companies ${companies}`);
+    
     res.json({
-      companies,
+      x,
     });
   }).catch((error) => {
     console.log(error.stack);

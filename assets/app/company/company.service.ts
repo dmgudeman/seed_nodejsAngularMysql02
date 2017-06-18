@@ -30,15 +30,16 @@ export class CompanyService {
 
     // https://angular.io/docs/ts/latest/guide/server-communication.html#!#extract-data
 	getCompanies():Observable<Company[]>{
-        let body;
+    
 		return this._http
                    .get(this.getCompanyUpdateUrl())
-			       .map(res =>{ 
-                       console.log(`getCompanies company.service ${JSON.stringify(res)}`);
-                       console.log(`getCompanies company.service res.header ${JSON.stringify(res.headers)}`);
-                       
-                       body = res.json().companies;
-                            return body || { };
+			       .map((res:Response) =>{ 
+                    //    console.log(`getCompanies company.service ${JSON.stringify(res)}`);
+                    //    console.log(`getCompanies company.service res.header ${JSON.stringify(res.headers)}`);
+                           console.log(`IN GETCOMPANIES COMPANY.SERVICE JSON.stringify(res)= ${JSON.stringify(res)}`);
+                     let body = (res.json().companies) ? res.json().companies : null;
+                     console.log(`IN GETCOMPANIES COMPANY.SERVICE body= ${body}`);
+                            return body ;
                    })
                    .catch(this.shared.handleError2);
 	}

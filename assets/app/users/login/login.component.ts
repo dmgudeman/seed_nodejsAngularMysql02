@@ -50,6 +50,11 @@ export class LoginComponent implements OnInit {
             "password": this.fcPassword,
         });
     }
+
+    goToRegister(item) {
+        this._router.navigate(['/register']);
+    }
+
     onSubmit() {
         // HEALTH OF LOCALSTORAGE----------------------------------------
         // https://stackoverflow.com/questions/34245593/html5-localstorage-usefull-functions-javascript-typescript
