@@ -13,7 +13,8 @@ import { Observable }              from 'RXJS/Observable';
 import { Company }                 from '../company';
 import { CompanyCardComponent }    from '../company-card/company-card.component';
 import { CompanyService }          from '../company.service';
-import { InputComponent }          from '../../shared/input/input.component';
+import { UserService }             from '../../users/user.service';
+// import { InputComponent }          from '../../shared/input/input.component';
 import { InvoiceService }          from '../../invoice/invoice.service';
 import { Invoice }                 from '../../invoice/invoice';
 import { customTransitionLeft }    from '../../shared/custom-transition-left.component';
@@ -29,29 +30,31 @@ export class CompaniesComponent implements OnInit {
   @HostBinding('style.display')   display = 'block';
   @HostBinding('style.position')  position = 'absolute';
 
+  active:boolean;
   class: any;
+  color:string;
   companies: Observable<Company[]>;
   companiesArray:Company[]
-  invoice: Invoice;
-  errorMessage: string;
-  name:string;
-  color:string;
-  hourly:number;
-  paymentTerms:number;
-  active:boolean;
   editing:boolean = false;
+  errorMessage: string;
+  invoice: Invoice;
+  hourly:number;
+  name:string;
+  paymentTerms:number;
   userId:number
   
   constructor(
               private _companyService: CompanyService,
               private _invoiceService: InvoiceService,
               private _route:ActivatedRoute,
-              private _router:Router) { 
-              };
+              private _router:Router,
+              private _userService: UserService,
+              ) {};
 
   ngOnInit() { 
      
     this.getCompanies();
+    this.userId = parseInt(localStorage.getItem("userId"));
   }
   
   getCompanies(){
@@ -65,6 +68,23 @@ export class CompaniesComponent implements OnInit {
           }
         });
   }
+
+  localStorage_consoleInfo() {
+            // var amount = 0;
+            // var size = 0;
+            // for (var i = 0; i < localStorage.length; ++i) {
+            //     var key = localStorage.key(i)
+            //     var value = localStorage.getItem(key);
+            //     console.log(amount, key, value);
+            //     size += key.length + value.length;
+            //     amount++;
+            // }
+            // console.log("Total entries:", amount);
+            // console.log("Total size:", size);
+          //  let x = localStorage.getItem("userId");
+           console.log(`localStorage_console() in companies.component userId= ${this.userId}`);
+        }
+        
   
   goToEditCompany(company?:Company){
       if (company){
@@ -82,15 +102,10 @@ export class CompaniesComponent implements OnInit {
      }
   }
 
-  logout() {
-     let result = this._companyService.logout();   
-            result.subscribe(x => {
-                // Ideally, here we'd want:
-                // this.form.markAsPristine();
-                console.log(`Im in companies component logout`);
-  
-                this._router.navigate(['/login']);
-            });
+  onLogout() {
+     this._userService.logout();
+     this._router.navigate(['login'])
+
   }
   goToNowhere () {
     

@@ -23,6 +23,8 @@ const Item = require('../../models/').Item;
 const Address = require('../../models/').Address;
 
 module.exports = (req, res) => {
+
+
   console.log(`In getAllCompanies endpoint req=`);
   Company.findAll({
     // where: {

@@ -1,20 +1,21 @@
 <div class="my-container">
     <nav id="section1" class="section">
         <div class="column" id="sec1col1">
-            <input type="image" src='src/assets/images/logo/large-press.png_48x48.png' (click)='logout()' alt="logo">
+            <input type="image" src='src/assets/images/logo/large-press.png_48x48.png' (click)='onLogout()' alt="logo">
         </div>
         <div class="column" id="sec1col2">
             Current Companies
         </div>
         <div class="column" id="sec1col3">
             <div id="plus" class="nav-wrapper" (click)="goToEditCompany()">
-                +
             </div>
         </div>
     </nav>
     <div id="section2" class="section">
         <div class="column" id="sec2col1"></div>
         <div class="column" id="sec2col2">
+     <!--<button type="button" class="btn btn-success btn-lg" (click)="localStorage_consoleInfo()" >Sign In</button>-->
+            
             <div id="card-wrapper">
                 <!--COMPANY CARDS -->
                 <div id="co-card">

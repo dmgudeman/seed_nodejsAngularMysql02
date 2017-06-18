@@ -58,6 +58,14 @@ export class UserService implements OnInit{
                     .map((response: Response) => response.json())
                     .catch(this.shared.handleError);
     }
+
+    logout() {
+        localStorage.clear;
+    }
+
+    isLoggedIn() {
+        return localStorage.getItem('token') !== null;
+    }
 }
 
 // RESOURCES FOR FACEBOOK AUTHENTICATION ----------------------------------------------

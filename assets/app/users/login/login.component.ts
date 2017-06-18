@@ -55,6 +55,10 @@ export class LoginComponent implements OnInit {
         this._router.navigate(['/register']);
     }
 
+    onLogout() {
+         this._userService.logout();
+    }
+    
     onSubmit() {
         // HEALTH OF LOCALSTORAGE----------------------------------------
         // https://stackoverflow.com/questions/34245593/html5-localstorage-usefull-functions-javascript-typescript
