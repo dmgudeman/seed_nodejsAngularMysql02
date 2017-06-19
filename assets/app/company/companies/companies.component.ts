@@ -41,6 +41,7 @@ export class CompaniesComponent implements OnInit {
   hourly:number;
   name:string;
   paymentTerms:number;
+  token:string;
   userId:number
   
   constructor(
@@ -55,17 +56,18 @@ export class CompaniesComponent implements OnInit {
      
     this.getCompanies();
     this.userId = parseInt(localStorage.getItem("userId"));
+    this.token = localStorage.getItem("token");
   }
   
   getCompanies(){
    this._companyService.getCompanies()
         .subscribe(companies => {
           // console.log(`in companies.Component getCompanies companies ${JSON.stringify(companies)}`);
-          if (companies ===[]){
-            this._router.navigate(['/login'])
-          } else {
+          // if (companies ===[]){
+          //   this._router.navigate(['/login'])
+          // } else {
           this.companiesArray = companies
-          }
+          // }
         });
   }
 

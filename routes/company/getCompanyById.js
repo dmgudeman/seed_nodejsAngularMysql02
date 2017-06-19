@@ -31,14 +31,15 @@ const Address = require('../../models/').Address;
 
 module.exports = (req, res) => {
   const id = req.params.companyId;
+  console.log(`getCompanyById id= ${id}`);
   Company.findOne({
     where: {
       id,
     },
-    include: [
-      Item,
-      Address,
-    ],
+    // include: [
+    //   Item,
+    //   Address,
+    // ],
   }).then((company) => {
     res.json({
       company,

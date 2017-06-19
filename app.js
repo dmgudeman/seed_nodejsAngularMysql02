@@ -1,4 +1,5 @@
 const express = require('express');
+const expressJWT = require('express-jwt');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
@@ -52,6 +53,7 @@ app.set('view engine', 'hbs');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
+// app.use(expressJWT({ secret: 'secret'}).unless({path: ['/user/login', '/user/register', '/']}))
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -69,9 +71,9 @@ app.use('/user_invoices', express.static(path.join(__dirname, 'user_invoices')))
 app.post('/address', routes.createAddress);
 app.get('/address/:addressId', routes.getAddressByCoId);
 app.put('/address/:addressId', routes.updateAddress);
-app.get('/companies', routes.getAllCompanies);
+// app.get('/companies', routes.getAllCompanies);
 app.get('/companies/:companyId', routes.getCompanyById);
-// app.get('/companies', routes.getCompaniesByUserId);
+app.get('/companies', routes.getCompaniesByUserId);
 app.post('/companies', routes.createCompany);
 app.put('/companies/:companyId', routes.updateCompany);
 app.get('/items/:itemId', routes.getItemById);

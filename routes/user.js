@@ -4,6 +4,7 @@ var router = express.Router();
 const User = require('../models/').User;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
 // -----------------------------------------------------------
 router.post('/', function(req, res, next) {
     let user = req.body;

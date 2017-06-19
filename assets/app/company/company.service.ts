@@ -28,11 +28,19 @@ export class CompanyService {
         this._url = this.myglobals.url;
 	}
 
-    // https://angular.io/docs/ts/latest/guide/server-communication.html#!#extract-data
+    // https://angular.io/docs/ts/latest/guide/server-communication.html#!#extract-data  // query strategy
+    // https://jwt.io/introduction/                                                      // Bearer header strategy
 	getCompanies():Observable<Company[]>{
-    
+        const token = localStorage.getItem('token') 
+            // ? '?token= ' + localStorage.getItem('token')                              // query strategy
+            ? localStorage.getItem('token')                                              // Bearer header strategy
+            : '';
+        // let headers = new Headers({ 'Content-Type': 'application/json' });            // query strategy
+        let headers = new Headers( {Authorization: 'Bearer ' + token} );                 // Bearer header strategy 
+        let options = new RequestOptions({ headers: headers });
 		return this._http
-                   .get(this.getCompanyUpdateUrl())
+                   // .get(this._url + "/companies/" + token)                            // query strategy
+                   .get(this._url + "/companies")                                        // Bearer header strategy
 			       .map((res:Response) =>{ 
                     //    console.log(`getCompanies company.service ${JSON.stringify(res)}`);
                     //    console.log(`getCompanies company.service res.header ${JSON.stringify(res.headers)}`);
@@ -43,7 +51,7 @@ export class CompanyService {
                    })
                    .catch(this.shared.handleError2);
 	}
-    
+
     getCompany(id:number) {
         let body;
         return this._http.get(this.getCompanyUrl(id) )

@@ -47,19 +47,19 @@ const Address = require('../../models/').Address;
 // const print = function () { console.log(`Company ${JSON.stringify(Company)}`) };
 
 module.exports = (req, res) => {
-  console.log(`req.body ${JSON.stringify(req.body)}`);
+  // console.log(`req.body ${JSON.stringify(req.body)}`);
   const company = req.body;
-  company.userId = req.app.locals.userId;
-  const loggedIn = req.app.locals.loggedIn;
+  // company.userId = req.app.locals.userId;
+  // const loggedIn = req.app.locals.loggedIn;
   // console.log(`in createCompany route req.qpp.locals ${req.app.locals}`);
   
-  console.log(`loggedINNnnnnnNNNNN ${loggedIn}`);
-  console.log(`req.app.locals.userId; ${req.app.locals.userId}`);
-  console.log(`in createCompany route company ${JSON.stringify(company)}`);
+  // console.log(`loggedINNnnnnnNNNNN ${loggedIn}`);
+  // console.log(`req.app.locals.userId; ${req.app.locals.userId}`);
+  // console.log(`in createCompany route company ${JSON.stringify(company)}`);
   
-  if (!loggedIn) {
-    res.redirect('/login');
-  }
+  // if (!loggedIn) {
+  //   res.redirect('/login');
+  // }
   Company.create(company, {
     include: [
       Address,
