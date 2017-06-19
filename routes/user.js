@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 // -----------------------------------------------------------
 router.post('/', function(req, res, next) {
     let user = req.body;
-    
+    console.log(`router.post in user route user= ${JSON.stringify(user)}`);
     User.create(user)
         .then((user) => {
             // console.log(`register ${JSON.stringify(user)}`);
@@ -26,6 +26,7 @@ router.post('/', function(req, res, next) {
 
 router.post('/login', function(req, res, next){
     let liUser = req.body;
+    console.log(`router.post login res.body= ${JSON.stringify(liUser)}`);
     let user;
     User.findOne({where: {username: liUser.username}})
         .then(data => {

@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
     }
 
     onLogout() {
-         this._userService.logout();
+         this._userService.onLogout();
     }
     
     onSubmit() {

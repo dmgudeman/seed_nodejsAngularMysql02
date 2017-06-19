@@ -55,7 +55,7 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 
-// app.use(expressJWT({ secret: 'secret'}).unless({path: ['/user/login', '/user/register', '/register', 'register']}))
+// app.use(expressJWT({ secret: 'secret'}).unless({path: ['/user/login', 'login', '/user/register', '/register', 'register']}));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

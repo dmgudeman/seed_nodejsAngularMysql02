@@ -48,19 +48,19 @@ export class UserService implements OnInit{
     
     login(username, password) {
         // console.log(`Im here in Authentication service ${username} ${password}`);
-            let headers = new Headers({ 'Content-Type': 'application/json' });
-            let options = new RequestOptions({ headers: headers });
-            let payload = { username, password };
-            console.log(`${this._url}/user/login  payload=${JSON.stringify(payload)}`);
-            
-            return this._http
-                    .post(this._url + '/user/login', payload, options)
-                    .map((response: Response) => response.json())
-                    .catch(this.shared.handleError);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        let payload = { username, password };
+        console.log(`${this._url}/user/login  payload=${JSON.stringify(payload)}`);
+        
+        return this._http
+                .post(this._url + '/user/login', payload, options)
+                .map((response: Response) => response.json())
+                .catch(this.shared.handleError);
     }
 
-    logout() {
-        // localStorage.clear;
+    onLogout() {
+        localStorage.clear;
     }
 
     isLoggedIn() {

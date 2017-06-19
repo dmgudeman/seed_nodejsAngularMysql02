@@ -106,7 +106,7 @@ export class CompaniesComponent implements OnInit {
   }
 
   onLogout() {
-     this._userService.logout();
+     this._userService.onLogout();
      this._router.navigate(['login'])
 
   }

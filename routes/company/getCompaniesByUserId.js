@@ -19,10 +19,10 @@ module.exports = (req, res) => {
   }
   
   Company.findAll({
-    // where: {
+    where: {
       userId: id,
       // active: true,
-    // },
+    },
     // include: [
     //   Item,
     //   Address,
