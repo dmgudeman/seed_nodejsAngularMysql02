@@ -30,24 +30,27 @@ export class CompanyService {
 
     // https://angular.io/docs/ts/latest/guide/server-communication.html#!#extract-data  // query strategy
     // https://jwt.io/introduction/                                                      // Bearer header strategy
+    
 	getCompanies():Observable<Company[]>{
         const token = localStorage.getItem('token') 
             // ? '?token= ' + localStorage.getItem('token')                              // query strategy
             ? localStorage.getItem('token')                                              // Bearer header strategy
             : '';
         // let headers = new Headers({ 'Content-Type': 'application/json' });            // query strategy
-        let headers = new Headers( {Authorization: 'Bearer ' + token} );                 // Bearer header strategy 
+        let headers = new Headers({ Authorization: 'Bearer ' + token });                // Bearer header strategy 
+        console.log(`IN GETCOMPANIES COMPANY.SERVICE headers= ${JSON.stringify(headers)}`);
         let options = new RequestOptions({ headers: headers });
 		return this._http
                    // .get(this._url + "/companies/" + token)                            // query strategy
                    .get(this._url + "/companies")                                        // Bearer header strategy
 			       .map((res:Response) =>{ 
-                    //    console.log(`getCompanies company.service ${JSON.stringify(res)}`);
-                    //    console.log(`getCompanies company.service res.header ${JSON.stringify(res.headers)}`);
-                           console.log(`IN GETCOMPANIES COMPANY.SERVICE JSON.stringify(res)= ${JSON.stringify(res)}`);
-                     let body = (res.json().companies) ? res.json().companies : null;
-                     console.log(`IN GETCOMPANIES COMPANY.SERVICE body= ${body}`);
-                            return body ;
+                    //  console.log(`getCompanies company.service ${JSON.stringify(res)}`);
+                    //  console.log(`getCompanies company.service res.header ${JSON.stringify(res.headers)}`);
+                        console.log(`IN GETCOMPANIES COMPANY.SERVICE JSON.stringify(res)= ${JSON.stringify(res)}`);
+                        let body = (res.json().companies) ? res.json().companies : null;
+                        console.log(`IN GETCOMPANIES COMPANY.SERVICE body= ${body}`);
+                        
+                        return body ;
                    })
                    .catch(this.shared.handleError2);
 	}

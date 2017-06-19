@@ -8,15 +8,16 @@ module.exports = (req, res) => {
   // if (!loggedIn) {
   //   res.status(403);
   // }
+  let id = 1
   Company.findAll({
     where: {
       userId: id,
       active: true,
     },
-    include: [
-      Item,
-      Address,
-    ],
+    // include: [
+    //   Item,
+    //   Address,
+    // ],
   }).then((companies) => {
     res.json({
       companies,
