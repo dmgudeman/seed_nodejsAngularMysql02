@@ -60,7 +60,7 @@ export class UserService implements OnInit{
     }
 
     logout() {
-        localStorage.clear;
+        // localStorage.clear;
     }
 
     isLoggedIn() {

@@ -1,28 +1,37 @@
 'use strict';
 
+const jwt = require('jsonwebtoken');
 const Company = require('../../models/').Company;
 const Item = require('../../models/').Item;
 const Address = require('../../models/').Address;
+
 
 module.exports = (req, res) => {
   // if (!loggedIn) {
   //   res.status(403);
   // }
-  let id = 1
+  let id;
+  
+  // console.log(`getCompanyByUserId req.headers `);
+  // console.log(`getCompanyByUserId req.headers ${JSON.stringify(req.headers)}`);
   var token = req.headers.authorization;
+  // var decoded = jwt.verify(token, 'secret');
+  // console.log(`getCompanyByUserId decoded= ${JSON.stringify(decoded)}`);
+  //   console.log(`IM HERE IN getCompaniesByUserId  `);
+  // console.log(`getCompaniesByUserId token= ${token}`);
   try {
     var decoded = jwt.verify(token, 'secret');
+    id = decoded.user.id;
+
   } catch (e) {
     return authFail(res);
   }
   
-  console.log(`getCompanyByUserId decoded = ${decoded}`);
-
   Company.findAll({
-    where: {
+    // where: {
       userId: id,
-      active: true,
-    },
+      // active: true,
+    // },
     // include: [
     //   Item,
     //   Address,

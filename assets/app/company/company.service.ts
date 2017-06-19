@@ -37,19 +37,22 @@ export class CompanyService {
             ? localStorage.getItem('token')                                              // Bearer header strategy
             : '';
         // let headers = new Headers({ 'Content-Type': 'application/json' });            // query strategy
-        let headers = new Headers({ "Authorization": "Bearer " + token });                // Bearer header strategy 
-        console.log(`IN GETCOMPANIES COMPANY.SERVICE headers= ${JSON.stringify(headers)}`);
-        let options = new RequestOptions({ headers: headers });
+
+        let bearerHeader = "Bearer " + token;                                            // Bearer header strategy 
+        let headers = new Headers({'authorization': token });               // Bearer header strategy 
+        console.log(`1. IN GETCOMPANIES COMPANY.SERVICE headrs= ${JSON.stringify(headers)}`);
+        let options = new RequestOptions({ headers: headers});
 		return this._http
                    // .get(this._url + "/companies/" + token)                            // query strategy
-                   .get(this._url + "/companies")                                        // Bearer header strategy
+                   .get(this._url + "/companies", options)                                        // Bearer header strategy
 			       .map((res:Response) =>{ 
                     //  console.log(`getCompanies company.service ${JSON.stringify(res)}`);
                     //  console.log(`getCompanies company.service res.header ${JSON.stringify(res.headers)}`);
-                        console.log(`IN GETCOMPANIES COMPANY.SERVICE JSON.stringify(res)= ${JSON.stringify(res)}`);
+                        // console.log(`2. IN GETCOMPANIES COMPANY.SERVICE JSON.stringify(res)= ${JSON.stringify(res)}`);
                         let body = (res.json().companies) ? res.json().companies : null;
-                        console.log(`IN GETCOMPANIES COMPANY.SERVICE body= ${body}`);
-                        
+                        console.log(`3. IN GETCOMPANIES COMPANY.SERVICE body= ${body}`);
+                        console.log(`4. IN GETCOMPANIES COMPANY.SERVICE res.headers= ${JSON.stringify(res.headers)}`);
+                         
                         return body ;
                    })
                    .catch(this.shared.handleError2);

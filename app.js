@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const routes = require('./routes/');
 const appRoutes = require('./routes/app');
 const userRoutes = require('./routes/user'); 
+const jwt = require('jsonwebtoken');
 
 // const createAddress = require('./routes/address/createAddress');
 // const getAddressByCoId = require('./routes/address/:addressId');
@@ -53,7 +54,8 @@ app.set('view engine', 'hbs');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(expressJWT({ secret: 'secret'}).unless({path: ['/user/login', '/user/register', '/register', 'register']}))
+
+// app.use(expressJWT({ secret: 'secret'}).unless({path: ['/user/login', '/user/register', '/register', 'register']}))
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
