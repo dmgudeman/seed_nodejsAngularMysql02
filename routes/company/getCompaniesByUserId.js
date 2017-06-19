@@ -9,6 +9,15 @@ module.exports = (req, res) => {
   //   res.status(403);
   // }
   let id = 1
+  var token = req.headers.authorization;
+  try {
+    var decoded = jwt.verify(token, 'secret');
+  } catch (e) {
+    return authFail(res);
+  }
+  
+  console.log(`getCompanyByUserId decoded = ${decoded}`);
+
   Company.findAll({
     where: {
       userId: id,

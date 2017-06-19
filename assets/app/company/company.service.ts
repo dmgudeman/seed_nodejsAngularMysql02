@@ -37,7 +37,7 @@ export class CompanyService {
             ? localStorage.getItem('token')                                              // Bearer header strategy
             : '';
         // let headers = new Headers({ 'Content-Type': 'application/json' });            // query strategy
-        let headers = new Headers({ Authorization: 'Bearer ' + token });                // Bearer header strategy 
+        let headers = new Headers({ "Authorization": "Bearer " + token });                // Bearer header strategy 
         console.log(`IN GETCOMPANIES COMPANY.SERVICE headers= ${JSON.stringify(headers)}`);
         let options = new RequestOptions({ headers: headers });
 		return this._http
