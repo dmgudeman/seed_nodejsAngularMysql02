@@ -84,10 +84,10 @@ app.put('/items/:itemId', routes.updateItem);
 app.post('/invoices', routes.createInvoice);
 app.get('/invoices', routes.getAllInvoices);
 app.get('/invoices/:invoiceId', routes.getInvoiceById);
+app.post('/user/login', routes.login);
+app.post('/user', routes.register);
 
-
-
-app.use('/user', userRoutes);
+// app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and route back to the front end to be handled 

@@ -39,7 +39,7 @@ export class UserService implements OnInit{
     addUser(payload) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        // console.log(`addUser in user.service payload= ${JSON.stringify(payload)}`);
+        console.log(`addUser in user.service payload= ${JSON.stringify(payload)}`);
         return this._http
 		           .post(this._url + '/user', payload, options)
 				   .map(res => res.json())

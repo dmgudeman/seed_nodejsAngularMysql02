@@ -1,30 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-const User = require('../models/').User;
+const User = require('../../models/').User;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// -----------------------------------------------------------
-router.post('/', function(req, res, next) {
-    let user = req.body;
-    console.log(`router.post in user route user= ${JSON.stringify(use)}`);
-    User.create(user)
-        .then((user) => {
-            // console.log(`register ${JSON.stringify(user)}`);
-            return res.status(201).json({ user, });
-        })
-        .catch((error) => {
-            console.log(error.stack);
-            return res.status(400).json({
-                error: error.stack,
-            });
-    });
-});
-
-// -----------------------------------------------------------
-
-router.post('/login', function(req, res, next){
+module.exports = (req, res) => {
     let liUser = req.body;
     console.log(`router.post login res.body= ${JSON.stringify(liUser)}`);
     let user;
@@ -58,8 +39,8 @@ router.post('/login', function(req, res, next){
                     error: error.stack,
                 });
         });
-});
+}
    
-module.exports = router;
+
 
 

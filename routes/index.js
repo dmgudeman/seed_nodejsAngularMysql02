@@ -16,8 +16,8 @@ index.getAllInvoices = require('./invoice/getAllInvoices');
 index.getInvoiceById = require('./invoice/getInvoiceById');
 index.createInvoicePdf = require('./invoice/createInvoicePdf');
 // index.getAllUsers = require('./user/getAllUsers');
-// index.register = require('./user/register');
-// index.login = require('./user/login');
+index.register = require('./user/register');
+index.login = require('./user/login');
 // index.logout = require('./user/logout');
 
 module.exports = index;
