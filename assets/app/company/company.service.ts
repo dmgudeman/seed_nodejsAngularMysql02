@@ -28,31 +28,20 @@ export class CompanyService {
         this._url = this.myglobals.url;
 	}
 
-    // https://angular.io/docs/ts/latest/guide/server-communication.html#!#extract-data  // query strategy
-    // https://jwt.io/introduction/                                                      // Bearer header strategy
     
 	getCompanies():Observable<Company[]>{
         const token = localStorage.getItem('token') 
-            // ? '?token= ' + localStorage.getItem('token')                              // query strategy
-            ? localStorage.getItem('token')                                              // Bearer header strategy
+            ? localStorage.getItem('token')                                              
             : '';
-        // let headers = new Headers({ 'Content-Type': 'application/json' });            // query strategy
 
-        let bearerHeader = "Bearer " + token;                                            // Bearer header strategy 
-        let headers = new Headers({'authorization': token });               // Bearer header strategy 
-        console.log(`1. IN GETCOMPANIES COMPANY.SERVICE headrs= ${JSON.stringify(headers)}`);
+        let bearerHeader = "Bearer " + token;                                            
+        let headers = new Headers({'authorization': token });               
         let options = new RequestOptions({ headers: headers});
+
 		return this._http
-                   // .get(this._url + "/companies/" + token)                            // query strategy
-                   .get(this._url + "/companies", options)                                        // Bearer header strategy
+                   .get(this._url + "/companies", options)                                        
 			       .map((res:Response) =>{ 
-                    //  console.log(`getCompanies company.service ${JSON.stringify(res)}`);
-                    //  console.log(`getCompanies company.service res.header ${JSON.stringify(res.headers)}`);
-                        // console.log(`2. IN GETCOMPANIES COMPANY.SERVICE JSON.stringify(res)= ${JSON.stringify(res)}`);
                         let body = (res.json().companies) ? res.json().companies : null;
-                        console.log(`3. IN GETCOMPANIES COMPANY.SERVICE body= ${body}`);
-                        console.log(`4. IN GETCOMPANIES COMPANY.SERVICE res.headers= ${JSON.stringify(res.headers)}`);
-                         
                         return body ;
                    })
                    .catch(this.shared.handleError2);
