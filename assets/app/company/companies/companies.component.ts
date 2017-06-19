@@ -96,7 +96,8 @@ export class CompaniesComponent implements OnInit {
           let hourly = company.hourly;
           let paymentTerms = company.paymentTerms;
           let active = company.active;
-          this._router.navigate(['/edit-company/' + coId, {id:coId, name:coName, color:color}]);
+          let userId = company.userId;
+          this._router.navigate(['/edit-company/' + coId || '', {id:coId, name:coName, color:color}]);
           
       } else {
         this._router.navigate(['/edit-company']);

@@ -15,6 +15,7 @@ import {
     Router, 
     ActivatedRoute, 
     Params }                           from '@angular/router';
+import { $ }                           from 'jquery';
 import { Observable }                  from 'rxjs/Observable';
 
 import { Address }                     from '../../address/address';
@@ -69,11 +70,11 @@ export class EditCompanyComponent implements OnInit {
             });
         this._route.params
             .subscribe(params => { 
-                                    this.coId = params['id']
-                                    this.coName = params['coName']
-                                    this.userId = 1;
-                                    console.log(`name ${this.coName}`);
-                                });
+                this.coId = params['id']
+                this.coName = params['coName']
+                // this.userId = params['userId'];
+            });
+        this.userId = parseInt(localStorage.getItem("userId"));
         this.title = this.coId ? " Edit "+ this.coName + " Details" : " New Business";
                                   
         if(this.coId){
@@ -98,8 +99,11 @@ export class EditCompanyComponent implements OnInit {
  
     onSubmit() {
         let  id = this.coId;
+        let stringUid = '' + this.userId;
         var payload = this.myform.value;
-        
+        payload.userId=this.userId;
+        console.log(`edit-company onSubmit this.userId= ${this.userId}`);
+        console.log(`edit-company onSubmit payload ${payload}`);
         var result;
             if (id) {
                 let result = this._companyService.updateCompany(payload, id);

@@ -47,7 +47,7 @@ const Address = require('../../models/').Address;
 // const print = function () { console.log(`Company ${JSON.stringify(Company)}`) };
 
 module.exports = (req, res) => {
-  // console.log(`req.body ${JSON.stringify(req.body)}`);
+  console.log(`req.body ${JSON.stringify(req.body)}`);
   const company = req.body;
   // company.userId = req.app.locals.userId;
   // const loggedIn = req.app.locals.loggedIn;
@@ -60,11 +60,11 @@ module.exports = (req, res) => {
   // if (!loggedIn) {
   //   res.redirect('/login');
   // }
-  Company.create(company, {
-    include: [
-      Address,
-    ],
-  })
+  Company.create(company)  // {
+  //   include: [
+  //     // Address,
+  //   ],
+  // })
   .then((createdCompany) => {
     console.log(`createdCompany ${JSON.stringify(createdCompany)}`);
     res.json({

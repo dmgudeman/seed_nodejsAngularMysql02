@@ -27,14 +27,12 @@ export class CompanyService {
         this.myglobals = new MyGlobals();
         this._url = this.myglobals.url;
 	}
-
     
 	getCompanies():Observable<Company[]>{
         const token = localStorage.getItem('token') 
             ? localStorage.getItem('token')                                              
             : '';
 
-        let bearerHeader = "Bearer " + token;                                            
         let headers = new Headers({'authorization': token });               
         let options = new RequestOptions({ headers: headers});
 
