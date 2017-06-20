@@ -7,25 +7,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const routes = require('./routes/');
 const appRoutes = require('./routes/app');
-const userRoutes = require('./routes/user'); 
+// const userRoutes = require('./routes/user'); 
 const jwt = require('jsonwebtoken');
-
-// const createAddress = require('./routes/address/createAddress');
-// const getAddressByCoId = require('./routes/address/:addressId');
-// const updateAddress = require('./routes/address/:addressId');
-// const getCompanyById = require('./routes/companies/:companyId');
-// const getCompaniesByUserId = require('./routes/companies');
-// const createCompany = require('./routes/company/createCompany');
-// const updateCompany = require('./routes/companies/:companyId');
-// const getItemById = require('./routes/items/:itemId');
-// const createItem = require('./routes/items');
-// const updateItem = require('./routes/items/:itemId');
-// const createInvoice = require('./routes/invoices');
-// const getAllInvoices = require('./routes/invoices');
-// const getInvoiceById = require('./routes/invoices/:invoiceId');
-// const getAllUsers = require('./routes/users');
-// const register = require('./routes/register');
-
 
 const app = express();
 const mysql = require('mysql');
@@ -87,7 +70,6 @@ app.get('/invoices/:invoiceId', routes.getInvoiceById);
 app.post('/user/login', routes.login);
 app.post('/user', routes.register);
 
-// app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and route back to the front end to be handled 
