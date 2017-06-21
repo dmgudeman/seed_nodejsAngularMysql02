@@ -92,9 +92,9 @@ export class CompanyDetailsComponent implements OnInit {
             .getCompany(coId)
             .subscribe(company => {this.company = company;
 
-                this.address = company.Address;
+                // this.address = company.Address;
                    console.log("Company-details getCompany this.coId", this.coId);
-                   console.log(`Company-details getCompany Address ${JSON.stringify(company.Address)}`)
+                //    console.log(`Company-details getCompany Address ${JSON.stringify(company.Address)}`)
                 //    console.log("THIS COMPANY " + JSON.stringify(this.company));
             })
     }
@@ -136,12 +136,12 @@ export class CompanyDetailsComponent implements OnInit {
     }
     goToEditCompany() {
         if (this.coName) {
-            // let coId = this.company.id;
-            // let coName = this.company.name;
-            // let color = this.company.color;
-            // let hourly = this.company.hourly;
-            // let paymentTerms = this.company.paymentTerms;
-            // let active = this.company.active;
+            let coId = this.company.id;
+            let coName = this.company.name;
+            let color = this.company.color;
+            let hourly = this.company.hourly;
+            let paymentTerms = this.company.paymentTerms;
+            let active = this.company.active;
             // this._router.navigate(['/edit-company/' + this.coId, { id: this.coId, name: coName, color: color }]);
             this._router.navigate(['/edit-company/' + + this.coId, {id: this.coId, coName: this.coName}] );
 
