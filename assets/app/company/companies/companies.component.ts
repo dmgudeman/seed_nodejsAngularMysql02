@@ -62,7 +62,7 @@ export class CompaniesComponent implements OnInit {
   getCompanies(){
    this._companyService.getCompanies()
         .subscribe(companies => {
-          console.log(`in companies.Component getCompanies companies= ${JSON.stringify(companies)}`);
+          // console.log(`in companies.Component getCompanies companies= ${JSON.stringify(companies)}`);
           // if (companies ===[]){
           //   this._router.navigate(['/login'])
           // } else {
@@ -71,7 +71,7 @@ export class CompaniesComponent implements OnInit {
         });
   }
 
-  localStorage_consoleInfo() {
+  // localStorage_consoleInfo() {
             // var amount = 0;
             // var size = 0;
             // for (var i = 0; i < localStorage.length; ++i) {
@@ -84,8 +84,8 @@ export class CompaniesComponent implements OnInit {
             // console.log("Total entries:", amount);
             // console.log("Total size:", size);
           //  let x = localStorage.getItem("userId");
-           console.log(`localStorage_console() in companies.component userId= ${this.userId}`);
-        }
+          //  console.log(`localStorage_console() in companies.component userId= ${this.userId}`);
+        // }
         
   
   goToEditCompany(company?:Company){

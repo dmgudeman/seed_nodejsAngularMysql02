@@ -29,7 +29,7 @@ export class CompanyService {
 	}
     
 	getCompanies():Observable<Company[]>{
-        console.log('IN COMPANY.SERVICE getCompanies');
+        // console.log('IN COMPANY.SERVICE getCompanies');
         const token = localStorage.getItem('token') 
             ? localStorage.getItem('token')                                              
             : '';
@@ -69,7 +69,7 @@ export class CompanyService {
     }    
     
     addCompany(payload){
-        console.log(`payload in addCompany ${JSON.stringify(payload)}`);
+        // console.log(`payload in addCompany ${JSON.stringify(payload)}`);
                
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers })

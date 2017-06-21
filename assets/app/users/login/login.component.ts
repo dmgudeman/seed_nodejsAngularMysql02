@@ -76,7 +76,6 @@ export class LoginComponent implements OnInit {
         localStorage_consoleInfo();
         // END OF: HEALTH OF LOCALSTORAGE----------------------------------------
 
-        // PERMANENT CODE -------------------------------------------------------
         let result;
         let username = this.fcUsername.value;
         let password = this.fcPassword.value;
@@ -87,8 +86,8 @@ export class LoginComponent implements OnInit {
         result = this._userService.login(username, password);
 
         result.subscribe(x => {
-            console.log(`login.component onSubmit x.token ${x.token}`);
-            console.log(`login.component onSubmit result${x.userId}`);
+            // console.log(`login.component onSubmit x.token ${x.token}`);
+            // console.log(`login.component onSubmit result${x.userId}`);
             localStorage.setItem('token', x.token);
             localStorage.setItem('userId', x.userId);
             // Ideally, here we'd want:

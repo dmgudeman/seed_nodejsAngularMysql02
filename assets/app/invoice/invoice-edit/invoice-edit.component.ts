@@ -155,8 +155,7 @@ export class InvoiceEditComponent implements OnInit {
                           let id = x.createdInvoice.id;
                         //   console.log( 'invoice-pre-pdf/' + id);
                           this._router.navigate(['invoice-pre-pdf/' + id]);
-                    }
-                    , 
+                    }, 
                     response => { if (response.status = 404) {
                                         this._router.navigate(['not-found']);}
                                 }
