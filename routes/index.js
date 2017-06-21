@@ -24,9 +24,12 @@
 
 const routes = require('express').Router();
 const companies = require('./companies');
+const items = require('./items');
 const user = require('./user');
-routes.use('/user', user);
+
 routes.use('/companies', companies);
+routes.use('/items', items)
+routes.use('/user', user);
 routes.use('/', user);
 // routes.get('/', (req, res) => {
 //     res.status(200).json({message: 'Connected!'})
