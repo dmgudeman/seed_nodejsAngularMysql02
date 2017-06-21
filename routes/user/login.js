@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = (req, res) => {
     let liUser = req.body;
-    console.log(`router.post login res.body= ${JSON.stringify(liUser)}`);
+    console.log(`0 router.post login req.body= ${JSON.stringify(liUser)}`);
     let user;
     User.findOne({where: {username: liUser.username}})
         .then(data => {
@@ -19,15 +19,18 @@ module.exports = (req, res) => {
             }
         })
         .then((user) => {
+            
             return bcrypt.compare(liUser.password, user.password)
         })
         .then((flag) => {
             if (flag) {
                 const token = jwt.sign({user: user}, 'secret', {expiresIn: 7200});
+                
                 const response = { 
                     message: 'Successfully logged in',
                     token: token,
                     userId: user.id}
+                console.log(`LOGIN ENDPOINT response = ${JSON.stringify(response)}`);
                     res.status(201).json(response)
             } else {
                 return console.log('failed to login')

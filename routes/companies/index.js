@@ -1,9 +1,9 @@
 
 const companies = require('express').Router();
-const all = require('./all');
-const getCompaniesByCoId = require()
+const getCompaniesByUserId = require('./getCompaniesByUserId');
+const getCompaniesByCoId = require('./getCompaniesByCoId')
 
-companies.get('/:coId', getCompaniesByCoId)
-companies.get('/', all);
+companies.get('/companies/:coId', getCompaniesByCoId)
+companies.get('/companies', getCompaniesByUserId);
 
 module.exports = companies

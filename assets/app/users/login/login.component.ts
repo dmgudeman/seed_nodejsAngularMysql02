@@ -38,10 +38,6 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        // reset login status
-        // this._authenticationService.logout();
-       
-        console.log(`Hi THERE in ngInit login`);
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
@@ -91,9 +87,8 @@ export class LoginComponent implements OnInit {
         result = this._userService.login(username, password);
 
         result.subscribe(x => {
-            // console.log(`login.component onSubmit result ${JSON.stringify(x)}`);
-            // console.log(`login.component onSubmit x.token ${x.token}`);
-            // console.log(`login.component onSubmit x.userId ${x.userId}`);
+            console.log(`login.component onSubmit x.token ${x.token}`);
+            console.log(`login.component onSubmit result${x.userId}`);
             localStorage.setItem('token', x.token);
             localStorage.setItem('userId', x.userId);
             // Ideally, here we'd want:

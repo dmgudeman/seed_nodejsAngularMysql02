@@ -29,6 +29,7 @@ export class CompanyService {
 	}
     
 	getCompanies():Observable<Company[]>{
+        console.log('IN COMPANY.SERVICE getCompanies');
         const token = localStorage.getItem('token') 
             ? localStorage.getItem('token')                                              
             : '';
