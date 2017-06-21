@@ -5,5 +5,4 @@ const login = require('./login');
 
 user.post('/register', register);
 user.post('/login', login);
-
-module.exports = user;
+module.exports = user

@@ -28,6 +28,7 @@ module.exports = (req, res) => {
     //   Address,
     // ],
   }).then((companies) => {
+    console.log(`COMPANIESBYUSERID companies= ${companies}`);
     res.json({
       companies,
     });
