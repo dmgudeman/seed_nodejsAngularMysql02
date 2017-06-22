@@ -30,7 +30,7 @@ const Item = require('../../models/').Item;
 const Address = require('../../models/').Address;
 
 module.exports = (req, res) => {
-  const id = req.params.companyId;
+  const id = req.params.coId;
   console.log(`getCompanyById id= ${id}`);
   Company.findOne({
     where: {

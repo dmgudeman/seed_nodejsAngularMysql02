@@ -43,10 +43,10 @@ module.exports = (sequelize, DataTypes) => {
         Company.hasOne(models.Address, {
           foreignKey: 'CompanyId',
         });
-        // Company.belongsTo(models.User, {
-        //   foreignKey: 'userId',
-        //   targetKey: 'id',
-        // });
+        Company.belongsTo(models.User, {
+          foreignKey: 'userId',
+          targetKey: 'id',
+        });
       },
     },
 

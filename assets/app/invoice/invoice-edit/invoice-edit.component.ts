@@ -86,7 +86,9 @@ export class InvoiceEditComponent implements OnInit {
         this._route.params.subscribe(params => {
             this.coId = params['id'];
         })
-        this.getItemsByCompany(this.coId);
+        let x = this.getItemsByCompany(this.coId);
+        console.log(`ngOnInit invoice-edit this.coId = ${this.coId}`);
+        console.log(`ngOnInit invoice-edit items=  ${x}`);
         this.onFormChange();
     }
 
@@ -116,6 +118,7 @@ export class InvoiceEditComponent implements OnInit {
     
     getItemsByCompany(coId) {
         let date = new Date('2017-10-07');
+        console.log(`INVOICE_EDIT getItemsByCompany(coId) coId= ${coId}`);
         this._companyService
             .getItemsByCompany2(coId)
             .subscribe(items => this.items = items,

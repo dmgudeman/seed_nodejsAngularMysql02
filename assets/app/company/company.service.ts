@@ -61,15 +61,18 @@ export class CompanyService {
                                                 return body;})
     }    
     getItemsByCompany2(id:number){
+        console.log(`1. COMPANY.SERVICE getItemsByCompany2 id= ${id}`);
+        console.log(`1. COMPANY.SERVICE getItemsByCompany2 this.getCompanyUrl(id)= ${this.getCompanyUrl(id)}`);
+
         let body;
         return this._http.get(this.getCompanyUrl(id))
                          .map((res:Response) => {body = <Company>res.json().company.Items;
-        // console.log("CO_SERVICE: getItemsByCompany " + JSON.stringify(body))
-                                                return body;})
+           console.log("2. COMPANY.SERVICE getItemsByCompany2 " + JSON.stringify(body))
+                         return body;})
     }    
     
     addCompany(payload){
-        // console.log(`payload in addCompany ${JSON.stringify(payload)}`);
+        console.log(`payload in addCompany ${JSON.stringify(payload)}`);
                
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers })
