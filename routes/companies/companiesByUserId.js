@@ -13,6 +13,7 @@ module.exports = (req, res) => {
   try {
     var decoded = jwt.verify(token, 'secret');
     id = decoded.user.id;
+    console.log(`COMPANIESBYUSERID id= ${id}`);
 
   } catch (e) {
     return authFail(res);
@@ -21,12 +22,12 @@ module.exports = (req, res) => {
   Company.findAll({
     where: {
       userId: id,
-      // active: true,
+      active: true,
     },
-    // include: [
-    //   Item,
-    //   Address,
-    // ],
+    include: [
+      Item,
+      Address,
+    ],
   }).then((companies) => {
     console.log(`COMPANIESBYUSERID companies= ${companies}`);
     res.json({

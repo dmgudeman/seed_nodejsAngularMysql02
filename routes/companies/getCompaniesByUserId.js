@@ -9,10 +9,12 @@ const Address = require('../../models/').Address;
 module.exports = (req, res) => {
   let id;
   var token = req.headers.authorization;
+    console.log(`COMPANIESBYUSERID id= ${id}`);
   
   try {
     var decoded = jwt.verify(token, 'secret');
     id = decoded.user.id;
+    console.log(`COMPANIESBYUSERID id= ${id}`);
 
   } catch (e) {
     return authFail(res);
@@ -21,13 +23,14 @@ module.exports = (req, res) => {
   Company.findAll({
     where: {
       userId: id,
-      // active: true,
+      active: true,
     },
-    // include: [
-    //   Item,
-    //   Address,
-    // ],
+    include: [
+      Item,
+      Address,
+    ],
   }).then((companies) => {
+    console.log(`COMPANIESBYUSERID companies= ${companies}`);
     res.json({
       companies,
     });

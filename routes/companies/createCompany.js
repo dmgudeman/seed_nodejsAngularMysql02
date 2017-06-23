@@ -60,11 +60,11 @@ module.exports = (req, res) => {
   // if (!loggedIn) {
   //   res.redirect('/login');
   // }
-  Company.create(company)  // {
-  //   include: [
-  //     // Address,
-  //   ],
-  // })
+  Company.create(company,{
+    include: [
+      Address,
+    ],
+  })
   .then((createdCompany) => {
     console.log(`createdCompany ${JSON.stringify(createdCompany)}`);
     res.json({

@@ -30,10 +30,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: true,
     },
-    userId: {
-      type: DataTypes.INTEGER(11).UNSIGNED,
-      allowNull: false,
-    },
+    // userId: {
+    //   type: DataTypes.INTEGER(11).UNSIGNED,
+    //   allowNull: false,
+    //   references: 'user',
+    //   referenceKey: 'id'
+    // },
   }, {
     classMethods: {
       associate: (models) => {
@@ -44,8 +46,7 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'CompanyId',
         });
         Company.belongsTo(models.User, {
-          foreignKey: 'userId',
-          targetKey: 'id',
+          foreignKey: 'userId'
         });
       },
     },
