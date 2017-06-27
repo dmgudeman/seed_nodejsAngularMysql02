@@ -60,10 +60,10 @@ export class AddressService {
 	} 
 
      getAddressUrl(){
-        return this._url +"/address";
+        return this._url +"/addresses";
     }
 
      getUpdateAddressUrl(addressId){
-		return this._url + "/address/" + addressId;
+		return this._url + "/addresses/" + addressId;
 	}
 }

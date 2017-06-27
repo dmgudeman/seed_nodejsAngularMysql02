@@ -74,6 +74,8 @@ export class AddressEditComponent implements OnInit {
             "CompanyId": this.CompanyId
         });
    this.CompanyId.setValue(this.coId);
+//    console.log(`address-edit ngOnInit this.coId= ${this.coId}`);
+   
    this.setAddress(this.coId);
   }
 
@@ -81,8 +83,9 @@ export class AddressEditComponent implements OnInit {
          this._companyService
             .getCompany(coId)
             .subscribe(company => {this.company= company;
+                   console.log(`address-edit setAddress company.id= ${JSON.stringify(company.id)}`)
+                if(company.Address){
                 this.address = company.Address;
-               
                    console.log(`address-edit setAddress company ${JSON.stringify(this.address)}`)
                    this.street1.setValue(this.address.street1);
                    this.street2.setValue(this.address.street2);
@@ -97,6 +100,7 @@ export class AddressEditComponent implements OnInit {
                  //  console.log("Address getCompany this.company" + JSON.stringify(this.company));
                     }
                 }
+            }
             });
     }
 
@@ -110,17 +114,17 @@ export class AddressEditComponent implements OnInit {
         console.log(`address-edit onSubmit payload ${JSON.stringify(payload)}`)
 
         var result;
-            if (!id) {
-                result = this._addressService.addAddress(payload);
-            } else {
-                let ID = (id) ? id : "ID NOT HERE";
-                result = this._addressService.updateAddress(payload, id);
-            }   
-            result.subscribe(x => {
-                // Ideally, here we'd want:
-                // this.form.markAsPristine();
-                this._router.navigate(['companies']);
-            });
+        if (!id) {
+            result = this._addressService.addAddress(payload);
+        } else {
+            let ID = (id) ? id : "ID NOT HERE";
+            result = this._addressService.updateAddress(payload, id);
+        }   
+        result.subscribe(x => {
+            // Ideally, here we'd want:
+            // this.form.markAsPristine();
+            this._router.navigate(['companies']);
+        });
     }
 
     goBack(): void {

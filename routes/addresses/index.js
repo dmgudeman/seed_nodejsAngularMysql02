@@ -1,8 +1,8 @@
 
 const address = require('express').Router();
-const createAddress = require('./create-address');
-const updateAddress = require('./update-address');
-const getAddressByCoId = require('./get-address-by-coid');
+const createAddress = require('./createAddress');
+const updateAddress = require('./updateAddress');
+const getAddressByCoId = require('./getAddressByCoid');
 
 address.post('/', createAddress)
 address.get('/:coId', getAddressByCoId)
