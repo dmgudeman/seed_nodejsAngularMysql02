@@ -53,13 +53,7 @@ export class CompanyService {
                                              return body;})
        } 
 
-    getItemsByCompany(id:number){
-        let body;
-        return this._http.get(this.getCompanyUrl(id))
-                         .map((res:Response) => {body = <Company>res.json()
-        console.log("CO_SERVICE: getItemsByCompany " + JSON.stringify(body))
-                                                return body;})
-    }    
+    
     getItemsByCompany2(id:number){
         console.log(`1. COMPANY.SERVICE getItemsByCompany2 id= ${id}`);
         console.log(`1. COMPANY.SERVICE getItemsByCompany2 this.getCompanyUrl(id)= ${this.getCompanyUrl(id)}`);

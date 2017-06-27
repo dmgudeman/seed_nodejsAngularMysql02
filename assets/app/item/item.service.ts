@@ -34,14 +34,20 @@ export class ItemService {
 			       .map(res => res.json());
 	}
 
-	getItemsByCompany(id:number){
+	// getItemsByCompany(id:number){
+    //     let body;
+    //     return this._http.get(this._companyService.getCompanyUrl(id))
+    //                      .map((res:Response) => {body = <Company>res.json().company.Items;
+    //     // console.log("CO_SERVICE: getItemsByCompany " + JSON.stringify(body))
+    //                                             return body;})
+    // }    
+    getItemsByCompany(id:number){
         let body;
-        return this._http.get(this._companyService.getCompanyUrl(id))
-                         .map((res:Response) => {body = <Company>res.json().company.Items;
-        // console.log("CO_SERVICE: getItemsByCompany " + JSON.stringify(body))
-                                                return body;})
-    }    
-	
+        return this._http.get('/items/' + id)
+                         .map((res:Response) => {body = <Company>res.json().items;
+                         console.log("ITEMS_SERVICE: getItemsByCompany " + JSON.stringify(body))
+                         return body;})
+    }    	
 	getItemsByDateRange (coId, beginDate){
 		 return this.getItemsByCompany(coId)
 		            .filter (data => data.date > beginDate);
@@ -105,4 +111,6 @@ export class ItemService {
     getItemUrl(itemId){
 		return this._url + "/items/" + itemId;
 	}
+
+
 }

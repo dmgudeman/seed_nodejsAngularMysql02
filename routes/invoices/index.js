@@ -1,10 +1,10 @@
 
 const invoice = require('express').Router();
 
-const createInvoice = require('./create-invoice');
-const createInvoicePdf = require('./create-invoice-pdf');
-const getInvoiceById = require('./get-invoice-by-id');
-const getAllInvoices = require('./get-all-invoices');
+const createInvoice = require('./createInvoice');
+const createInvoicePdf = require('./createInvoicePdf');
+const getInvoiceById = require('./getInvoiceById');
+const getAllInvoices = require('./getAllInvoices');
 
 invoice.post('/', createInvoice);
 invoice.post('/', createInvoicePdf);

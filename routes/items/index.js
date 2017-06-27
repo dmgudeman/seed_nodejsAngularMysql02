@@ -6,7 +6,7 @@ const getItemsByCoId = require('./getItemsByCoId');
 const updateItem = require('./updateItem');
 
 items.post('/', createItem);
-items.get('/:id', getItemsByCoId)
+items.get('/:companyId', getItemsByCoId)
 items.put('/:id', updateItem);
 
 module.exports = items;

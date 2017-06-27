@@ -24,6 +24,7 @@ import { InvoiceService }       from '../../invoice/invoice.service';
 import { Invoice }              from '../../invoice/invoice';
 import { Item }                 from '../../item/item';
 import { ItemDetailComponent }  from '../../item/item-detail/item-detail.component';
+import { ItemService }          from '../../item/item.service';
 import { Shared }               from '../../shared/shared';
 
 @Component({
@@ -56,6 +57,7 @@ export class CompanyDetailsComponent implements OnInit {
 
     constructor(
         private _companyService: CompanyService,
+        private _itemService: ItemService,
         private _invoiceService: InvoiceService,
         private _location: Location,
         private _router: Router,
@@ -100,7 +102,7 @@ export class CompanyDetailsComponent implements OnInit {
 
     getItemsByCompany(coId) {
         console.log(`company-details getItemsByCompany coId= ${coId}`);
-        this._companyService
+        this._itemService
             .getItemsByCompany(coId)
             .subscribe(items => this.items = items,
             error => this.errorMessage = <any>error);
