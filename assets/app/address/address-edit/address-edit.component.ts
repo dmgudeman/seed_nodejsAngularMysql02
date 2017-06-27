@@ -82,7 +82,7 @@ export class AddressEditComponent implements OnInit {
             .getAddress(coId)
             .subscribe(address => {this.address= address.address;
                 console.log(`address-edit getAddress address= ${JSON.stringify(address)}`)
-                if (address) {
+                if (this.address !==null) {
                     console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
                     console.log(`address-edit getAddress this.address.street1= ${JSON.stringify(this.address.street1)}`)
                     this.street1.setValue(this.address.street1);
