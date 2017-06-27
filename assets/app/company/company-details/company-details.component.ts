@@ -17,6 +17,7 @@ import { Observable }           from 'RXJS/Observable';
 // components
 import { Address }              from '../../address/address';
 import { AddressComponent }     from '../../address/address/address.component';
+import { AddressService }       from '../../address/address.service';
 import { CompanyService }       from '../company.service';
 import { Company }              from '../company';
 import { customTransitionLeft } from '../../shared/custom-transition-left.component';
@@ -56,6 +57,7 @@ export class CompanyDetailsComponent implements OnInit {
     
 
     constructor(
+        private _addressService: AddressService,
         private _companyService: CompanyService,
         private _itemService: ItemService,
         private _invoiceService: InvoiceService,
@@ -73,6 +75,7 @@ export class CompanyDetailsComponent implements OnInit {
             });
         this.getCompany(this.coId);
         this.getItemsByCompany(this.coId);
+        this.getAddressByCoId(this.coId);
     }
 
     getCompanies(id) {
@@ -96,6 +99,14 @@ export class CompanyDetailsComponent implements OnInit {
             })
     }
 
+    getAddressByCoId(coId) {
+        this._addressService.getAddress(coId) 
+            .subscribe(address => {
+                console.log(`getAddressByCoId company-Details this.address= ${address}`);
+                this.address = address;
+            })
+
+    }
     setColor(color) {
         return color
     }

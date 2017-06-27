@@ -59,6 +59,7 @@ export class AddressEditComponent implements OnInit {
         private _fb:FormBuilder) { }
 
   ngOnInit() {
+      console.log(`address-edit ngOnInit has been fired`);
     this.invalid.setValue(false);
     
     this.myform = this._fb.group({
@@ -78,6 +79,7 @@ export class AddressEditComponent implements OnInit {
   }
 
     getAddress(coId) { 
+                console.log(`address-edit getAddress coId= ${coId}`)
         this._addressService
             .getAddress(coId)
             .subscribe(address => {this.address= address.address;
@@ -96,7 +98,10 @@ export class AddressEditComponent implements OnInit {
                             this._router.navigate(['NotFound']);
                         }
                     }
+                } else {
+                    console.log(`this.address= ${this.address}`);
                 }
+
         });
     }
 
