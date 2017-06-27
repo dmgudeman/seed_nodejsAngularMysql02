@@ -74,7 +74,7 @@ export class AddressEditComponent implements OnInit {
             "CompanyId": this.CompanyId
         });
    this.CompanyId.setValue(this.coId);
-//    console.log(`address-edit ngOnInit this.coId= ${this.coId}`);
+   console.log(`address-edit ngOnInit this.coId= ${this.coId}`);
    
    this.setAddress(this.coId);
   }
