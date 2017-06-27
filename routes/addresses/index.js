@@ -6,6 +6,6 @@ const getAddressByCoId = require('./getAddressByCoid');
 
 address.post('/', createAddress)
 address.get('/:coId', getAddressByCoId)
-address.put('/', updateAddress);
+address.put('/:addressId', updateAddress);
 
 module.exports = address

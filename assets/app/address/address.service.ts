@@ -50,7 +50,7 @@ export class AddressService {
                         .catch(this.shared.handleError);
         }
     updateAddress(payload, id){
-	    console.log("address.service updateAdress payload " + JSON.stringify(payload))
+	    console.log("address.service updateAddress payload " + JSON.stringify(payload))
 
 		return this._http
 		           .put(this.getUpdateAddressUrl(id), payload)

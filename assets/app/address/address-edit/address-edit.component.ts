@@ -62,46 +62,42 @@ export class AddressEditComponent implements OnInit {
     this.invalid.setValue(false);
     
     this.myform = this._fb.group({
-            "city": this.city,
-            "country": this.country,
-            "invalid": this.invalid,
-            "latitude": this.latitude,
-            "longitude": this.longitude,
-            "postalCode": this.postalCode,
-            "street1":this.street1,
-            "street2":this.street2,
-            "state": this.state,
-            "CompanyId": this.CompanyId
-        });
+        "city": this.city,
+        "country": this.country,
+        "invalid": this.invalid,
+        "latitude": this.latitude,
+        "longitude": this.longitude,
+        "postalCode": this.postalCode,
+        "street1":this.street1,
+        "street2":this.street2,
+        "state": this.state,
+        "CompanyId": this.CompanyId
+    });
    this.CompanyId.setValue(this.coId);
-   console.log(`address-edit ngOnInit this.coId= ${this.coId}`);
-   
    this.getAddress(this.coId);
   }
 
-   getAddress(coId) { 
-         this._addressService
+    getAddress(coId) { 
+        this._addressService
             .getAddress(coId)
             .subscribe(address => {this.address= address.address;
-                   console.log(`address-edit getAddress address= ${JSON.stringify(address)}`)
-                if(address){
-                   console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
-                   console.log(`address-edit getAddress this.address.street1= ${JSON.stringify(this.address.street1)}`)
-                   this.street1.setValue(this.address.street1);
-                   this.street2.setValue(this.address.street2);
-                   this.city.setValue(this.address.city);
-                   this.state.setValue(this.address.state);
-                   this.postalCode.setValue(this.address.postalCode);
-                   this.country.setValue(this.address.country);
-                  //  console.log("Address getCompany this.coId ", this.coId);
-                  response => {
-                    if (response.status === 404){
-                        this._router.navigate(['NotFound']);
-                 //  console.log("Address getCompany this.company" + JSON.stringify(this.company));
+                console.log(`address-edit getAddress address= ${JSON.stringify(address)}`)
+                if (address) {
+                    console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
+                    console.log(`address-edit getAddress this.address.street1= ${JSON.stringify(this.address.street1)}`)
+                    this.street1.setValue(this.address.street1);
+                    this.street2.setValue(this.address.street2);
+                    this.city.setValue(this.address.city);
+                    this.state.setValue(this.address.state);
+                    this.postalCode.setValue(this.address.postalCode);
+                    this.country.setValue(this.address.country);
+                    response => {
+                        if (response.status === 404){
+                            this._router.navigate(['NotFound']);
+                        }
                     }
                 }
-            }
-            });
+        });
     }
 
   onSubmit() {
@@ -123,7 +119,7 @@ export class AddressEditComponent implements OnInit {
         result.subscribe(x => {
             // Ideally, here we'd want:
             // this.form.markAsPristine();
-            this._router.navigate(['companies']);
+            // this._router.navigate(['companies']);
         });
     }
 

@@ -6,8 +6,8 @@ const Address = require('../../models/').Address;
 
 module.exports = (req, res) => {
     const id = req.params.addressId;
-    const address = req.body.address;
-    // console.log(`address in updateAddress model ${JSON.stringify(address)}`);
+    const address = req.body;
+    console.log(`UPDATEADDRESS req.body= ${JSON.stringify(req.body)}`);
     console.log(`updateAddress AddressId ${id}`);
 
     Address.findOne({
