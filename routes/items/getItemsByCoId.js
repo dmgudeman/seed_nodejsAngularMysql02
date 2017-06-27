@@ -3,11 +3,14 @@
 const Item = require('../../models/').Item;
 
 module.exports = (req, res) => {
-  const item = req.body.item;
-  console.log(`req.body.item ${JSON.stringify(req.body.item)}`);
-  Item.create(item).then((createdItem) => {
+  const id = req.params.companyId;
+  Item.findAll({
+    where: {
+      companyId,
+    },
+  }).then((items) => {
     res.json({
-      createdItem,
+      items,
     });
   }).catch((error) => {
     console.log(error.stack);
