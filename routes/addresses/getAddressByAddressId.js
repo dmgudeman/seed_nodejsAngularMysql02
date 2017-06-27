@@ -3,14 +3,13 @@
 const Address = require('../../models/').Address;
 
 module.exports = (req, res) => {
-    const CompanyId = req.params.coId;
-    console.log(`CompanyId ${CompanyId}`);
+    const addressId = req.params.addressId;
+    console.log(`addressId ${addressId}`);
     Address.findOne({
         where: {
-            CompanyId,
+            addressId,
         },
     }).then((address) => {
-        console.log(`GETADDRESSBYADDRESSID address= ${address}`);
         res.json({
             address,
         });

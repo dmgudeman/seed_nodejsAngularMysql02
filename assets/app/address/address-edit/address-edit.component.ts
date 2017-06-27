@@ -76,17 +76,17 @@ export class AddressEditComponent implements OnInit {
    this.CompanyId.setValue(this.coId);
    console.log(`address-edit ngOnInit this.coId= ${this.coId}`);
    
-   this.setAddress(this.coId);
+   this.getAddress(this.coId);
   }
 
-   setAddress(coId) { 
-         this._companyService
-            .getCompany(coId)
-            .subscribe(company => {this.company= company;
-                   console.log(`address-edit setAddress company.id= ${JSON.stringify(company.id)}`)
-                if(company.Address){
-                this.address = company.Address;
-                   console.log(`address-edit setAddress company ${JSON.stringify(this.address)}`)
+   getAddress(coId) { 
+         this._addressService
+            .getAddress(coId)
+            .subscribe(address => {this.address= address.address;
+                   console.log(`address-edit getAddress address= ${JSON.stringify(address)}`)
+                if(address){
+                   console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
+                   console.log(`address-edit getAddress this.address.street1= ${JSON.stringify(this.address.street1)}`)
                    this.street1.setValue(this.address.street1);
                    this.street2.setValue(this.address.street2);
                    this.city.setValue(this.address.city);

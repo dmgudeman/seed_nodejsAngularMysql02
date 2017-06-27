@@ -45,11 +45,11 @@ export class AddressService {
     addAddress(payload){
         console.log("PAYLOAD " + JSON.stringify(payload));
         console.log("this.getAddressUpdateUrl()" + this.getAddressUrl());
-       		return this._http.post(this.getAddressUrl(), payload)
-                            .map((res:Response) => <Address>res.json())
-                            .catch(this.shared.handleError);
+        return this._http.post(this.getAddressUrl(), payload)
+                        .map((res:Response) => <Address>res.json())
+                        .catch(this.shared.handleError);
         }
-     updateAddress(payload, id){
+    updateAddress(payload, id){
 	    console.log("address.service updateAdress payload " + JSON.stringify(payload))
 
 		return this._http
@@ -58,12 +58,18 @@ export class AddressService {
                    .do(data => console.log(`address.service updateAddress DATA ${data}`))
                    .catch(this.shared.handleError);
 	} 
+    getAddress(coId){
+        return this._http
+                   .get(this.getUpdateAddressUrl(coId))
+                   .map((res) => <Address>res.json())
+                   .catch(this.shared.handleError);
+    }
 
      getAddressUrl(){
         return this._url +"/addresses";
     }
 
-     getUpdateAddressUrl(addressId){
-		return this._url + "/addresses/" + addressId;
+     getUpdateAddressUrl(coId){
+		return this._url + "/addresses/" + coId;
 	}
 }
