@@ -62,7 +62,6 @@ export class CompaniesComponent implements OnInit {
   getCompanies(){
    this._companyService.getCompanies()
         .subscribe(companies => {
-          // console.log(`in companies.Component getCompanies companies= ${JSON.stringify(companies)}`);
           // if (companies ===[]){
           //   this._router.navigate(['/login'])
           // } else {
