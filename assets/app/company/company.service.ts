@@ -38,10 +38,15 @@ export class CompanyService {
         let options = new RequestOptions({ headers: headers});
 
 		return this._http
-                   .get(this._url + "/companies", options)                                        
+                   // .get(this._url + "/companies/" + token)                            // query strategy
+                   .get(this._url + "/companies")                                        // Bearer header strategy
 			       .map((res:Response) =>{ 
-                        let body = (res.json().companies) ? res.json().companies : null;
-                        return body ;
+                    //    console.log(`getCompanies company.service ${JSON.stringify(res)}`);
+                    //    console.log(`getCompanies company.service res.header ${JSON.stringify(res.headers)}`);
+                           console.log(`IN GETCOMPANIES COMPANY.SERVICE JSON.stringify(res)= ${JSON.stringify(res)}`);
+                     let body = (res.json().companies) ? res.json().companies : null;
+                     console.log(`IN GETCOMPANIES COMPANY.SERVICE body= ${body}`);
+                            return body ;
                    })
                    .catch(this.shared.handleError2);
 	}
@@ -53,6 +58,20 @@ export class CompanyService {
                                              return body;})
        } 
 
+    getItemsByCompany(id:number){
+        let body;
+        return this._http.get(this.getCompanyUrl(id))
+                         .map((res:Response) => {body = <Company>res.json().company.Items;
+        // console.log("CO_SERVICE: getItemsByCompany " + JSON.stringify(body))
+                                                return body;})
+    }    
+    getItemsByCompany2(id:number){
+        let body;
+        return this._http.get(this.getCompanyUrl(id))
+                         .map((res:Response) => {body = <Company>res.json().company.Items;
+        // console.log("CO_SERVICE: getItemsByCompany " + JSON.stringify(body))
+                                                return body;})
+    }    
     
     addCompany(payload){
         console.log(`payload in addCompany ${JSON.stringify(payload)}`);
