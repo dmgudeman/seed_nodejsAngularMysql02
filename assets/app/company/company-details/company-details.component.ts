@@ -17,7 +17,6 @@ import { Observable }           from 'RXJS/Observable';
 // components
 import { Address }              from '../../address/address';
 import { AddressComponent }     from '../../address/address/address.component';
-import { AddressService }       from '../../address/address.service';
 import { CompanyService }       from '../company.service';
 import { Company }              from '../company';
 import { customTransitionLeft } from '../../shared/custom-transition-left.component';
@@ -25,7 +24,6 @@ import { InvoiceService }       from '../../invoice/invoice.service';
 import { Invoice }              from '../../invoice/invoice';
 import { Item }                 from '../../item/item';
 import { ItemDetailComponent }  from '../../item/item-detail/item-detail.component';
-import { ItemService }          from '../../item/item.service';
 import { Shared }               from '../../shared/shared';
 
 @Component({
@@ -57,9 +55,7 @@ export class CompanyDetailsComponent implements OnInit {
     
 
     constructor(
-        private _addressService: AddressService,
         private _companyService: CompanyService,
-        private _itemService: ItemService,
         private _invoiceService: InvoiceService,
         private _location: Location,
         private _router: Router,
@@ -73,9 +69,13 @@ export class CompanyDetailsComponent implements OnInit {
                 this.coName = params['coName'];
                 this.coColor = params['coColor'];
             });
-        this.getCompany(this.coId);
+        // console.log(`Company-details ngOnInit this.coId ${this.coId}`)
+        
+         this.getCompany(this.coId);
         this.getItemsByCompany(this.coId);
-        this.getAddressByCoId(this.coId);
+
+       
+        
     }
 
     getCompanies(id) {
@@ -92,28 +92,19 @@ export class CompanyDetailsComponent implements OnInit {
             .getCompany(coId)
             .subscribe(company => {this.company = company;
 
-                // this.address = company.Address;
+                this.address = company.Address;
                    console.log("Company-details getCompany this.coId", this.coId);
-                //    console.log(`Company-details getCompany Address ${JSON.stringify(company.Address)}`)
+                   console.log(`Company-details getCompany Address ${JSON.stringify(company.Address)}`)
                 //    console.log("THIS COMPANY " + JSON.stringify(this.company));
             })
     }
 
-    getAddressByCoId(coId) {
-        this._addressService.getAddress(coId) 
-            .subscribe(address => {
-                console.log(`getAddressByCoId company-Details this.address= ${address}`);
-                this.address = address;
-            })
-
-    }
     setColor(color) {
         return color
     }
 
     getItemsByCompany(coId) {
-        console.log(`company-details getItemsByCompany coId= ${coId}`);
-        this._itemService
+        this._companyService
             .getItemsByCompany(coId)
             .subscribe(items => this.items = items,
             error => this.errorMessage = <any>error);
