@@ -1,3 +1,42 @@
+/**
+ * Created by davidgudeman on 3/3/17.
+ * @swagger
+ * /invoices:
+ *   post:
+ *     description: creates an invoice
+ *     summary: creates an invoice
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - name: body
+ *         in: body
+ *         required: true
+ *         description: invoice object
+ *         schema:
+ *           type: object
+ *           required:
+ *             - invoice
+ *           properties:
+ *              invoice:
+ *                type: object
+ *           example:
+ *             invoice:
+ *               beginDate: '2017-02-01'
+ *               endDate: '2017-03-11'
+ *               description: blah blah
+ *               amount: 250
+ *               discount: 0.15
+ *               companyId: 1
+ *               Items:
+ *                 - 1
+ *                 - 2
+ *                 - 3
+ *     produces:
+ *       - application/json
+ *     tags:
+ *       - Invoice
+ */
+
 'use strict';
 
 const db = require('../../models/');
@@ -5,7 +44,6 @@ const Invoice = require('../../models/').Invoice;
 
 module.exports = (req, res) => {
   const invoice = req.body.invoice;
-  console.log(`ROUTES CREATE-INVOICE invoice= ${JSON.stringify(invoice)}` );
   let createdInvoice;
   db.sequelize.transaction((t) => {
     return Invoice.create(invoice, {

@@ -46,27 +46,25 @@
 const Item = require('../../models/').Item;
 
 module.exports = (req, res) => {
-    const id = req.params.itemId;
-    console.log(`updateItem id ${id}`);
-
-    const item = req.body.item;
-    Item.findOne({
-        where: {
-            id,
-        },
-    }).then((foundItem) => {
-        if (!foundItem) {
-            return Promise.reject(new Error('no item found with that id'));
-        }
-        return foundItem.update(item);
-    }).then((updatedItem) => {
-        res.json({
-            updatedItem,
-        });
-    }).catch((error) => {
-        console.log(error.stack);
-        res.status(400).json({
-            error: error.stack,
-        });
+  const id = req.params.itemId;
+  const item = req.body.item;
+  Item.findOne({
+    where: {
+      id,
+    },
+  }).then((foundItem) => {
+    if (!foundItem) {
+      return Promise.reject(new Error('no item found with that id'));
+    }
+    return foundItem.update(item);
+  }).then((updatedItem) => {
+    res.json({
+      updatedItem,
     });
+  }).catch((error) => {
+    console.log(error.stack);
+    res.status(400).json({
+      error: error.stack,
+    });
+  });
 };

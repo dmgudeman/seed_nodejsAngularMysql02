@@ -23,24 +23,17 @@ const Item = require('../../models/').Item;
 const Address = require('../../models/').Address;
 
 module.exports = (req, res) => {
-
-
-  console.log(`In getAllCompanies endpoint req=`);
   Company.findAll({
-    // where: {
-    //   userId: userId,
-    //   active: true,
-    // },
-    // include: [
-    //   Item,
-    //   Address,
-    // ],
+    where: {
+      active: true,
+    },
+    include: [
+      Item,
+      Address,
+    ],
   }).then((companies) => {
-    let x = companies ? companies :  null;
-    console.log(`In getAllcompanies companies ${companies}`);
-    
     res.json({
-      x,
+      companies,
     });
   }).catch((error) => {
     console.log(error.stack);

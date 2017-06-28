@@ -1,3 +1,24 @@
+/**
+ * Created by davidgudeman on 3/15/17.
+ * @swagger
+ * /invoices/{invoiceId}:
+ *   get:
+ *     description: retrieves a single company
+ *     summary: retrieves a single company
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - name: invoiceId
+ *         in: path
+ *         required: true
+ *         description: invoice id
+ *         type: integer
+ *         defaultValue: 1
+ *     produces:
+ *       - application/json
+ *     tags:
+ *       - Invoice
+ */
 
 'use strict';
 

@@ -1,4 +1,22 @@
-
+/**
+ * Created by davidgudeman on 3/5/17.
+ * @swagger
+ * /invoices/pdf:
+ *   post:
+ *     description: creates a pdf version of a html document
+ *     summary: creates a pdf version of a html document
+ *     consumes:
+ *       - text/plain
+ *     parameters:
+ *       - name: body
+ *         in: body
+ *         required: true
+ *         description: invoice html
+ *     produces:
+ *       - application/json
+ *     tags:
+ *       - Invoice
+ */
 
 'use strict';
 

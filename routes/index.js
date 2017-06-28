@@ -23,13 +23,13 @@
 // module.exports = index;
 
 const routes = require('express').Router();
-const addresses = require('./addresses');
+// const addresses = require('./addresses');
 const companies = require('./companies');
 const items = require('./items');
 const invoices = require('./invoices');
 const users = require('./users');
 
-routes.use('/addresses', addresses);
+// routes.use('/addresses', addresses);
 routes.use('/companies', companies);
 routes.use('/invoices', invoices)
 routes.use('/items', items)
