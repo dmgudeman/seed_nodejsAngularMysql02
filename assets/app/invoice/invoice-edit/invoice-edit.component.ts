@@ -24,6 +24,7 @@ import * as Moment               from 'moment';
 
 import { CompanyService }        from '../../company/company.service';
 import { Item }                  from '../../item/item';
+import { ItemService }           from '../../item/item.service';
 import { Shared }                from '../../shared/shared';
 import { InvoiceService }        from '../invoice.service';
 import { Invoice }               from '../invoice';
@@ -65,6 +66,7 @@ export class InvoiceEditComponent implements OnInit {
 
     constructor(private _fb: FormBuilder,
         private _companyService: CompanyService,
+        private _itemService: ItemService,
         private _invoiceService: InvoiceService,
         private _location: Location,
         private _route: ActivatedRoute,
@@ -86,16 +88,14 @@ export class InvoiceEditComponent implements OnInit {
         this._route.params.subscribe(params => {
             this.coId = params['id'];
         })
-        let x = this.getItemsByCompany(this.coId);
-        console.log(`ngOnInit invoice-edit this.coId = ${this.coId}`);
-        console.log(`ngOnInit invoice-edit items=  ${x}`);
+        this.getItemsByCompany(this.coId);
         this.onFormChange();
     }
 
     onFormChange() {
         this.invoice.valueChanges.subscribe(data => {
-            this.filterByDateRange(data.beginDate, data.endDate)
-            this.output = data
+            // this.filterByDateRange(data.beginDate, data.endDate)
+            // this.output = data
         })
     }
 
@@ -118,9 +118,9 @@ export class InvoiceEditComponent implements OnInit {
     
     getItemsByCompany(coId) {
         let date = new Date('2017-10-07');
-        console.log(`INVOICE_EDIT getItemsByCompany(coId) coId= ${coId}`);
-        this._companyService
-            .getItemsByCompany2(coId)
+        // console.log(`INVOICE_EDIT getItemsByCompany(coId) coId= ${coId}`);
+        this._itemService
+            .getItemsByCompany(coId)
             .subscribe(items => this.items = items,
             error => this.errorMessage = <any>error,
             // () => console.log('completed')
@@ -130,11 +130,15 @@ export class InvoiceEditComponent implements OnInit {
     filterByDateRange(beginDate?, endDate?) {
         let bmDate = Moment(beginDate.formatted);
         let emDate = Moment(endDate.formatted);
+        console.log(`INVOICE_EDIT filterByDateRange this.items.length= ${JSON.stringify(this.items.length)}`);
 
         for (let i = 0; i < this.items.length; i++) {
             let imDate = Moment(this.items[i].date)
             if (imDate.isAfter(bmDate) && imDate.isBefore(emDate)) {
                   this.itemIds.push(this.items[i].id);
+        console.log(`INVOICE_EDIT filterByDateRange this.itemIds= ${JSON.stringify(this.itemIds)}`);
+            
+                  
                 }
             }
         return this.itemIds;
@@ -143,13 +147,18 @@ export class InvoiceEditComponent implements OnInit {
     goBack() { this._location.back(); }
 
     onSubmit() {
+        console.log(`INVOICE_EDIT onSubmit() this.items= ${JSON.stringify(this.items)}`);
         this.submittedForm = this.invoice.value;
+        console.log(`INVOICE_EDIT onSubmit() this.invoice.value= ${JSON.stringify(this.invoice.value)}`);
         let date1 = Moment(this.submittedForm.beginDate.date).add(-1, 'month').format('YYYY-MM-DD')
         let date2 = Moment(this.submittedForm.endDate.date).add(-1, 'month').format('YYYY-MM-DD');
+        this.filterByDateRange(date1, date2);
+        console.log(`INVOICE_EDIT onSubmit() this.itemIds= ${JSON.stringify(this.itemIds)}`);
         this.submittedForm.beginDate = date1;
         this.submittedForm.endDate = date2;
         this.submittedForm.companyId = this.coId;
         this.submittedForm.Items = this.itemIds;
+
         this._invoiceService.addInvoice(this.submittedForm)
                .subscribe(
                     x => {

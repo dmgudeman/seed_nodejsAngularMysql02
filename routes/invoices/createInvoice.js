@@ -5,7 +5,7 @@ const Invoice = require('../../models/').Invoice;
 
 module.exports = (req, res) => {
   const invoice = req.body.invoice;
-  console.log(`ROUTES CREATE-INVOICE invoice= ${invoice}` );
+  console.log(`ROUTES CREATE-INVOICE invoice= ${JSON.stringify(invoice)}` );
   let createdInvoice;
   db.sequelize.transaction((t) => {
     return Invoice.create(invoice, {
