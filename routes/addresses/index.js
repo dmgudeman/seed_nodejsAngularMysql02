@@ -1,11 +1,14 @@
 
-const address = require('express').Router();
+const addresses = require('express').Router();
+
 const createAddress = require('./createAddress');
-const updateAddress = require('./updateAddress');
-const getAddressByCoId = require('./getAddressByCoid');
+// const getAllAddresses = require('./getAllAddresses');
+// const getAddressById = require('./getAddressById');
+// const updateAddress = require('./updateAddress');
 
-address.post('/', createAddress)
-address.get('/:coId', getAddressByCoId)
-address.put('/:addressId', updateAddress);
+addresses.post('/', createAddress)
+// addresses.get('/:companyId', getAddressById)
+// addresses.get('/', getAllAddresses);
+// addresses.put('/:companyId', updateAddress);
 
-module.exports = address
+module.exports = addresses

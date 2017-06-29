@@ -109,7 +109,7 @@ export class AddressEditComponent implements OnInit {
 
   onSubmit() {
         
-        let  id = this.company.id;
+        let  id = this.coId;
         // if () {id=this.address.id};
         console.log(`address-edit onSubmit id ${id}`);
         

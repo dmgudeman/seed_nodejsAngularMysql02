@@ -62,9 +62,7 @@ module.exports = (sequelize, DataTypes) => {
           targetKey: 'id',
         });
       },
-       print: console.log(`In Address model class methods HHHHHHHHHHHHHHHHHH`),
     },
-       
   });
   return Address;
 };
