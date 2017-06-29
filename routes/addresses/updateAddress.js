@@ -1,3 +1,7 @@
+'use strict';
+
+const Address = require('../../models/').Address;
+
 module.exports = (req, res) => {
   const id = req.params.addressId;
   const address = req.body.Address;

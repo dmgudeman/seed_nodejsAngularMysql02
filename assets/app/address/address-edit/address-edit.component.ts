@@ -104,7 +104,7 @@ export class AddressEditComponent implements OnInit {
         });
     }
 
-    submitThis() {
+    onSubmit() {
             
         let  id; 
         if (this.address) {
@@ -125,6 +125,7 @@ export class AddressEditComponent implements OnInit {
         result = this._addressService.updateAddress ({Address:payload}, id);}   
 
         result.subscribe(x => {
+            event.stopPropagation();
             // Ideally, here we'd want:
             // this.form.markAsPristine();
             // this._router.navigate(['companies']);
