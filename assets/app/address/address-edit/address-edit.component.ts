@@ -109,22 +109,22 @@ export class AddressEditComponent implements OnInit {
 
   onSubmit() {
         
-        let  id = this.coId;
-        // if () {id=this.address.id};
-        console.log(`address-edit onSubmit id ${id}`);
+        let  id; 
+        if (this.address) {id=this.address.id};
+        console.log(`address-edit onSubmit id ${this.address}`);
         
         let x = this.myform.value;
         let payload =   x;//{address:x};
         console.log(`address-edit onSubmit payload ${JSON.stringify(payload)}`)
 
         var result;
-        // if (!id) {
-        //     result = this._addressService.addAddress(payload);
-        // } else {
-        //     let ID = (id) ? d : "ID NOT HERE";
+        if (!id) {
+            result = this._addressService.addAddress({Address:payload});
+        } else {
+            let ID = (id) ? id : "ID NOT HERE";
     
-        result = this._companyService.updateCompany ({Address:payload}, id);
-        // }   
+        result = this._addressService.updateAddress ({Address:payload}, id);
+        }   
         result.subscribe(x => {
             // Ideally, here we'd want:
             // this.form.markAsPristine();
