@@ -41,12 +41,9 @@ export class CompanyService {
                    // .get(this._url + "/companies/" + token)                            // query strategy
                    .get(this._url + "/companies")                                        // Bearer header strategy
 			       .map((res:Response) =>{ 
-                    //    console.log(`getCompanies company.service ${JSON.stringify(res)}`);
-                    //    console.log(`getCompanies company.service res.header ${JSON.stringify(res.headers)}`);
-                           console.log(`IN GETCOMPANIES COMPANY.SERVICE JSON.stringify(res)= ${JSON.stringify(res)}`);
-                     let body = (res.json().companies) ? res.json().companies : null;
-                     console.log(`IN GETCOMPANIES COMPANY.SERVICE body= ${body}`);
-                            return body ;
+                       console.log(`IN GETCOMPANIES COMPANY.SERVICE JSON.stringify(res)= ${JSON.stringify(res)}`);
+                       let body = (res.json().companies) ? res.json().companies : null;
+                           return body ;
                    })
                    .catch(this.shared.handleError2);
 	}
@@ -55,22 +52,23 @@ export class CompanyService {
         let body;
         return this._http.get(this.getCompanyUrl(id) )
                    .map ((res:Response) => {body = res.json().company;
-                                             return body;})
+                      return body;})
        } 
 
     getItemsByCompany(id:number){
         let body;
         return this._http.get(this.getCompanyUrl(id))
-                         .map((res:Response) => {body = <Company>res.json().company.Items;
-        // console.log("CO_SERVICE: getItemsByCompany " + JSON.stringify(body))
-                                                return body;})
+                   .map((res:Response) => {body = <Company>res.json().company.Items;
+                   // console.log("CO_SERVICE: getItemsByCompany " + JSON.stringify(body))
+                        return body;})
     }    
     getItemsByCompany2(id:number){
         let body;
-        return this._http.get(this.getCompanyUrl(id))
-                         .map((res:Response) => {body = <Company>res.json().company.Items;
-        // console.log("CO_SERVICE: getItemsByCompany " + JSON.stringify(body))
-                                                return body;})
+        return this._http
+                   .get(this.getCompanyUrl(id))
+                   .map((res:Response) => {body = <Company>res.json().company.Items;
+                   // console.log("CO_SERVICE: getItemsByCompany " + JSON.stringify(body))
+                       return body;})
     }    
     
     addCompany(payload){
@@ -79,19 +77,22 @@ export class CompanyService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers })
     
-        return this._http.post( this.getCompanyUpdateUrl() , JSON.stringify(payload), options)
+        return this._http
+                   .post( this.getCompanyUpdateUrl() , JSON.stringify(payload), options)
                    .map(res => res.json())
     }
 
     updateCompany(payload, id){
-		return this._http.put(this.getCompanyUrl(id), {company:payload})
-                            .map((res:Response) => <Company>res.json())
-                            .catch(this.shared.handleError);
+		return this._http
+                   .put(this
+                   .getCompanyUrl(id), {company:payload})
+                   .map((res:Response) => <Company>res.json())
+                   .catch(this.shared.handleError);
         }
     
     deleteCompany(companyId){
 		return this._http.delete(this.getCompanyUrl(companyId))
-			.map(res => res.json());
+			       .map(res => res.json());
 	}
     
     getCompanyUrl(companyId){
