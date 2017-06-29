@@ -30,7 +30,7 @@ export class AddressComponent implements OnInit {
   
   ngOnInit() {
     this.setAddress(this.coId);
-    // console.log(`Address ngOnInit Address ${this.address}`);
+    console.log(`Address ngOnInit Address ${this.address}`);
 
   }
 
@@ -45,8 +45,8 @@ export class AddressComponent implements OnInit {
                    this.postalCode = this.address.postalCode;
                    this.state = this.address.state;
                    this.country = this.address.country;
-                  //  console.log("Address getCompany this.coId ", this.coId);
-                  //  console.log("Address getCompany this.company" + JSON.stringify(this.company));
+                   console.log("Address getCompany this.coId ", this.coId);
+                   console.log("Address getCompany this.company" + JSON.stringify(this.company));
             });
     }
 }

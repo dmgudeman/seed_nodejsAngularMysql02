@@ -78,9 +78,10 @@ export class EditCompanyComponent implements OnInit {
         this.title = this.coId ? " Edit "+ this.coName + " Details" : " New Business";
                                   
         if(this.coId){
-            this._companyService.getCompany(this.coId)
+            this._companyService
+                .getCompany(this.coId)
                 .subscribe(company => {this.company= company;
-        console.log(`Company-details ngOnInit this.company ${JSON.stringify(company)}`)
+                 console.log(`edit-company ngOnInit company= ${JSON.stringify(company)}`)
                     
                     this.name.setValue(this.company.name);
                     this.color.setValue(this.company.color);

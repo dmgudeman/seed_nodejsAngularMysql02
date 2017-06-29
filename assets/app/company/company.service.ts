@@ -41,7 +41,7 @@ export class CompanyService {
                    // .get(this._url + "/companies/" + token)                            // query strategy
                    .get(this._url + "/companies")                                        // Bearer header strategy
 			       .map((res:Response) =>{ 
-                       console.log(`IN GETCOMPANIES COMPANY.SERVICE JSON.stringify(res)= ${JSON.stringify(res)}`);
+                    //    console.log(`IN GETCOMPANIES COMPANY.SERVICE JSON.stringify(res)= ${JSON.stringify(res)}`);
                        let body = (res.json().companies) ? res.json().companies : null;
                            return body ;
                    })

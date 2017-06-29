@@ -74,16 +74,18 @@ export class AddressEditComponent implements OnInit {
         "state": this.state,
         "CompanyId": this.CompanyId
     });
-   this.CompanyId.setValue(this.coId);
-   this.getAddress(this.coId);
+    if(this.coId){
+         this.CompanyId.setValue(this.coId);
+         this.getAddress(this.coId);
+    }
   }
 
     getAddress(coId) { 
                 console.log(`address-edit getAddress coId= ${coId}`)
-        this._addressService
-            .getAddress(coId)
-            .subscribe(address => {this.address= address.address;
-                console.log(`address-edit getAddress address= ${JSON.stringify(address)}`)
+        this._companyService
+            .getCompany(coId)
+            .subscribe(company => {this.address= company.Address;
+                console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
                 if (this.address !==null) {
                     console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
                     console.log(`address-edit getAddress this.address.street1= ${JSON.stringify(this.address.street1)}`)
@@ -106,8 +108,9 @@ export class AddressEditComponent implements OnInit {
     }
 
   onSubmit() {
-        let  id = null;
-        if (this.address) {id=this.address.id};
+        
+        let  id = this.company.id;
+        // if () {id=this.address.id};
         console.log(`address-edit onSubmit id ${id}`);
         
         let x = this.myform.value;
@@ -115,12 +118,13 @@ export class AddressEditComponent implements OnInit {
         console.log(`address-edit onSubmit payload ${JSON.stringify(payload)}`)
 
         var result;
-        if (!id) {
-            result = this._addressService.addAddress(payload);
-        } else {
-            let ID = (id) ? id : "ID NOT HERE";
-            result = this._addressService.updateAddress(payload, id);
-        }   
+        // if (!id) {
+        //     result = this._addressService.addAddress(payload);
+        // } else {
+        //     let ID = (id) ? d : "ID NOT HERE";
+    
+        result = this._companyService.updateCompany ({Address:payload}, id);
+        // }   
         result.subscribe(x => {
             // Ideally, here we'd want:
             // this.form.markAsPristine();
