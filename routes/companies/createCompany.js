@@ -46,6 +46,7 @@ const Address = require('../../models/').Address;
 
 module.exports = (req, res) => {
   const company = req.body.company;
+  console.log(`CREATECOMPANY company= ${JSON.stringify(req.body)}`);
   Company.create(company, {
     include: [
       Address,

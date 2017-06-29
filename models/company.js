@@ -30,12 +30,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: true,
     },
-    userId: {
-      type: DataTypes.INTEGER(11).UNSIGNED,
-      allowNull: false,
-      references: 'user',
-      referenceKey: 'id'
-    },
+    // userId: {
+    //   type: DataTypes.INTEGER(11).UNSIGNED,
+    //   allowNull: false,
+    //   references: 'user',
+    //   referenceKey: 'id'
+    // },
   }, {
     classMethods: {
       associate: (models) => {

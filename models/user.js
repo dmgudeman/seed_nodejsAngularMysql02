@@ -34,6 +34,13 @@ module.exports = function(sequelize, DataTypes) {
             freezeTableName: true,
             tableName: 'user',
             dialect: 'mysql',
+            classMethods: {
+                associate: (models) => {
+                    User.hasMany(models.Company, {
+                    foreignKey: 'userId',
+                    });
+                },
+            },
             hooks: {
                 beforeCreate: function(user, options) {
                     return new Promise((resolve, reject) => {
