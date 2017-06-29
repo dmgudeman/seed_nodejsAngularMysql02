@@ -50,7 +50,7 @@ export class AddressEditComponent implements OnInit {
     latitude = new FormControl;
     CompanyId = new FormControl;
 
-  constructor( 
+    constructor( 
         private _addressService:AddressService,
         private _companyService:CompanyService,
         private _location:Location,
@@ -58,37 +58,34 @@ export class AddressEditComponent implements OnInit {
         private _route:ActivatedRoute,
         private _fb:FormBuilder) { }
 
-  ngOnInit() {
-      console.log(`address-edit ngOnInit has been fired`);
-    this.invalid.setValue(false);
+    ngOnInit() {
+        console.log(`address-edit ngOnInit has been fired`);
+        this.invalid.setValue(false);
     
-    this.myform = this._fb.group({
-        "city": this.city,
-        "country": this.country,
-        "invalid": this.invalid,
-        "latitude": this.latitude,
-        "longitude": this.longitude,
-        "postalCode": this.postalCode,
-        "street1":this.street1,
-        "street2":this.street2,
-        "state": this.state,
-        "CompanyId": this.CompanyId
-    });
-    if(this.coId){
-         this.CompanyId.setValue(this.coId);
-         this.getAddress(this.coId);
+        this.myform = this._fb.group({
+            "city": this.city,
+            "country": this.country,
+            "invalid": this.invalid,
+            "latitude": this.latitude,
+            "longitude": this.longitude,
+            "postalCode": this.postalCode,
+            "street1":this.street1,
+            "street2":this.street2,
+            "state": this.state,
+            "CompanyId": this.CompanyId
+        });
+        if(this.coId){
+            this.CompanyId.setValue(this.coId);
+            this.getAddress(this.coId);
+        }
     }
-  }
 
     getAddress(coId) { 
-                console.log(`address-edit getAddress coId= ${coId}`)
         this._companyService
             .getCompany(coId)
             .subscribe(company => {this.address= company.Address;
-                console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
+                // console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
                 if (this.address !==null) {
-                    console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
-                    console.log(`address-edit getAddress this.address.street1= ${JSON.stringify(this.address.street1)}`)
                     this.street1.setValue(this.address.street1);
                     this.street2.setValue(this.address.street2);
                     this.city.setValue(this.address.city);
@@ -107,14 +104,16 @@ export class AddressEditComponent implements OnInit {
         });
     }
 
-  onSubmit() {
-        
+    submitThis() {
+            
         let  id; 
-        if (this.address) {id=this.address.id};
-        console.log(`address-edit onSubmit id ${this.address}`);
+        if (this.address) {
+            id=this.address.id
+            console.log(`address-edit onSubmit id ${this.address}`); 
+        };
         
         let x = this.myform.value;
-        let payload =   x;//{address:x};
+        let payload =   x;
         console.log(`address-edit onSubmit payload ${JSON.stringify(payload)}`)
 
         var result;
@@ -123,8 +122,8 @@ export class AddressEditComponent implements OnInit {
         } else {
             let ID = (id) ? id : "ID NOT HERE";
     
-        result = this._addressService.updateAddress ({Address:payload}, id);
-        }   
+        result = this._addressService.updateAddress ({Address:payload}, id);}   
+
         result.subscribe(x => {
             // Ideally, here we'd want:
             // this.form.markAsPristine();

@@ -58,9 +58,9 @@ export class AddressService {
                    .do(data => console.log(`address.service updateAddress DATA ${data}`))
                    .catch(this.shared.handleError);
 	} 
-    getAddress(coId){
+    getAddress(addressId){
         return this._http
-                   .get(this.getUpdateAddressUrl(coId))
+                   .get(this.getUpdateAddressUrl(addressId))
                    .map((res) => <Address>res.json())
                    .catch(this.shared.handleError);
     }
