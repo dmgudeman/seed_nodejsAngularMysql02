@@ -121,43 +121,63 @@ export class InvoiceEditComponent implements OnInit {
         // console.log(`INVOICE_EDIT getItemsByCompany(coId) coId= ${coId}`);
         this._itemService
             .getItemsByCompany(coId)
-            .subscribe(items => this.items = items,
+            .subscribe(
+                data =>{ 
+                    console.log(`INVOICE-EDIT getItemsByCompany data= ${JSON.stringify(data)}`);
+                    console.log(`INVOICE-EDIT getItemsByCompany company.Items= ${JSON.stringify(data.company.Items)}`);
+                    this.items = data.company.Items;
+                },
             error => this.errorMessage = <any>error,
             // () => console.log('completed')
+                
             );
     }
     
     filterByDateRange(beginDate?, endDate?) {
         let bmDate = Moment(beginDate.formatted);
         let emDate = Moment(endDate.formatted);
-        console.log(`INVOICE_EDIT filterByDateRange this.items.length= ${JSON.stringify(this.items.length)}`);
+        let filteredItems: Item[]=[];
+        // console.log(`INVOICE_EDIT filterByDateRange this.items.length= ${JSON.stringify(this.items.length)}`);
+        // console.log(`INVOICE_EDIT filterByDateRange bmDate= ${JSON.stringify(bmDate)}`);
+        // console.log(`INVOICE_EDIT filterByDateRange emDate= ${JSON.stringify(emDate)}`);
 
         for (let i = 0; i < this.items.length; i++) {
-            let imDate = Moment(this.items[i].date)
-            if (imDate.isAfter(bmDate) && imDate.isBefore(emDate)) {
-                  this.itemIds.push(this.items[i].id);
-        console.log(`INVOICE_EDIT filterByDateRange this.itemIds= ${JSON.stringify(this.itemIds)}`);
-            
-                  
+            let imDate = Moment(this.items[i].date);
+             bmDate = bmDate.add(-1,'d');
+             emDate = emDate.add(-1,'d');
+        // console.log(`INVOICE_EDIT filterByDateRange imDate= ${JSON.stringify(imDate)}`);
+        // console.log(`INVOICE_EDIT filterByDateRange bmDate= ${JSON.stringify(bmDate)}`);
+        // console.log(`INVOICE_EDIT filterByDateRange emDate= ${JSON.stringify(emDate)}`);
+       
+
+        // console.log(`INVOICE_EDIT filterByDateRange im.isSorA(bm, day)= ${imDate.isSameOrAfter(bmDate, 'day')}`);
+
+            if (imDate.isSameOrAfter(bmDate, 'day') && imDate.isSameOrBefore(emDate, 'day')) {
+        // console.log(`INVOICE_EDIT filterByDateRange this.items[i]= ${this.items[i]}`);
+                  filteredItems.push(this.items[i])
                 }
             }
-        return this.itemIds;
+        // console.log(`INVOICE_EDIT filterByDateRange filteredItems= ${JSON.stringify(filteredItems)}`);
+
+        return filteredItems;
     }
 
     goBack() { this._location.back(); }
 
     onSubmit() {
-        console.log(`INVOICE_EDIT onSubmit() this.items= ${JSON.stringify(this.items)}`);
+        // this.items = this.getItemsByCompany(this.coId);
+        // console.log(`INVOICE_EDIT onSubmit() this.items= ${JSON.stringify(this.items)}`);
         this.submittedForm = this.invoice.value;
-        console.log(`INVOICE_EDIT onSubmit() this.invoice.value= ${JSON.stringify(this.invoice.value)}`);
+        // console.log(`INVOICE_EDIT onSubmit() this.invoice.value= ${JSON.stringify(this.invoice.value)}`);
         let date1 = Moment(this.submittedForm.beginDate.date).add(-1, 'month').format('YYYY-MM-DD')
         let date2 = Moment(this.submittedForm.endDate.date).add(-1, 'month').format('YYYY-MM-DD');
-        this.filterByDateRange(date1, date2);
-        console.log(`INVOICE_EDIT onSubmit() this.itemIds= ${JSON.stringify(this.itemIds)}`);
+        // console.log(`date1=${date1}  date2=${date2}`);
+        let filteredItems = this.filterByDateRange(date1, date2);
+        // console.log(`INVOICE_EDIT onSubmit() this.items= ${JSON.stringify(filteredItems)}`);
         this.submittedForm.beginDate = date1;
         this.submittedForm.endDate = date2;
         this.submittedForm.companyId = this.coId;
-        this.submittedForm.Items = this.itemIds;
+        this.submittedForm.Items = filteredItems;
 
         this._invoiceService.addInvoice(this.submittedForm)
                .subscribe(
@@ -165,7 +185,7 @@ export class InvoiceEditComponent implements OnInit {
                         //   console.log("Success!");
                         //   console.log("ID " , x.createdInvoice.id);
                           let id = x.createdInvoice.id;
-                        //   console.log( 'invoice-pre-pdf/' + id);
+                          console.log( 'invoice-pre-pdf/' + id);
                           this._router.navigate(['invoice-pre-pdf/' + id]);
                     }, 
                     response => { if (response.status = 404) {

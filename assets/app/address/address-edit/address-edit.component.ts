@@ -128,7 +128,7 @@ export class AddressEditComponent implements OnInit {
             event.stopPropagation();
             // Ideally, here we'd want:
             // this.form.markAsPristine();
-            // this._router.navigate(['companies']);
+            this._router.navigate(['companies']);
         });
     }
 

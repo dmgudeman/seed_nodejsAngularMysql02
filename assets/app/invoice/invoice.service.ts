@@ -244,7 +244,7 @@ export class InvoiceService {
     </head>
     <body>`
            
-    tail = `  </body>
+    tail = `  </body
               </html>          
           `
         // ngInit() {
@@ -252,7 +252,7 @@ export class InvoiceService {
 
         addInvoice(payload) {
                 console.log("INVOICESERVICE this._url + '/invoices' = " + this.getInvoiceUrl())
-                console.log("JSON.stringify({ 'invoice': payload } " + JSON.stringify({ invoice: payload }) )
+                console.log("INVOICESERVICE JSON.stringify({invoice: payload } " + JSON.stringify({ invoice: payload }) )
                 return this._http
                         .post(this.getInvoiceUrl(), { "invoice": payload })
                         .map((res)  => { 
@@ -307,7 +307,23 @@ export class InvoiceService {
                    .map(invoice => items$ = invoice.Items)
 	}
 
+    // filterByDateRange(beginDate?, endDate?) {
+    //     let bmDate = Moment(beginDate.formatted);
+    //     let emDate = Moment(endDate.formatted);
+    //     let filteredItems: Item[];
+    //     console.log(`INVOICE_EDIT filterByDateRange this.items.length= ${JSON.stringify(this.items.length)}`);
 
+    //     for (let i = 0; i < this.items.length; i++) {
+    //         let imDate = Moment(this.items[i].date)
+    //         if (imDate.isAfter(bmDate) && imDate.isBefore(emDate)) {
+    //               filteredItems.push(this.items[i]);
+    //     console.log(`INVOICE_EDIT filterByDateRange filteredItems= ${JSON.stringify(filteredItems)}`);
+            
+                  
+    //             }
+    //         }
+    //     return filteredItems;
+    // }
         getInvoiceUrl() {
                 return this._url + "/invoices";
         }
