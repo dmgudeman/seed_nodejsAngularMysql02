@@ -136,30 +136,29 @@ export class InvoiceEditComponent implements OnInit {
     filterByDateRange(beginDate?, endDate?) {
         let bmDate = Moment(beginDate.formatted);
         let emDate = Moment(endDate.formatted);
-        let filteredItems: Item[]=[];
-        // console.log(`INVOICE_EDIT filterByDateRange this.items.length= ${JSON.stringify(this.items.length)}`);
-        // console.log(`INVOICE_EDIT filterByDateRange bmDate= ${JSON.stringify(bmDate)}`);
-        // console.log(`INVOICE_EDIT filterByDateRange emDate= ${JSON.stringify(emDate)}`);
+        bmDate = bmDate.add(-1,'d');
+        emDate = emDate.add(-1,'d');
+        let filteredItemsId: number[]=[];
+        console.log(`INVOICE_EDIT filterByDateRange this.items.length= ${JSON.stringify(this.items.length)}`);
+        console.log(`INVOICE_EDIT filterByDateRange bmDate= ${JSON.stringify(bmDate)}`);
+        console.log(`INVOICE_EDIT filterByDateRange emDate= ${JSON.stringify(emDate)}`);
 
         for (let i = 0; i < this.items.length; i++) {
             let imDate = Moment(this.items[i].date);
-             bmDate = bmDate.add(-1,'d');
-             emDate = emDate.add(-1,'d');
-        // console.log(`INVOICE_EDIT filterByDateRange imDate= ${JSON.stringify(imDate)}`);
-        // console.log(`INVOICE_EDIT filterByDateRange bmDate= ${JSON.stringify(bmDate)}`);
-        // console.log(`INVOICE_EDIT filterByDateRange emDate= ${JSON.stringify(emDate)}`);
-       
-
-        // console.log(`INVOICE_EDIT filterByDateRange im.isSorA(bm, day)= ${imDate.isSameOrAfter(bmDate, 'day')}`);
+             
+        console.log(`INVOICE_EDIT filterByDateRange imDate= ${JSON.stringify(imDate)}`);
+        console.log(`INVOICE_EDIT filterByDateRange bmDate= ${JSON.stringify(bmDate)}`);
+        console.log(`INVOICE_EDIT filterByDateRange emDate= ${JSON.stringify(emDate)}`);
+        console.log(`INVOICE_EDIT filterByDateRange im.isSorA(bm, day)= ${imDate.isSameOrAfter(bmDate, 'day')}`);
 
             if (imDate.isSameOrAfter(bmDate, 'day') && imDate.isSameOrBefore(emDate, 'day')) {
-        // console.log(`INVOICE_EDIT filterByDateRange this.items[i]= ${this.items[i]}`);
-                  filteredItems.push(this.items[i])
+        console.log(`INVOICE_EDIT filterByDateRange this.items[i]= ${this.items[i]}`);
+                  filteredItemsId.push(this.items[i].id)
                 }
             }
-        // console.log(`INVOICE_EDIT filterByDateRange filteredItems= ${JSON.stringify(filteredItems)}`);
+        console.log(`INVOICE_EDIT filterByDateRange filteredItemsId= ${filteredItemsId}`);
 
-        return filteredItems;
+        return filteredItemsId;
     }
 
     goBack() { this._location.back(); }
@@ -168,16 +167,16 @@ export class InvoiceEditComponent implements OnInit {
         // this.items = this.getItemsByCompany(this.coId);
         // console.log(`INVOICE_EDIT onSubmit() this.items= ${JSON.stringify(this.items)}`);
         this.submittedForm = this.invoice.value;
-        // console.log(`INVOICE_EDIT onSubmit() this.invoice.value= ${JSON.stringify(this.invoice.value)}`);
+        console.log(`INVOICE_EDIT onSubmit() this.invoice.value= ${JSON.stringify(this.invoice.value)}`);
         let date1 = Moment(this.submittedForm.beginDate.date).add(-1, 'month').format('YYYY-MM-DD')
         let date2 = Moment(this.submittedForm.endDate.date).add(-1, 'month').format('YYYY-MM-DD');
-        // console.log(`date1=${date1}  date2=${date2}`);
-        let filteredItems = this.filterByDateRange(date1, date2);
-        // console.log(`INVOICE_EDIT onSubmit() this.items= ${JSON.stringify(filteredItems)}`);
+        console.log(`date1=${date1}  date2=${date2}`);
+        let filteredItemsId = this.filterByDateRange(date1, date2);
+        console.log(`INVOICE_EDIT onSubmit() this.itemsId= ${JSON.stringify(filteredItemsId)}`);
         this.submittedForm.beginDate = date1;
         this.submittedForm.endDate = date2;
         this.submittedForm.companyId = this.coId;
-        this.submittedForm.Items = filteredItems;
+        this.submittedForm.Items = filteredItemsId;
 
         this._invoiceService.addInvoice(this.submittedForm)
                .subscribe(

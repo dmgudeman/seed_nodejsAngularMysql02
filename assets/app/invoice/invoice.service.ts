@@ -251,8 +251,8 @@ export class InvoiceService {
         // }
 
         addInvoice(payload) {
-                console.log("INVOICESERVICE this._url + '/invoices' = " + this.getInvoiceUrl())
-                console.log("INVOICESERVICE JSON.stringify({invoice: payload } " + JSON.stringify({ invoice: payload }) )
+                // console.log("INVOICESERVICE this._url + '/invoices' = " + this.getInvoiceUrl())
+                // console.log("INVOICESERVICE JSON.stringify({invoice: payload } " + JSON.stringify({ invoice: payload }) )
                 return this._http
                         .post(this.getInvoiceUrl(), { "invoice": payload })
                         .map((res)  => { 

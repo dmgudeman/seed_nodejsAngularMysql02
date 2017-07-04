@@ -43,11 +43,13 @@ const db = require('../../models/');
 const Invoice = require('../../models/').Invoice;
 
 module.exports = (req, res) => {
-  const invoice = req.body;
+  const invoice = req.body.invoice;
+  console.log(invoice);
   console.log(`CREATEINVOICE req.body= ${JSON.stringify(req.body)}`);
   let createdInvoice;
   db.sequelize.transaction((t) => {
     return Invoice.create(invoice, {
+      logging: console.log,
       transaction: t,
     }).then((newInvoice) => {
       createdInvoice = newInvoice;
