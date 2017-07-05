@@ -35,40 +35,55 @@ export class RegisterComponent implements OnInit {
         ) { }
 
     ngOnInit() {
-        this.firstname= new FormControl('', Validators.required);
-        this.lastname = new FormControl('', Validators.required);
-        this.username = new FormControl('', Validators.required),
-        this.password= new FormControl('', [Validators.required,
-                                              Validators.minLength(1)]);
-        this.password_confirm = new FormControl('', Validators.required);  
+        // this.firstname= new FormControl('', Validators.required);
+        // this.lastname = new FormControl('', Validators.required);
+        // this.username = new FormControl('', Validators.required),
+        // this.password= new FormControl('', [Validators.required,
+        //                                       Validators.minLength(1)]);
+        // this.password_confirm = new FormControl('', Validators.required);  
         
         // get return url from route parameters or default to '/'
         this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
 
         this.myform = this._fb.group({
-            "firstname": this.firstname,
-            "lastname": this.lastname,
-            "username": this.username,
-            "password": this.password,
-            "password_confirm": this.password_confirm,
+            "firstname": [this.firstname, [
+                Validators.required]
+            ],
+            "lastname": [this.lastname,[
+                Validators.required]
+            ],
+            "username": [this.username, [
+                Validators.required]
+            ],
+            "password": [this.password,[
+                Validators.required]
+            ],
+            "password_confirm": [ this.password_confirm, [
+                Validators.required]
+            ],
         });
     }
     
        onLogout() {
-         this._userService.logout();
+         this._userService.onLogout();
          this._router.navigate(['login']);
     }
 
     onSubmit() {
       
         let result;
-        let firstname = this.firstname.value;
-        let lastname = this.lastname.value;
-        let username = this.username.value;
-        let password = this.password.value;
-        let password_confirmation = this.password_confirm.value;
-        let payload = { firstname, lastname, username, password };
+        console.log(``);
+        console.log(`register.component onSubmit payload= ${JSON.stringify(this.myform.value)}`);
+        let myform = this.myform.value;
+        console.log(`register.component onSubmit payload= ${JSON.stringify(myform.firstname)}`);
+        let firstname = myform.firstname;
+        let lastname = myform.lastname;
+        let username = myform.username;
+        let password = myform.password;
+        let password_confirmation = myform.password_confirm;
 
+        let payload = { firstname, lastname, username, password };
+        console.log(`register.component onSubmit payload= ${payload}`);
         result = this._userService.addUser(payload);
     
         result.subscribe(x => {

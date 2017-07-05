@@ -27,24 +27,21 @@
                    formControlName= "lastname"
                    name="lastname">
         </div>
-        <div class="form-group" [ngClass] = "{
-            'has-danger': username.invalid,
-            'has-success': username.valid
-                                      }">
+         <div class="form-group has-danger">
             <label id="usernamelab" class="input" fo="username" >Username</label>
             <input id="username" 
                    type="text" 
                    class="input ec-input form-control" 
                    formControlName= "username"
                    name="username">
-                <div 
+                <!--<div 
                     *ngIf="username.touched && username.pristine"
                     class="alert alert-danger">Username is required
                 </div>
                 <div 
                     *ngIf="username.invalid && username.dirty"
                     class="alert alert-danger">Username is required
-                </div>
+                </div>-->
                 
                 
                
