@@ -126,22 +126,14 @@ export class InvoicePrePdfComponent implements OnInit {
   submit(){
     // let stringy = document.documentElement.innerHTML;
      let stringy = document.getElementById('invoice-body').innerHTML;
-    //  console.log("SUBMIT stringy " , stringy);
-    //  let stringy2 = JSON.stringify(stringy);
-    //  alert(typeof stringy);
-    //  console.log("SUBMIT stringy2 " +  stringy2);
-     this._invoiceService.addPdf(stringy)
-                         .subscribe(
-                    x => {console.log("Success!");
-                    }
-                    , 
-                    response => { if (response.status = 404) {
-                                        this._router.navigate(['not-found']);}
-
-                                  
-                                }
-                    );
-
+     this._invoiceService
+         .addPdf(stringy)
+         .subscribe(
+            x => {console.log("Success!");
+              this._router.navigate(['companies'])}, 
+            response => { if (response.status = 404) {
+              this._router.navigate(['not-found']);}
+            }
+         );
   }
-
 }

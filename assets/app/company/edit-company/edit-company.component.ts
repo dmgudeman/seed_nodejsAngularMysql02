@@ -103,24 +103,24 @@ export class EditCompanyComponent implements OnInit {
         let stringUid = '' + this.userId;
         var payload = this.myform.value;
         payload.userId=this.userId;
-        console.log(`edit-company onSubmit this.userId= ${this.userId}`);
-        console.log(`edit-company onSubmit payload ${payload}`);
+        // console.log(`edit-company onSubmit ${id}`);
+        // console.log(`edit-company onSubmit payload ${payload}`);
         var result;
             if (id) {
                 let result = this._companyService.updateCompany(payload, id);
+                this._router.navigate(['companies']);
             } else {
                 let ID = (id) ? id : "ID NOT HERE";
-                console.log(`edit-company onSubmit payload ${JSON.stringify(payload)}`);
-
+                // console.log(`edit-company onSubmit payload ${JSON.stringify(payload)}`);
                 let result = this._companyService.addCompany(payload);
-                console.log(`result ${JSON.stringify(result)}`);
-                
+                // console.log(`result ${JSON.stringify(result)}`);
             }   
-           this._companyService.addCompany(payload).subscribe(x => {
-                // Ideally, here we'd want:
-                // this.form.markAsPristine();
-                this._router.navigate(['companies']);
-            });
+               this._router.navigate(['companies']);
+        //    this._companyService.addCompany(payload).subscribe(x => {
+        //         // Ideally, here we'd want:
+        //         // this.form.markAsPristine();
+        //         this._router.navigate(['companies']);
+        //     });
     }
 
     goBack(): void {

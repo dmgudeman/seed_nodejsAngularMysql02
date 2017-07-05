@@ -72,14 +72,14 @@ export class CompanyService {
     }    
     
     addCompany(payload){
-        console.log(`payload in addCompany ${JSON.stringify({company:{payload}})}`);
-               
+        // console.log(`payload in addCompany ${JSON.stringify({company:{payload}})}`);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers })
     
         return this._http
                    .post( this.getCompanyUpdateUrl() , {company:payload}, options)
                    .map(res => res.json())
+                   .catch(this.shared.handleError);
     }    
     updateCompany(payload, id){
 		return this._http
