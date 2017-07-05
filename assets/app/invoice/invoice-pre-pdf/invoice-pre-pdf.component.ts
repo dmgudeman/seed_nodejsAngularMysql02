@@ -65,8 +65,6 @@ export class InvoicePrePdfComponent implements OnInit {
                 }
 
   ngOnInit() {
-      // let datee = new Date('2017-10-07')
-      // let datee = new Date()
       this._route.params.subscribe(params => {this.invoiceId = params['id']; });
       this.invoice = this.getInvoice(this.invoiceId);
       this.items = this.getItems(this.invoiceId);

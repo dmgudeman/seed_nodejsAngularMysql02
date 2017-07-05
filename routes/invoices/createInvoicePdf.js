@@ -37,6 +37,8 @@ function writeFilePromisified(name, text) {
 }
 
 function convertHtmlToPdfPromisified(htmlFileName, pdfFileName) {
+  console.log(`htmlFileName ${htmlFileName}`);
+  console.log(`pdflFileName ${pdfFileName}`);
   return new Promise((resolve, reject) => {
     exec(`wkhtmltopdf ${htmlFileName} ${pdfFileName}`, (error, stdout, stderr) => {
       if (error) {
@@ -56,6 +58,8 @@ function convertHtmlToPdfPromisified(htmlFileName, pdfFileName) {
 
 module.exports = (req, res) => {
   const invoiceHTML = req.body;
+  // console.log(`REQ.BODY ${req.body}`);
+  console.log(`__dirname ${__dirname}`);
   const invoiceHTMLFileName = 'invoice.html';
   const outputPDFFileName = 'output.pdf';
   const invoiceHTMLPath = path.join(__dirname, '../../user_invoices', invoiceHTMLFileName);
@@ -64,7 +68,9 @@ module.exports = (req, res) => {
   writeFilePromisified(invoiceHTMLPath, invoiceHTML).then(() => {
     return convertHtmlToPdfPromisified(invoiceHTMLPath, outputPDFPath);
   }).then((output) => {
+    console.log(`createInvoicePdf output= ${output}`);
     res.json({
+      logging: console.log,
       newPdf: outputPDFFileName,
     });
   }).catch((error) => {

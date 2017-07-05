@@ -1,38 +1,4 @@
-import { Injectable }       from '@angular/core';
-
-import {
-        Http,
-        Response,
-        Headers,
-        RequestOptions
-}                           from '@angular/http';
-import { Observable }       from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-
-import { Company }          from '../company/company';
-import { MyGlobals }        from '../shared/myglobals';
-import { Invoice }          from './invoice';
-import { Item }             from '../item/item';
-import { ItemService }      from '../item/item.service';
-import { Shared }           from '../shared/shared';
-
-@Injectable()
-export class InvoiceService {
-
-        invoice: Invoice;
-        items: Item[];
-        shared: Shared;
-        myglobals: MyGlobals;
-        errorMessage: string;
-
-        private _url;
-
-        constructor(private _http: Http) {
-                this.shared = new Shared();
-                this.myglobals = new MyGlobals();
-                this._url = this.myglobals.url;
-        }
-        head = `<!doctype html>
+<!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -242,93 +208,77 @@ export class InvoiceService {
 }
     </style>
     </head>
-    <body>`
-           
-    tail = `  </body
-              </html>          
-          `
-        // ngInit() {
-        // }
+    <body>
+    <div _ngcontent-c1="" class="invoice-box" ng-reflect-class-base="invoice-box">
+        <table _ngcontent-c1="" cellpadding="0" cellspacing="0">
+            <tbody _ngcontent-c1=""><tr _ngcontent-c1="" class="top" ng-reflect-class-base="top">
+                <td _ngcontent-c1="" colspan="2">
+                    <table _ngcontent-c1="">
+                        <tbody _ngcontent-c1=""><tr _ngcontent-c1="">
+                            <td _ngcontent-c1="" class="title" ng-reflect-class-base="title">
+                                <div _ngcontent-c1="">www</div>
+                                
+                            </td>
+                            <td _ngcontent-c1="">
+                                Invoice #: 45<br _ngcontent-c1=""> Created: 7/4/2017<br _ngcontent-c1=""> Due: 8/3/2017
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
 
-        addInvoice(payload) {
-                // console.log("INVOICESERVICE this._url + '/invoices' = " + this.getInvoiceUrl())
-                // console.log("INVOICESERVICE JSON.stringify({invoice: payload } " + JSON.stringify({ invoice: payload }) )
-                return this._http
-                        .post(this.getInvoiceUrl(), { "invoice": payload })
-                        .map((res)  => { 
-                                // console.log(res.json());
-                                // console.log(res.json().createdInvoice.id);
-                                return res.json();
-                        }).catch(this.shared.handleError);
-        }
+            <tr _ngcontent-c1="" class="information" ng-reflect-class-base="information">
+                <td _ngcontent-c1="" colspan="2">
+                    <table _ngcontent-c1="">
+                        <tbody _ngcontent-c1=""><tr _ngcontent-c1="">
+                            <td _ngcontent-c1="">
+                                Next Step Webs, Inc.<br _ngcontent-c1=""> 12345 Sunny Road<br _ngcontent-c1=""> Sunnyville, TX 12345
+                            </td>
+                            <td _ngcontent-c1="">
+                                www<br _ngcontent-c1=""> John Doe<br _ngcontent-c1=""> john@example.com
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
 
-        addPdf(payload) {
-             let   augmented  = this.head + payload + this.tail;
-        //      console.log("AUGMENTED " + augmented);
-        //     alert(typeof augmented);
-             console.log("PAYLOAD " + payload);
+            <tr _ngcontent-c1="" class="heading row1" ng-reflect-class-base="heading row1">
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"> Payment Method </td>
+                <td _ngcontent-c1="" class="col1 col1-mid" ng-reflect-class-base="col1 col1-mid"> </td>
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"> Check # </td>
+            </tr>
 
-                return this._http
-                        .post(this.getInvoiceUrl() + '/pdf', augmented )
-                        .map((res)  => { 
-                                console.log("RES.JSON ",  res);
-                                console.log("this.getInvoiceUrl() + '/pdf' " + this.getInvoiceUrl() + '/pdf');
-                                console.log(res.json().createdInvoice.id);
-                                return res.json();
-                        }).catch(this.shared.handleError);
-        }
+            <tr _ngcontent-c1="" class="details row1" ng-reflect-class-base="details row1">
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"> Check </td>
+                <td _ngcontent-c1="" class="col1 col1-mid" ng-reflect-class-base="col1 col1-mid"> </td>
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"> 1000 </td>
+            </tr>
 
-        
+            <tr _ngcontent-c1="" class="heading item row1" ng-reflect-class-base="heading item row1">
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"> Item </td>
+                <td _ngcontent-c1="" class="col1 col1-mid" ng-reflect-class-base="col1 col1-mid"> Description </td>
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"> Price </td>
+            </tr>
 
-        getInvoices(): Observable<Invoice[]> {
-                return this._http.get(this.getInvoiceUrl())
-                           .map(response => {
-                                //    console.log("GET RESPONSE ", response.json())
-                                return response.json()
-                        });
-        }
-        
-        getInvoiceById(invoiceId: number): Observable<Invoice> {
-                let body;
-                return this._http.get(this.getInvoiceByIdUrl(invoiceId))
-                            .map ((res:Response) => {body = res.json().invoice;
-                                        // console.log("INVOICESERVICE Body " + JSON.stringify(body))
-                                             return body;})
-        }
-
-        getCompanyFromInvoice(invoice:Invoice){
-                // console.log(JSON.stringify(invoice.Company));
-                return invoice.Company;
-        }
-        
-        getItemsByInvoiceId( invoiceId ): Observable<Item[]> {
-	   let items$;	
-	  return this.getInvoiceById(invoiceId)
-                   .map(invoice => items$ = invoice.Items)
-	}
-
-    // filterByDateRange(beginDate?, endDate?) {
-    //     let bmDate = Moment(beginDate.formatted);
-    //     let emDate = Moment(endDate.formatted);
-    //     let filteredItems: Item[];
-    //     console.log(`INVOICE_EDIT filterByDateRange this.items.length= ${JSON.stringify(this.items.length)}`);
-
-    //     for (let i = 0; i < this.items.length; i++) {
-    //         let imDate = Moment(this.items[i].date)
-    //         if (imDate.isAfter(bmDate) && imDate.isBefore(emDate)) {
-    //               filteredItems.push(this.items[i]);
-    //     console.log(`INVOICE_EDIT filterByDateRange filteredItems= ${JSON.stringify(filteredItems)}`);
+            <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--><tr _ngcontent-c1="" class="item row1" ng-reflect-class-base="item row1">
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"> 7/3/2017 </td>
+                <td _ngcontent-c1="" class="col1 col1-mid" ng-reflect-class-base="col1 col1-mid"> sdfgdsfgsdgf </td>
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"> 0 </td>
+            </tr><tr _ngcontent-c1="" class="item row1" ng-reflect-class-base="item row1">
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"> 7/3/2017 </td>
+                <td _ngcontent-c1="" class="col1 col1-mid" ng-reflect-class-base="col1 col1-mid"> sdfsdffsddfsdf </td>
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"> 0 </td>
+            </tr>
             
-                  
-    //             }
-    //         }
-    //     return filteredItems;
-    // }
-        getInvoiceUrl() {
-                return this._url + "/invoices";
-        }
-        getInvoiceByIdUrl(invoiceId){
-		return this._url + "/invoices/" + invoiceId;
-	}
-
-}
+            <tr _ngcontent-c1="" class="total row1" ng-reflect-class-base="total row1">
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"></td>
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"></td>
+                <td _ngcontent-c1="" class="col1" ng-reflect-class-base="col1"> Total: $385.00 </td>
+            </tr>
+        </tbody></table>
+    </div>
+      </body
+              </html>          
+          
