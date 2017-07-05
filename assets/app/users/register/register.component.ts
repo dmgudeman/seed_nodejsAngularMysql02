@@ -52,9 +52,8 @@ export class RegisterComponent implements OnInit {
     buildForm(): void {
         this.myform = this._fb.group({
             "firstname": [this.user.firstName, [
-                Validators.required,
-                Validators.minLength(2),
-                Validators.maxLength(24)]
+                Validators.required,]
+               
             ],
             "lastname": [this.user.lastName,[
                 Validators.required]
@@ -63,7 +62,9 @@ export class RegisterComponent implements OnInit {
                 Validators.required]
             ],
             "password": [this.user.password,[
-                Validators.required]
+                Validators.required,
+                Validators.minLength(4),
+                Validators.maxLength(24)]
             ],
             "password_confirm": [ this.user.password_confirm, [
                 Validators.required]
@@ -78,12 +79,7 @@ export class RegisterComponent implements OnInit {
     onValueChanged(data?: any) {
         if (!this.myform) { 
             return; }
-        // console.log(`onValueChanged data= ${JSON.stringify(data)}`);
 
-            console.log(this.user.firstName);
-        // if(this.myform.value.firstname !== undefined && this.myform.value.firstname !== null){
-        // console.log(`onValueChanged firstname.dirty= ${this.firstname.touched}`);
-        // }
         const form = this.myform;
     
         for (const field in this.formErrors) {
@@ -93,9 +89,14 @@ export class RegisterComponent implements OnInit {
         
             if (control && control.dirty && !control.valid) {
                 const messages = this.validationMessages[field];
+                console.log(`control= ${control}`);
+                console.log(`control.dirty= ${control.dirty}`);
+                console.log(`control.valid= ${control.valid}`);
+                console.log(`control.touched= ${control.touched}`);
                 console.log(messages);
                 for (const key in control.errors) {
-                this.formErrors[field] += messages[key] + ' ';
+                console.log(`key= ${key}`);
+                    this.formErrors[field] += messages[key] + ' ';
                 }
             }
         }
@@ -103,18 +104,30 @@ export class RegisterComponent implements OnInit {
  
     formErrors = {
         'firstname': '',
-        'lastname': ''
+        'lastname': '',
+        'username': '',
+        'password': '',
+        'confirm_password': ''
     };
     
     validationMessages = {
         'firstname': {
-        'required':      'First name is required.',
-        'minlength':     'First name must be at least 4 characters long.',
-        'maxlength':     'First name cannot be more than 24 characters long.',
+            'required': 'First name is required.',
         },
         'lastname': {
-        'required': 'Last name is required.'
-        }
+            'required': 'Last name is required.',
+        },
+        'username': {
+            'required': 'Username is required.'
+        },
+        'password': {
+            'required': 'A password is required.',
+            'minlength': 'Password must be at least 4 characters long.',
+            'maxlength': 'Password cannot be more than 24 characters long.',
+        },
+        'confirm_password': {
+            'required': 'Passwords must match'
+        },
     };
 
     onLogout() {

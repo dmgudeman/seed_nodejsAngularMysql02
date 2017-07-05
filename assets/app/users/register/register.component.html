@@ -17,6 +17,7 @@
                    type="text" 
                    class="input ec-input form-control" 
                    formControlName= "firstname"
+                   name="firstname"
                    required>
             <div *ngIf="formErrors.firstname" class="alert alert-danger">
                 {{formErrors.firstname}}
@@ -30,14 +31,20 @@
                    formControlName= "lastname"
                    name="lastname"
                    required>
+            <div *ngIf="formErrors.lastname" class="alert alert-danger">
+                {{formErrors.lastname}}
+            </div>
         </div>
          <div class="form-group has-danger">
-            <label id="usernamelab" class="input" fo="username" >Username</label>
+            <label id="usernamelab" class="input" for="username" >Username</label>
             <input id="username" 
                    type="text" 
                    class="input ec-input form-control" 
                    formControlName= "username"
                    name="username">
+            <div *ngIf="formErrors.username" class="alert alert-danger">
+                {{formErrors.username}}
+            </div>
                 <!--<div 
                     *ngIf="username.touched && username.pristine"
                     class="alert alert-danger">Username is required
@@ -61,6 +68,9 @@
                    class="input ec-input form-control" 
                    formControlName= "password"
                    name="password">
+            <div *ngIf="formErrors.password" class="alert alert-danger">
+                {{formErrors.password}}
+            </div>
         </div>
         <div class="form-group">
             <label id="password2lab" class="input" for="password_confirm" >Repeat Password</label>
@@ -69,6 +79,9 @@
                    class="input ec-input form-control" 
                    formControlName= "password_confirm"
                    name="password_confirm">
+            <div *ngIf="formErrors.confirm_password" class="alert alert-danger">
+                {{formErrors.confirm_password}}
+            </div>
         </div>
         <button type="submit" class="btn btn-success btn-lg">Sign In</button>
         <button type="button" class="btn btn-danger btn-lg" (click)="onLogout()">Log Out</button>
