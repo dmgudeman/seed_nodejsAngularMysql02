@@ -12,12 +12,15 @@
     <!-- LOGIN FORM -->
     <form [formGroup]="myform" (ngSubmit)="onSubmit()">
         <div class="form-group has-danger">
-            <label id="firstnamelab" class="input" for="firstname" >First Name</label>
+            <label for="firstname" id="firstnamelab" class="input"  >First Name</label>
             <input id="firstname" 
                    type="text" 
                    class="input ec-input form-control" 
                    formControlName= "firstname"
-                   name="firstname">
+                   required>
+            <div *ngIf="formErrors.firstname" class="alert alert-danger">
+                {{formErrors.firstname}}
+            </div>
         </div>
         <div class="form-group has-danger">
             <label id="lastnamelab" class="input" for="lastname" >Last Name</label>
@@ -25,7 +28,8 @@
                    type="text" 
                    class="input ec-input form-control" 
                    formControlName= "lastname"
-                   name="lastname">
+                   name="lastname"
+                   required>
         </div>
          <div class="form-group has-danger">
             <label id="usernamelab" class="input" fo="username" >Username</label>
