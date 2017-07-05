@@ -273,7 +273,7 @@ export class InvoiceService {
                         .map((res)  => { 
                                 console.log("RES.JSON ",  res);
                                 console.log("this.getInvoiceUrl() + '/pdf' " + this.getInvoiceUrl() + '/pdf');
-                                console.log(res.json().createdInvoice.id);
+                                console.log(res.json().createdInvoice);
                                 return res.json();
                         }).catch(this.shared.handleError);
         }
