@@ -70,29 +70,12 @@ export class RegisterComponent implements OnInit {
         this.onValueChanged(); // (re)set validation messages now
     }
 
-checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
-    console.log(`checkIfMatchingPasswords called`);
-          return (group: FormGroup) => {
-            let passwordInput = group.controls[passwordKey],
-                passwordConfirmationInput = group.controls[passwordConfirmationKey];
-            if (passwordInput.value !== passwordConfirmationInput.value) {
-              return passwordConfirmationInput.setErrors({notEquivalent: true})
-            }
-            else {
-                return passwordConfirmationInput.setErrors(null);
-            }
-          }
-        }
-
-
     onValueChanged(data?: any) {
         if (!this.myform) {
             return; }
 
         const form = this.myform;
     
-        
-        
         for (const field in this.formErrors) {
             // clear previous error message (if any)
             this.formErrors[field] = '';
@@ -116,8 +99,6 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
                     this.formErrors[field] += messages[key] + ' ';
                 }
             }
-            
-        
         }
     }
  
@@ -151,6 +132,10 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
 
     onLogout() {
         this._userService.onLogout();
+        this._router.navigate(['login']);
+    }
+
+    goToLogIn() {
         this._router.navigate(['login']);
     }
 
