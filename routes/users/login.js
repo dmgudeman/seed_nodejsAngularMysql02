@@ -15,7 +15,7 @@ module.exports = (req, res) => {
                 user = data;
                 return user;
             } else {
-                return console.log ('user not found');
+                console.log ('user not found');
             }
         })
         .then((user) => {
@@ -33,14 +33,18 @@ module.exports = (req, res) => {
                 console.log(`LOGIN ENDPOINT response = ${JSON.stringify(response)}`);
                     res.status(201).json(response)
             } else {
-                return console.log('failed to login')
+                return res.status(400).send(
+                    "Password and/or Username not found"
+                );
             }
         })
         .catch((error) => {
                 console.log(error.stack);
-                return res.status(400).json({
-                    error: error.stack,
-                });
+                // return res.status(400).json({
+                //     error: error.stack,
+                return res.status(400).send(
+                    "Password and/or Username not found"
+                );
         });
 }
    

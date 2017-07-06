@@ -8,11 +8,11 @@ import { CompanyDetailsComponent }  from './company-details/company-details.comp
 import { EditCompanyComponent }     from './edit-company/edit-company.component';
 
 const companyRoutes = [
-  { path: 'companies', component: CompaniesComponent, canActivate : [AuthGuard]}, 
-  { path: 'company-card/:id',     component: CompanyCardComponent },
-  { path: 'edit-company',         component: EditCompanyComponent },
-  { path: 'edit-company/:id',     component: EditCompanyComponent},
-  { path: 'company-details',      component: CompanyDetailsComponent },
+  { path: 'companies',            component: CompaniesComponent, canActivate : [AuthGuard]}, 
+  { path: 'company-card/:id',     component: CompanyCardComponent, canActivate : [AuthGuard] },
+  { path: 'edit-company',         component: EditCompanyComponent, canActivate : [AuthGuard] },
+  { path: 'edit-company/:id',     component: EditCompanyComponent, canActivate : [AuthGuard]},
+  { path: 'company-details',      component: CompanyDetailsComponent, canActivate : [AuthGuard] },
 ];
 
 @NgModule({

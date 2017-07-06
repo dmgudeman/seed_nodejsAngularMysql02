@@ -50,7 +50,6 @@ export class UserService implements OnInit{
     }
     
     login(username, password) {
-        // console.log(`Im here in Authentication service ${username} ${password}`);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         let payload = { username, password };
