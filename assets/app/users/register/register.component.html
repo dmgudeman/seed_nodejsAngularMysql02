@@ -1,98 +1,67 @@
 <div class="container">
-
-<div class="col-sm-6 col-sm-offset-3">
-
-    <h1><span class="fa fa-sign-in"></span> Sign Up</h1>
-
-    <!-- show any messages that come back with authentication -->
-    <!--<% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-    <% } %>-->
-
-    <!-- LOGIN FORM -->
-    <form [formGroup]="myform" (ngSubmit)="onSubmit()">
-        <div class="form-group has-danger">
-            <label for="firstname" id="firstnamelab" class="input"  >First Name</label>
-            <input id="firstname" 
-                   type="text" 
-                   class="input ec-input form-control" 
-                   formControlName= "firstname"
-                   name="firstname"
-                   required>
-            <div *ngIf="formErrors.firstname" class="alert alert-danger">
-                {{formErrors.firstname}}
-            </div>
-        </div>
-        <div class="form-group has-danger">
-            <label id="lastnamelab" class="input" for="lastname" >Last Name</label>
-            <input id="lastname" 
-                   type="text" 
-                   class="input ec-input form-control" 
-                   formControlName= "lastname"
-                   name="lastname"
-                   required>
-            <div *ngIf="formErrors.lastname" class="alert alert-danger">
-                {{formErrors.lastname}}
-            </div>
-        </div>
-         <div class="form-group has-danger">
-            <label id="usernamelab" class="input" for="username" >Username</label>
-            <input id="username" 
-                   type="text" 
-                   class="input ec-input form-control" 
-                   formControlName= "username"
-                   name="username">
-            <div *ngIf="formErrors.username" class="alert alert-danger">
-                {{formErrors.username}}
-            </div>
-                <!--<div 
-                    *ngIf="username.touched && username.pristine"
-                    class="alert alert-danger">Username is required
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1><span class="fa fa-sign-in"></span> Sign Up</h1>
+        <form [formGroup]="myform" (ngSubmit)="onSubmit()">
+            <div class="form-group has-danger">
+                <label for="firstname" id="firstnamelab" class="input"  >First Name</label>
+                <input id="firstname" 
+                    type="text" 
+                    class="input ec-input form-control" 
+                    formControlName= "firstname"
+                    name="firstname"
+                    required>
+                <div *ngIf="formErrors.firstname" class="alert alert-danger">
+                    {{formErrors.firstname}}
                 </div>
-                <div 
-                    *ngIf="username.invalid && username.dirty"
-                    class="alert alert-danger">Username is required
-                </div>-->
-                
-                
-               
-        <!--<pre>Dirty? {{username.dirty}}</pre>
-        <pre>valid? {{username.valid}}</pre>
-        <pre>Touched? {{username.touched}}</pre>-->
-        <!--<pre>Touched? {{username.validateUsername}}</pre>-->
-        </div>
-        <div class="form-group">
-            <label id="passwordlab" class="input" for="password" >Password</label>
-            <input id="password"
-                   type="password" 
-                   class="input ec-input form-control" 
-                   formControlName= "password"
-                   name="password">
-            <div *ngIf="formErrors.password" class="alert alert-danger">
-                {{formErrors.password}}
             </div>
-        </div>
-        <div class="form-group">
-            <label id="password2lab" class="input" for="password_confirm" >Repeat Password</label>
-            <input id="password_confirm"
-                   type="password" 
-                   class="input ec-input form-control" 
-                   formControlName= "password_confirm"
-                   name="password_confirm">
-            <div *ngIf="formErrors.password_confirm" class="alert alert-info">
-                {{formErrors.password_confirm}}
+            <div class="form-group has-danger">
+                <label id="lastnamelab" class="input" for="lastname" >Last Name</label>
+                <input id="lastname" 
+                    type="text" 
+                    class="input ec-input form-control" 
+                    formControlName= "lastname"
+                    name="lastname"
+                    required>
+                <div *ngIf="formErrors.lastname" class="alert alert-danger">
+                    {{formErrors.lastname}}
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-success btn-lg">Sign Up</button>
-        <button type="button" class="btn btn-warning btn-lg" (click)="goToLogIn()">Log In</button>
-        <button type="button" class="btn btn-danger btn-lg" (click)="onLogout()">Log Out</button>
-    </form>
-
-    <hr>
-
-    <p>Already have an account? <a href="/login">Login</a></p>
-    <p>Or go <a href="/">home</a>.</p>
-
-</div>
-
+            <div class="form-group has-danger">
+                <label id="usernamelab" class="input" for="username" >Username</label>
+                <input id="username" 
+                    type="text" 
+                    class="input ec-input form-control" 
+                    formControlName= "username"
+                    name="username">
+                <div *ngIf="formErrors.username" class="alert alert-danger">
+                    {{formErrors.username}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label id="passwordlab" class="input" for="password" >Password</label>
+                <input id="password"
+                    type="password" 
+                    class="input ec-input form-control" 
+                    formControlName= "password"
+                    name="password">
+                <div *ngIf="formErrors.password" class="alert alert-danger">
+                    {{formErrors.password}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label id="password2lab" class="input" for="password_confirm" >Repeat Password</label>
+                <input id="password_confirm"
+                    type="password" 
+                    class="input ec-input form-control" 
+                    formControlName= "password_confirm"
+                    name="password_confirm">
+                <div *ngIf="formErrors.password_confirm" class="alert alert-info">
+                    {{formErrors.password_confirm}}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Sign Up</button>
+            <button type="button" class="btn btn-warning btn-lg" (click)="goToLogIn()">Log In</button>
+            <button type="button" class="btn btn-danger btn-lg" (click)="onLogout()">Log Out</button>
+        </form>
+    </div>
 </div>

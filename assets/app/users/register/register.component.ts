@@ -7,11 +7,8 @@ import { FormBuilder,
          Validators }             from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PasswordValidation }        from '../../shared/password-validation';
-// import { AlertService }           from '../services/alert.service';
-// import { AuthenticationService }  from '../services/authentication.service';
 import { User }                   from '../user';
 import { UserService }            from '../user.service';
-// import { validateUsername }     from '../services/user-validators/validate-username';
 
 @Component({
   selector: 'app-register',
@@ -44,7 +41,6 @@ export class RegisterComponent implements OnInit {
     ngOnInit() {
         // get return url from route parameters or default to '/'
         this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
-        
     }
     
     buildForm(): void {
@@ -58,10 +54,7 @@ export class RegisterComponent implements OnInit {
                 Validators.maxLength(24)]
             ],
             password_confirm: ['', Validators.required],
-        }
-    //     ,{validator: this.checkIfMatchingPasswords('password', 'password_confirm')
-    // }
-    );
+        });
          
         this.myform
             .valueChanges
@@ -83,19 +76,15 @@ export class RegisterComponent implements OnInit {
 
             if (this.myform.value.password 
                 && this.myform.value.password_confirm
-                && this._passwordValidation.MatchPassword(this.myform)){
-                
+                && this._passwordValidation.MatchPassword(this.myform)
+                ) {
                 this.formErrors['password_confirm'] = this.validationMessages['password_confirm'].required + ' ';
-                console.log(this.formErrors.password_confirm);
             }
-        
             
             if (control && control.dirty && !control.valid) {
                 const messages = this.validationMessages[field];
                 
                 for (const key in control.errors) {
-                    console.log(`key= ${key}`);
-                    console.log(`control.errors ${JSON.stringify(control.errors)}`);
                     this.formErrors[field] += messages[key] + ' ';
                 }
             }
@@ -140,19 +129,14 @@ export class RegisterComponent implements OnInit {
     }
 
     onSubmit() {
-      
         let result;
-        // console.log(`register.component onSubmit payload= ${JSON.stringify(this.myform.value)}`);
         let myform = this.myform.value;
-        // console.log(`register.component onSubmit payload= ${JSON.stringify(myform.firstname)}`);
         let firstname = myform.firstname;
         let lastname = myform.lastname;
         let username = myform.username;
         let password = myform.password;
         let password_confirmation = myform.password_confirm;
-
         let payload = { firstname, lastname, username, password };
-        // console.log(`register.component onSubmit payload= ${payload}`);
         result = this._userService.addUser(payload);
     
         result.subscribe(x => {
@@ -161,6 +145,5 @@ export class RegisterComponent implements OnInit {
             this._router.navigate(['login']);
         });
     }
-
 }
 
