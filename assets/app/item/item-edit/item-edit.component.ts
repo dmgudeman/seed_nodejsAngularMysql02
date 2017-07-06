@@ -37,18 +37,18 @@ export class ItemEditComponent implements OnInit {
     moment = require('moment');
     dateFormat = require('dateformat');
    
-    private hoursArrayLimit = 25;
-    private hoursArray:number[] = [];
-    private coId: number;
-    private coName: string;
-    private date:Date;
-    private id:number;
-    private item = new Item();
-    private m = this.moment();
-    private myDatePickerOptions: IMyOptions = { dateFormat: 'yyyy-mm-dd'};
-    private title: string;
-    private type: string = 'placeholder';
-    private uId: number;
+     hoursArrayLimit = 25;
+     hoursArray:number[] = [];
+     coId: number;
+     coName: string;
+     date:Date;
+     id:number;
+     item = new Item();
+     m = this.moment();
+     myDatePickerOptions: IMyOptions = { dateFormat: 'yyyy-mm-dd'};
+     title: string;
+     type: string = 'placeholder';
+     uId: number;
 
 
     myform : FormGroup;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {trigger, state, animate, style, transition, AnimationEntryMetadata} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-// import { Company } from '../company/company';
+import { Company } from '../company/company';
 import * as Moment from 'moment';
 import 'rxjs';
 

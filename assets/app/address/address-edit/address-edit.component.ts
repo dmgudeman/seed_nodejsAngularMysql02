@@ -34,9 +34,9 @@ export class AddressEditComponent implements OnInit {
     @Input() coId: number;
     // @Input() private address:Address;
             address:Address;
-    private addressId:number;
-    private company:Company;
-    private errorMessage: string;
+    addressId:number;
+    company:Company;
+    errorMessage: string;
 
     myform : FormGroup;
     street1 = new FormControl();

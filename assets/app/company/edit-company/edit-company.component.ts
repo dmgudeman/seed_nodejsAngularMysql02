@@ -37,13 +37,13 @@ export class EditCompanyComponent implements OnInit {
     @HostBinding('style.display')   display = 'block';
     @HostBinding('style.position')  position = 'absolute';
             address:Address;
-    private company:Company;
-    private errorMessage: string;
-    private coId: number;
-    private coName:string;
-    private title:string;
-    private itemId: number;
-    private userId: number;
+     company:Company;
+     errorMessage: string;
+     coId: number;
+     coName:string;
+     title:string;
+     itemId: number;
+     userId: number;
 
     myform : FormGroup;
     name   = new FormControl;

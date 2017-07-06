@@ -124,8 +124,8 @@ export class InvoiceEditComponent implements OnInit {
             .subscribe(
                 data =>{ 
                     console.log(`INVOICE-EDIT getItemsByCompany data= ${JSON.stringify(data)}`);
-                    console.log(`INVOICE-EDIT getItemsByCompany company.Items= ${JSON.stringify(data.company.Items)}`);
-                    this.items = data.company.Items;
+                    // this.items = data.company.Items;
+                    this.items = data.Items;
                 },
             error => this.errorMessage = <any>error,
             // () => console.log('completed')
