@@ -86,29 +86,33 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
 
 
     onValueChanged(data?: any) {
-        if (!this.myform) { 
+        if (!this.myform) {
             return; }
 
         const form = this.myform;
     
-        if (this.myform.value.password && this.myform.value.password_confirm){
-            this._passwordValidation.MatchPassword(this.myform);
-        }
+        
+        
         for (const field in this.formErrors) {
             // clear previous error message (if any)
             this.formErrors[field] = '';
             const control = form.get(field);
+
+            if (this.myform.value.password 
+                && this.myform.value.password_confirm
+                && this._passwordValidation.MatchPassword(this.myform)){
+                
+                this.formErrors['password_confirm'] = this.validationMessages['password_confirm'].required + ' ';
+                console.log(this.formErrors.password_confirm);
+            }
         
+            
             if (control && control.dirty && !control.valid) {
                 const messages = this.validationMessages[field];
-                console.log(`control= ${control}`);
-                console.log(`control.dirty= ${control.dirty}`);
-                console.log(`control.valid= ${control.valid}`);
-                console.log(`control.touched= ${control.touched}`);
-                console.log(`field= ${field}`);
-                console.log(messages);
+                
                 for (const key in control.errors) {
-                console.log(`key= ${key}`);
+                    console.log(`key= ${key}`);
+                    console.log(`control.errors ${JSON.stringify(control.errors)}`);
                     this.formErrors[field] += messages[key] + ' ';
                 }
             }
@@ -141,7 +145,7 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
             'maxlength': 'Password cannot be more than 24 characters long.',
         },
         'password_confirm': {
-            'required': 'Passwords must match'
+            'required': 'Please match the passwords'
         },
     };
 

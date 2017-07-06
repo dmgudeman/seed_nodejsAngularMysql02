@@ -79,8 +79,8 @@
                    class="input ec-input form-control" 
                    formControlName= "password_confirm"
                    name="password_confirm">
-            <div *ngIf="formErrors.confirm_password" class="alert alert-danger">
-                {{formErrors.confirm_password}}
+            <div *ngIf="formErrors.password_confirm" class="alert alert-info">
+                {{formErrors.password_confirm}}
             </div>
         </div>
         <button type="submit" class="btn btn-success btn-lg">Sign In</button>
