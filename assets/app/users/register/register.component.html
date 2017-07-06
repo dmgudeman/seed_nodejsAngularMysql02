@@ -59,7 +59,7 @@
                     {{formErrors.password_confirm}}
                 </div>
             </div>
-            <button type="submit" class="btn btn-success btn-lg">Sign Up</button>
+            <button type="submit" class="btn btn-success btn-lg" [disabled]="!myform.valid">Sign Up</button>
             <button type="button" class="btn btn-warning btn-lg" (click)="goToLogIn()">Log In</button>
             <button type="button" class="btn btn-danger btn-lg" (click)="onLogout()">Log Out</button>
         </form>

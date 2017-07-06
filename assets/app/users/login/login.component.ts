@@ -35,18 +35,66 @@ export class LoginComponent implements OnInit {
         // private _alertService: AlertService,
         private _fb: FormBuilder,
         private _userService: UserService
-    ) { }
-
-    ngOnInit() {
-
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
-        this.myform = this._fb.group({
-            username: ['',  Validators.required],
-            password: ['',  Validators.required],
-        });
+    ) { 
+        this.buildForm();
     }
 
+    ngOnInit() {
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
+    }
+
+    buildForm(): void {
+        this.myform = this._fb.group({
+            username: ['', Validators.required ],
+            password: ['', Validators.required ],
+        });
+         
+        this.myform
+            .valueChanges
+            .subscribe(data => this.onValueChanged(data));
+ 
+        this.onValueChanged(); // (re)set validation messages now
+    }
+    onValueChanged(data?: any) {
+        if (!this.myform) {
+            return; }
+        console.log(`data onValueChanged ${JSON.stringify(data)}`);
+        const form = this.myform;
+    
+        for (const field in this.formErrors) {
+            // clear previous error message (if any)
+            this.formErrors[field] = '';
+            const control = form.get(field);
+            console.log(`control ${field}`);
+            console.log(`control.dirty ${control.dirty}`);
+            console.log(`control.valid ${control.valid}`);
+            
+            if (control && control.dirty && !control.valid) {
+                const messages = this.validationMessages[field];
+                
+            console.log(`messages ${messages}`);
+                for (const key in control.errors) {
+                    console.log(`key ${key}`);
+                    this.formErrors[field] += messages[key] + ' ';
+                }
+            }
+        }
+    }
+ 
+    formErrors = {
+        'username': '',
+        'password': '',
+    };
+    
+    validationMessages = {
+        'username': {
+            'required': 'Username is required.'
+        },
+        'password': {
+            'required': 'A password is required.',
+        },
+    };
     goToRegister(item) {
         this._router.navigate(['/register']);
     }
@@ -56,6 +104,8 @@ export class LoginComponent implements OnInit {
     }
     
     onSubmit() {
+       
+       
         // HEALTH OF LOCALSTORAGE----------------------------------------
         // https://stackoverflow.com/questions/34245593/html5-localstorage-usefull-functions-javascript-typescript
         // There are a lot of good methods about the localStorage here. 
@@ -82,6 +132,7 @@ export class LoginComponent implements OnInit {
         let username = this.myform.value.username;
         let password = this.myform.value.password;
         let payload = { username, password };
+
         // console.log(`${username}`);
         // console.log(`${password}`);
         // console.log(`login.component onSubmit payload ${JSON.stringify(payload)}`);
