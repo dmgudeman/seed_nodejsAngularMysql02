@@ -8,15 +8,15 @@ import 'rxjs';
 
 @Injectable()
 export class Shared {
-      moment = require('moment');
-       private m = this.moment();
+    moment = require('moment');
+    private m = this.moment();
 
     constructor() {
      }
 
     public handleError(error: Response) {
         console.error(error);
-        let message = `Error status code ${error.status} at ${error.url}`;
+        let message = `Error status code ${error.status} at ${error.url} ${error.statusText}`;
         return Observable.throw(message);
     }
 

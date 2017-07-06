@@ -60,15 +60,12 @@ export class UserService implements OnInit{
                 .map((response: Response) => {
                     let result = JSON.parse(JSON.stringify(response));
                     let body = result._body;
-                    console.log((typeof body == 'string'));
+                    // console.log((typeof body == 'string'));
                     let objBody = JSON.parse(body);
                     let userId = objBody.userId;
                     let token = objBody.token;
                     let answer = {token, userId}
-                    // console.log(`userId= ${userId}  token= ${token}`);
                     return answer;
-                    // response.json()
-
                 })
                 .catch(this.shared.handleError)
     }

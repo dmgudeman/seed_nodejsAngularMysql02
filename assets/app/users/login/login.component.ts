@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
     loading = false;
     returnUrl: string;
     myform: FormGroup;
-    fcUsername = new FormControl();
-    fcPassword = new FormControl();
+    // fcUsername = new FormControl();
+    // fcPassword = new FormControl();
     userId: number;
 
     constructor(
@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit {
         // get return url from route parameters or default to '/'
         this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
         this.myform = this._fb.group({
-            "username": this.fcUsername,
-            "password": this.fcPassword,
+            username: ['',  Validators.required],
+            password: ['',  Validators.required],
         });
     }
 
@@ -73,12 +73,14 @@ export class LoginComponent implements OnInit {
             console.log("Total entries:", amount);
             console.log("Total size:", size);
         }
-        localStorage_consoleInfo();
+        // UNCOMMENT THIS TO ACTIVATE localStorage_consoleInfo
+        // localStorage_consoleInfo()
+        
         // END OF: HEALTH OF LOCALSTORAGE----------------------------------------
 
         let result;
-        let username = this.fcUsername.value;
-        let password = this.fcPassword.value;
+        let username = this.myform.value.username;
+        let password = this.myform.value.password;
         let payload = { username, password };
         // console.log(`${username}`);
         // console.log(`${password}`);
@@ -88,7 +90,6 @@ export class LoginComponent implements OnInit {
         result.subscribe(x => {
             // console.log(`login.component onSubmit x.token ${x.token}`);
             // console.log(`login.component onSubmit result${x.userId}`);
-           console.log(`x.status ${x.status}`); 
             localStorage.setItem('token', x.token);
             localStorage.setItem('userId', x.userId);
             // Ideally, here we'd want:
