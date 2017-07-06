@@ -7,11 +7,10 @@ import { CommonModule } from '@angular/common';
 // import { MaterialModule } from '@angular/material';
 // import { ItemDetailComponent }     from 'app/item/item-detail/item-detail.component';
 // import { TruncatePipe }            from 'app/shared/truncate.pipe';
+import { PasswordValidation}        from './password-validation';
 
 @NgModule({
   declarations: [
-    // ItemDetailComponent,
-    // TruncatePipe,
   ],
   imports: [
     CommonModule,
@@ -26,6 +25,7 @@ import { CommonModule } from '@angular/common';
       //  ItemDetailComponent    
   ],
   providers: [
+      PasswordValidation
   ]
 })
 export class SharedModule {} 

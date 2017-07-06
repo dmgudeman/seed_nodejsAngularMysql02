@@ -13,7 +13,7 @@ import { MaterialModule }           from '@angular/material';
 // my modules
 import { AppRoutingModule }         from './app-routing.module';
 import { CompanyModule }            from './company/company.module';
-// import { SharedModule }             from 'app/shared/shared.module';
+import { SharedModule }             from './shared/shared.module';
 import { UsersModule }              from './users/users.module';
 import { UsersRoutingModule }       from './users/users-routing.module';
 
@@ -70,7 +70,7 @@ import { ItemListComponent }        from './item/item-list/item-list.component';
     // MyDateRangePickerModule,
     ReactiveFormsModule,
     RouterTestingModule,
-    // SharedModule,
+    SharedModule,
     UsersModule,
     
     // Routing Modules

@@ -6,6 +6,7 @@ import { FormBuilder,
          ReactiveFormsModule, 
          Validators }             from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PasswordValidation }        from '../../shared/password-validation';
 // import { AlertService }           from '../services/alert.service';
 // import { AuthenticationService }  from '../services/authentication.service';
 import { User }                   from '../user';
@@ -28,60 +29,71 @@ export class RegisterComponent implements OnInit {
     password;
     password_confirm; 
     user = new User();
+
    
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
         private _fb:FormBuilder,
         private _userService:UserService,
-        ) { }
+        private _passwordValidation: PasswordValidation
+        ) {
+            this.buildForm();
+         }
 
     ngOnInit() {
-        // this.firstname= new FormControl();
-        // this.lastname = new FormControl('', Validators.required);
-        // this.username = new FormControl('', Validators.required),
-        // this.password= new FormControl('', [Validators.required,
-        //                                       Validators.minLength(1)]);
-        // this.password_confirm = new FormControl('', Validators.required);  
-        
         // get return url from route parameters or default to '/'
         this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
-        this.buildForm();
+        
     }
     
     buildForm(): void {
         this.myform = this._fb.group({
-            "firstname": [this.user.firstName, [
-                Validators.required,]
-               
-            ],
-            "lastname": [this.user.lastName,[
-                Validators.required]
-            ],
-            "username": [this.user.username, [
-                Validators.required]
-            ],
-            "password": [this.user.password,[
+            firstname: ['',  Validators.required],
+            lastname: ['', Validators.required],
+            username: ['', Validators.required],
+            password: ['',[
                 Validators.required,
                 Validators.minLength(4),
                 Validators.maxLength(24)]
             ],
-            "password_confirm": [ this.user.password_confirm, [
-                Validators.required]
-            ],
-        });
+            password_confirm: ['', Validators.required],
+        }
+    //     ,{validator: this.checkIfMatchingPasswords('password', 'password_confirm')
+    // }
+    );
+         
         this.myform
             .valueChanges
             .subscribe(data => this.onValueChanged(data));
  
         this.onValueChanged(); // (re)set validation messages now
     }
+
+checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
+    console.log(`checkIfMatchingPasswords called`);
+          return (group: FormGroup) => {
+            let passwordInput = group.controls[passwordKey],
+                passwordConfirmationInput = group.controls[passwordConfirmationKey];
+            if (passwordInput.value !== passwordConfirmationInput.value) {
+              return passwordConfirmationInput.setErrors({notEquivalent: true})
+            }
+            else {
+                return passwordConfirmationInput.setErrors(null);
+            }
+          }
+        }
+
+
     onValueChanged(data?: any) {
         if (!this.myform) { 
             return; }
 
         const form = this.myform;
     
+        if (this.myform.value.password && this.myform.value.password_confirm){
+            this._passwordValidation.MatchPassword(this.myform);
+        }
         for (const field in this.formErrors) {
             // clear previous error message (if any)
             this.formErrors[field] = '';
@@ -93,12 +105,15 @@ export class RegisterComponent implements OnInit {
                 console.log(`control.dirty= ${control.dirty}`);
                 console.log(`control.valid= ${control.valid}`);
                 console.log(`control.touched= ${control.touched}`);
+                console.log(`field= ${field}`);
                 console.log(messages);
                 for (const key in control.errors) {
                 console.log(`key= ${key}`);
                     this.formErrors[field] += messages[key] + ' ';
                 }
             }
+            
+        
         }
     }
  
@@ -107,7 +122,7 @@ export class RegisterComponent implements OnInit {
         'lastname': '',
         'username': '',
         'password': '',
-        'confirm_password': ''
+        'password_confirm': ''
     };
     
     validationMessages = {
@@ -125,7 +140,7 @@ export class RegisterComponent implements OnInit {
             'minlength': 'Password must be at least 4 characters long.',
             'maxlength': 'Password cannot be more than 24 characters long.',
         },
-        'confirm_password': {
+        'password_confirm': {
             'required': 'Passwords must match'
         },
     };
