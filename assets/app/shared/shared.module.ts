@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthGuard }        from './auth-guard';
 // import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { FlexLayoutModule }     from '@angular/flex-layout';
 // import { HttpModule } from '@angular/http';
@@ -25,6 +26,7 @@ import { PasswordValidation}        from './password-validation';
       //  ItemDetailComponent    
   ],
   providers: [
+      AuthGuard,
       PasswordValidation
   ]
 })
