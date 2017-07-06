@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit {
         result.subscribe(x => {
             // console.log(`login.component onSubmit x.token ${x.token}`);
             // console.log(`login.component onSubmit result${x.userId}`);
+           console.log(`x.status ${x.status}`); 
             localStorage.setItem('token', x.token);
             localStorage.setItem('userId', x.userId);
             // Ideally, here we'd want:

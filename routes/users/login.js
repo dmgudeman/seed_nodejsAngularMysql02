@@ -15,12 +15,14 @@ module.exports = (req, res) => {
                 user = data;
                 return user;
             } else {
-                console.log ('user not found');
+                return new Error('no user');
             }
         })
         .then((user) => {
-            
-            return bcrypt.compare(liUser.password, user.password)
+            console.log(`user ${user}`);
+            if (user) {
+                 return bcrypt.compare(liUser.password, user.password)
+            }
         })
         .then((flag) => {
             if (flag) {
@@ -43,7 +45,7 @@ module.exports = (req, res) => {
                 // return res.status(400).json({
                 //     error: error.stack,
                 return res.status(400).send(
-                    "Password and/or Username not found"
+                    "Password and/or username not found"
                 );
         });
 }
