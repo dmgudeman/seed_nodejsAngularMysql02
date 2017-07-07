@@ -32,23 +32,11 @@ import { ItemDetailComponent }         from '../../item/item-detail/item-detail.
 })
 export class AddressEditComponent implements OnInit {
     @Input() coId: number;
-    // @Input() private address:Address;
-            address:Address;
+    address:Address;
     addressId:number;
     company:Company;
     errorMessage: string;
-
     myform : FormGroup;
-    // street1 = new FormControl();
-    // street2 = new FormControl();
-    // city = new FormControl();
-    // state = new FormControl();
-    // postalCode = new FormControl();
-    // country = new FormControl();
-    // invalid = new FormControl;
-    // longitude = new FormControl;
-    // latitude = new FormControl;
-    // CompanyId = new FormControl;
 
     constructor( 
         private _addressService:AddressService,
@@ -61,12 +49,7 @@ export class AddressEditComponent implements OnInit {
          }
 
     ngOnInit() {
-        console.log(`address-edit ngOnInit has been fired`);
-        // this.invalid.setValue(false);
-    
-        
         if(this.coId){
-            // this.CompanyId.setValue(this.coId);
             this.getAddress(this.coId);
         }
     }
@@ -74,9 +57,9 @@ export class AddressEditComponent implements OnInit {
         this.myform = this._fb.group({
             city: ' ',
             country:'',
-            invalid:'',
-            latitude:'',
-            longitude:'',
+            invalid:false,
+            // latitude:'',
+            // longitude:'',
             postalCode:'',
             street1:'',
             street2:'',
@@ -91,13 +74,18 @@ export class AddressEditComponent implements OnInit {
                 // console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
                 if (this.address !==null) {
                     this.myform.patchValue({
-                    street1: this.address.street1,
-                    street2: this.address.street2,
                     city: this.address.city,
+                    invalid: false,
+                    country: this.address.country,
                     state: this.address.state,
                     postalCode: this.address.postalCode,
-                    country:  this.address.country,
-                    })
+                    // latitude: null,
+                    // longitude: null,
+                    street1:this.address.street1,
+                    street2: this.address.street2,
+                    CompanyId: coId,
+                })
+               
                     response => {
                         if (response.status === 404){
                             this._router.navigate(['NotFound']);
