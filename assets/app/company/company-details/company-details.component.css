@@ -61,13 +61,14 @@ html, body {
 
 /* -------------- NAVBAR ---------------------*/
 .header {
-    position: fixed;
+    /*position: fixed;
     left: 0px;
-    top: 0px;
+    top: 0px;*/
     max-height: 125px;
     min-width: 100%;
     max-width: 100%;
     z-index: 2;
+    /*background-color: magenta;*/
 }
 
 .glyphicon, #plus-link  {
@@ -90,6 +91,8 @@ html, body {
      flex-direction: column;
        flex: 1 1 auto;
        justify-content: space-between;
+    /*background-color: brown;*/
+       
 
 }
 #sec1row1 {
