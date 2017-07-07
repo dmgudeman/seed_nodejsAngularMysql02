@@ -25,6 +25,7 @@ export class ItemDetailComponent implements OnInit {
   @Input() item: Item
   @Input() itemColor: string;
   shared = new Shared();
+  color:string;
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
@@ -43,7 +44,8 @@ export class ItemDetailComponent implements OnInit {
   }
 
   setColor(color) {
-    return color;
+      this.color = color
+    return this.color;
   }
 
 }

@@ -123,7 +123,7 @@ export class InvoiceEditComponent implements OnInit {
             .getItemsByCompany(coId)
             .subscribe(
                 data =>{ 
-                    console.log(`INVOICE-EDIT getItemsByCompany data= ${JSON.stringify(data)}`);
+                    // console.log(`INVOICE-EDIT getItemsByCompany data= ${JSON.stringify(data)}`);
                     this.items = data;
                 },
                 error => this.errorMessage = <any>error,
