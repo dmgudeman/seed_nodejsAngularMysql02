@@ -42,12 +42,16 @@ export class ItemService {
     //                                             return body;})
     // }    
     getItemsByCompany(id:number){
-        let body:Item[];
-        return this._http.get('/companies/' + id)
-                         .map((res:Response) => {body = <any>res.json()
-						console.log(`ITEMS_SERVICE: res= ${JSON.stringify(res)}`);
-                        console.log("ITEMS_SERVICE: res.json()._body" + JSON.stringify(res.json()));
-                         return body;})
+        // let body:Item[];
+        console.log(`IN GETITEMSBYCOMPANY ITEMS.SERVICE`);
+        return this._http.get('/items/' + id)
+                         .map((res:Response) => {
+                             console.log(`IN MAPPPPPPPPPPPPPPPPPPPPPPP `);
+                             let items = res.json().item;
+                            //  let items = body.company;
+						console.log(`ITEMS_SERVICE: items= ${JSON.stringify(res.json().item)}`);
+                        // console.log("ITEMS_SERVICE: res.json()._body" + JSON.stringify(res.json()._body));
+                         return items;})
     }    
 	// getItemsByDateRange (coId, beginDate)
 	// 	 return this.getItemsByCompany(coId)
