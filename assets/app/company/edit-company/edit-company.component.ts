@@ -81,7 +81,7 @@ export class EditCompanyComponent implements OnInit {
             this._companyService
                 .getCompany(this.coId)
                 .subscribe(company => {this.company= company;
-                 console.log(`edit-company ngOnInit company= ${JSON.stringify(company)}`)
+                 console.log(`000edit-company ngOnInit company= ${JSON.stringify(company)}`)
                     
                     this.name.setValue(this.company.name);
                     this.color.setValue(this.company.color);
@@ -98,22 +98,27 @@ export class EditCompanyComponent implements OnInit {
         }
     }
  
-    onSubmit() {
+    onSubmit3() {
         let  id = this.coId;
         let stringUid = '' + this.userId;
         var payload = this.myform.value;
         payload.userId=this.userId;
-        // console.log(`edit-company onSubmit ${id}`);
-        // console.log(`edit-company onSubmit payload ${payload}`);
+        // let modified = {"company": payload};
+        console.log(`111edit-company onSubmit ${id}`);
+        console.log(`222edit-company onSubmit payload ${JSON.stringify(payload)}`);
         var result;
             if (id) {
-                let result = this._companyService.updateCompany(payload, id);
-                this._router.navigate(['companies']);
+                let result = this._companyService
+                                 .updateCompany(payload, id)
+                                 .subscribe(result => {
+                                        console.log(`RESULT = ${JSON.stringify(result)}`);
+                                 })
+                // this._router.navigate(['companies']);
             } else {
                 let ID = (id) ? id : "ID NOT HERE";
-                // console.log(`edit-company onSubmit payload ${JSON.stringify(payload)}`);
+                console.log(`333edit-company onSubmit payload ${JSON.stringify(payload)}`);
                 let result = this._companyService.addCompany(payload);
-                // console.log(`result ${JSON.stringify(result)}`);
+                console.log(`444result ${result}`);
             }   
                this._router.navigate(['companies']);
         //    this._companyService.addCompany(payload).subscribe(x => {

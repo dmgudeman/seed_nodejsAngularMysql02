@@ -72,7 +72,7 @@ export class CompanyService {
     }    
     
     addCompany(payload){
-        // console.log(`payload in addCompany ${JSON.stringify({company:{payload}})}`);
+        console.log(`payload in addCompany ${JSON.stringify({company:{payload}})}`);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers })
     
@@ -82,10 +82,16 @@ export class CompanyService {
                    .catch(this.shared.handleError);
     }    
     updateCompany(payload, id){
+        console.log(`url)= ${this.getCompanyUrl(id)}`);
+        console.log(`343434334updateCompany {company:payload} ${JSON.stringify({company: payload})}`);
 		return this._http
-                   .put(this
-                   .getCompanyUrl(id), {company:payload})
-                   .map((res:Response) => <Company>res.json())
+                   .put(this.getCompanyUrl(id), {company:payload})
+                   .map((res:Response) => {
+                       console.log(`updatCompany url ${this.getCompanyUrl(id)}`); 
+                       console.log(`updatCompany url ${JSON.stringify({company:payload})}`); 
+
+
+                       <Company>res.json()})
                    .catch(this.shared.handleError);
         }
     

@@ -8,12 +8,9 @@ import {
     Validators
 } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-// import { AlertService }           from '../alert.service';
-// import { AuthenticationService }  from '../authentication.service';
 import { UserService }            from '../user.service';
 
 @Component({
-    // moduleId: module.id.toString(),
     selector: 'login',
     templateUrl: 'login.component.html'
 
@@ -24,8 +21,6 @@ export class LoginComponent implements OnInit {
     loading = false;
     returnUrl: string;
     myform: FormGroup;
-    // fcUsername = new FormControl();
-    // fcPassword = new FormControl();
     userId: number;
 
     constructor(
@@ -59,16 +54,16 @@ export class LoginComponent implements OnInit {
     onValueChanged(data?: any) {
         if (!this.myform) {
             return; }
-        console.log(`data onValueChanged ${JSON.stringify(data)}`);
+        // console.log(`data onValueChanged ${JSON.stringify(data)}`);
         const form = this.myform;
     
         for (const field in this.formErrors) {
             // clear previous error message (if any)
             this.formErrors[field] = '';
             const control = form.get(field);
-            console.log(`control ${field}`);
-            console.log(`control.dirty ${control.dirty}`);
-            console.log(`control.valid ${control.valid}`);
+            // console.log(`control ${field}`);
+            // console.log(`control.dirty ${control.dirty}`);
+            // console.log(`control.valid ${control.valid}`);
             
             if (control && control.dirty && !control.valid) {
                 const messages = this.validationMessages[field];
