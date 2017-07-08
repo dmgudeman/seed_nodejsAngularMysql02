@@ -24,29 +24,34 @@ export class AddressComponent implements OnInit {
   state: string;
   postalCode: string;
   country: string;
+  CompanyId: number
 
 
   constructor(private _companyService:CompanyService) { }
   
-  ngOnInit() {
-    this.setAddress(this.coId);
-    console.log(`Address ngOnInit Address ${this.address}`);
+    ngOnInit() {
+        this.setAddress(this.coId);
+        console.log(`Address ngOnInit Address ${this.address}`);
 
-  }
+    }
 
-   setAddress(coId) { 
-         this._companyService
+    setAddress(coId) { 
+        this._companyService
             .getCompany(coId)
             .subscribe(company => {this.company = company;
-                   this.address = company.Address;
-                   this.street1 = this.address.street1
-                   this.street2 = this.address.street2
-                   this.city = this.address.city;
-                   this.postalCode = this.address.postalCode;
-                   this.state = this.address.state;
-                   this.country = this.address.country;
-                   console.log("Address getCompany this.coId ", this.coId);
-                   console.log("Address getCompany this.company" + JSON.stringify(this.company));
+                if(company.address){
+                    this.address = company.Address;
+                    this.street1 = this.address.street1
+                    this.street2 = this.address.street2
+                    this.city = this.address.city;
+                    this.postalCode = this.address.postalCode;
+                    this.state = this.address.state;
+                    this.country = this.address.country;
+                    this.CompanyId= coId;
+                    console.log("Address getCompany this.coId ", this.coId);
+                    console.log("Address getCompany this.company" + JSON.stringify(this.company));
+                }
             });
+            
     }
 }

@@ -71,7 +71,8 @@ export class AddressEditComponent implements OnInit {
         this._companyService
             .getCompany(coId)
             .subscribe(company => {this.address= company.Address;
-                // console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
+                console.log(`address-edit getAddress address= ${JSON.stringify(this.address)}`)
+                    console.log(`INNNNNNNNNNNNNNNN ${coId}`);
                 if (this.address !==null) {
                     this.myform.patchValue({
                     city: this.address.city,
@@ -85,14 +86,14 @@ export class AddressEditComponent implements OnInit {
                     street2: this.address.street2,
                     CompanyId: coId,
                 })
-               
                     response => {
                         if (response.status === 404){
                             this._router.navigate(['NotFound']);
                         }
                     }
                 } else {
-                    console.log(`this.address= ${this.address}`);
+                    
+                    console.log(`NO ADDRESS FOUND this.address= ${this.address}`);
                 }
 
         });
@@ -107,7 +108,11 @@ export class AddressEditComponent implements OnInit {
         };
         
         let x = this.myform.value;
-        let payload =   x;
+        if(this.coId){
+           x.CompanyId = this.coId 
+        }
+
+        let payload =x;
         console.log(`address-edit onSubmit payload ${JSON.stringify(payload)}`)
 
         var result;
