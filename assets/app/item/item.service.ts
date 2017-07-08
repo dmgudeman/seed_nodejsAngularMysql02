@@ -33,40 +33,24 @@ export class ItemService {
 		           .get(this._url)
 			       .map(res => res.json());
 	}
-
-	// getItemsByCompany(id:number){
-    //     let body;
-    //     return this._http.get(this._companyService.getCompanyUrl(id))
-    //                      .map((res:Response) => {body = <Company>res.json().company.Items;
-    //     // console.log("CO_SERVICE: getItemsByCompany " + JSON.stringify(body))
-    //                                             return body;})
-    // }    
+	   
     getItemsByCompany(id:number){
-        let body:Item[];
-        return this._http.get('/companies/' + id)
-                         .map((res:Response) => {body = <any>res.json()
-						console.log(`ITEMS_SERVICE: res= ${JSON.stringify(res)}`);
-                        console.log("ITEMS_SERVICE: res.json()._body" + JSON.stringify(res.json()));
-                         return body;})
+        return this._http.get('/items/' + id)
+                         .map((res:Response) => {
+                             let items = res.json().item;
+                             return items;
+                            })
     }    
-	// getItemsByDateRange (coId, beginDate)
-	// 	 return this.getItemsByCompany(coId)
-	// 	            .filter (data => data.date > beginDate);
-	// }
     
     getItem(itemId){
-		// console.log("this.getItemUrl(itemId)  " + this.getItemUrl(itemId))
 		let body:Item;
-		let   yunkers = this._http
-		                    .get(this.getItemUrl(itemId))
-							.map((res:Response) => {body = <Item>res.json().item; return body})
-							// .do(data => console.log("GETITEM BODY" + JSON.stringify(body)))
-			                return yunkers;
+		let   item = this._http
+		                 .get(this.getItemUrl(itemId))
+					     .map((res:Response) => {body = <Item>res.json().item; return body})
+			                return item;
 	}
     
     addItem(payload){
-		console.log("ADDITEM: payload " + JSON.stringify(payload))
-		console.log(`this._url ${this._url}/items`);
 		return this._http
 		           .post(this._url + '/items', payload)
 				   .map(res => res.json())
@@ -96,10 +80,7 @@ export class ItemService {
                                         this._router.navigate(['not-found']);}
                                 }
                 );
-       console.log( "INVOICESERVICE hourly ", hourly);
        let subtotal = (item.hours * hourly) + item.amount;
-       console.log( "INVOICESERVICE subtotal ", subtotal);
-
 	   return subtotal;
   
 	}
@@ -112,6 +93,4 @@ export class ItemService {
     getItemUrl(itemId){
 		return this._url + "/items/" + itemId;
 	}
-
-
 }

@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
             'required': 'A password is required.',
         },
     };
-    goToRegister(item) {
+    goToRegister() {
         this._router.navigate(['/register']);
     }
 

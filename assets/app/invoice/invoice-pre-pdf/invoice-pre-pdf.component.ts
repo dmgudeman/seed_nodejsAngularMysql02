@@ -80,7 +80,7 @@ export class InvoicePrePdfComponent implements OnInit {
                            .subscribe(
                                       invoice => {this.invoice = invoice;
                                         this.createdDate = this.invoice.createdAt;
-                                         this.m = this.moment(this.createdDate);
+                                        this.m = this.moment(this.createdDate);
                                         this.company = this._invoiceService.getCompanyFromInvoice(this.invoice);
                                         this.coName = this.company.name;
                                         this.color = this.company.color;

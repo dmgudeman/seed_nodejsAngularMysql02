@@ -88,6 +88,7 @@ export class InvoiceEditComponent implements OnInit {
         this._route.params.subscribe(params => {
             this.coId = params['id'];
         })
+        console.log(`In INIT on COMPANY-EDIT`);
         this.getItemsByCompany(this.coId);
         this.onFormChange();
     }
@@ -118,18 +119,14 @@ export class InvoiceEditComponent implements OnInit {
     
     getItemsByCompany(coId) {
         let date = new Date('2017-10-07');
-        // console.log(`INVOICE_EDIT getItemsByCompany(coId) coId= ${coId}`);
         this._itemService
             .getItemsByCompany(coId)
             .subscribe(
                 data =>{ 
-                    console.log(`INVOICE-EDIT getItemsByCompany data= ${JSON.stringify(data)}`);
-                    console.log(`INVOICE-EDIT getItemsByCompany company.Items= ${JSON.stringify(data.company.Items)}`);
-                    this.items = data.company.Items;
+                    // console.log(`INVOICE-EDIT getItemsByCompany data= ${JSON.stringify(data)}`);
+                    this.items = data;
                 },
-            error => this.errorMessage = <any>error,
-            // () => console.log('completed')
-                
+                error => this.errorMessage = <any>error,
             );
     }
     

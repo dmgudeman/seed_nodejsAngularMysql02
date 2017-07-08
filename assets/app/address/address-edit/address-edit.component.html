@@ -12,12 +12,12 @@
             <a  class="glyphicon glyphicon-chevron-left" aria-hidden="true"></a>
             {{title}}
         </div>
-    </nav>-->
+    </nav>--
     <!--  FORM -->
     <div id="section2" class="over-form tmp-form">
         <div class="colum" id="col2"></div>
         <div class="colum" id="col3">
-            <form [formGroup]="myform" (ngSubmit)="onSubmit()">
+            <form [formGroup]="myform" (ngSubmit)="onSubmit2($event)">
                 <!--<div> <pre>{{ myform.value | json}}</pre></div>-->
                 <!--street1-->
                 <div id="row1" class="row">
@@ -77,7 +77,7 @@
                     <div id="input-box7" class="input-box">
                         <label id="label7" class="input"></label>
                         <div class="footer-row">
-                            <button class="footer-col" (click)="onSubmit($event)" type="submit"> 
+                            <button class="footer-col" (click)="onSubmit2($event)" type="submit"> 
                         Submit
                     </button>
                         </div>
@@ -88,5 +88,5 @@
         </div>
         <div class="colum" id="col4"></div>
     </div>
-    <footer id="footer" (click)="onSubmit()">Submit</footer>
+    <!--<footer id="footer" (click)="onSubmit()">Submit</footer>-->
 </div>
