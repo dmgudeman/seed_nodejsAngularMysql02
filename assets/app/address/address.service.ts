@@ -64,6 +64,19 @@ export class AddressService {
                    .map((res) => <Address>res.json())
                    .catch(this.shared.handleError);
     }
+    getAddressByCoId(coId){
+        return this._http
+                   .get("/companies/" + coId )
+                   .map((res) => {
+
+                       let address = res.json().company.Address;
+                    //    address = JSON.parse(JSON.stringify(address));
+                       console.log(`getAddressByCoId ${JSON.stringify(address)}`);
+                       return address;
+                   })
+                   .catch(this.shared.handleError);
+
+    }
 
      getAddressUrl(){
         return this._url +"/addresses";

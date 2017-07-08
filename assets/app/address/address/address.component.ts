@@ -4,6 +4,7 @@ import {
     Input 
   }                          from '@angular/core';
 import { Address }           from '../address';
+import { AddressService }    from '../address.service';
 import { Company }           from '../../company/company';
 import { CompanyDetailsComponent }    from '../../company/company-details/company-details.component';
 import { CompanyService }    from '../../company/company.service';
@@ -27,20 +28,22 @@ export class AddressComponent implements OnInit {
   CompanyId: number
 
 
-  constructor(private _companyService:CompanyService) { }
+  constructor(private _companyService:CompanyService,
+              private _addressService:AddressService) { }
   
     ngOnInit() {
-        this.setAddress(this.coId);
+        this.getAddress(this.coId);
         console.log(`Address ngOnInit Address ${this.address}`);
 
     }
 
-    setAddress(coId) { 
-        this._companyService
-            .getCompany(coId)
-            .subscribe(company => {this.company = company;
-                if(company.address){
-                    this.address = company.Address;
+    getAddress(coId) { 
+        this._addressService
+            .getAddressByCoId(coId)
+            .subscribe(address => {this.address = address;
+                console.log(`address.component setAddress this.company ${JSON.stringify(this.address)}`);
+                if(address)
+                    // this.address = company.Address;
                     this.street1 = this.address.street1
                     this.street2 = this.address.street2
                     this.city = this.address.city;
@@ -49,7 +52,7 @@ export class AddressComponent implements OnInit {
                     this.country = this.address.country;
                     this.CompanyId= coId;
                     console.log("Address getCompany this.coId ", this.coId);
-                    console.log("Address getCompany this.company" + JSON.stringify(this.company));
+                    console.log("Address getCompany this.company" + JSON.stringify(address));
                 }
             });
             
